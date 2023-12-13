@@ -17,6 +17,7 @@ export const Navbar = () => {
 		<Box
 			w={"100vw"}
 			h={"74px"}
+			pt={"25px"}
 			bgColor={"home.primary"}
 			display={"flex"}
 			alignItems={"center"}
