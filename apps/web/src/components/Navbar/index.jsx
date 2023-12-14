@@ -20,7 +20,7 @@ export const Navbar = () => {
       alignItems={'center'}
       top={-1}
       color={'white'}
-      // position={"fixed"}
+      position={"fixed"}
       zIndex={10}
     >
       <Box
