@@ -23,22 +23,22 @@ import { useNavigate } from "react-router";
 export const SearchProduct = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [title, setTitle] = useState("");
-	const [events, setEvents] = useState();
+	const [product, setProduct] = useState();
 	const navigate = useNavigate()
 
-	const findEvent = async () => {
+	const findProduct = async () => {
 		try {
 			const response = await axios.get(
-				`http://localhost:8080/event?title=${title}`
+				`http://localhost:8080/product?title=${title}`
 			);
-			setEvents(response?.data?.data);
+			setProduct(response?.data?.data);
 		} catch (err) {
 			console.log(err);
 		}
 	};
 
 	useEffect(() => {
-		findEvent();
+		findProduct();
 	}, [title]);
 
 	const handeSearchlinput = (event) => {
@@ -57,7 +57,7 @@ export const SearchProduct = () => {
 					color={"black"}
 					w={{base: "250px",lg: "350px"}}
 					borderRadius={"40px"}
-					placeholder="Cari event..."
+					placeholder="Search Product..."
 					onClick={onOpen}
 				/>
 			</InputGroup>
@@ -75,7 +75,7 @@ export const SearchProduct = () => {
 								bgColor={"white"}
 								color={"black"}
 								borderRadius={"40px"}
-								placeholder="Cari event..."
+								placeholder="search Product..."
 								name="title"
 								onChange={handeSearchlinput}
 								value={title}
@@ -89,7 +89,7 @@ export const SearchProduct = () => {
 						overflow={"auto"}
 						mb={"20px"}
 					>
-						{events?.slice(0, 5).map((data, index) => {
+						{product?.slice(0, 5).map((data, index) => {
 							return (
 								<Flex
 									key={index}
@@ -99,7 +99,7 @@ export const SearchProduct = () => {
 									borderRadius={"5px"}
 									w={"full"}
 									cursor={"pointer"}
-									onClick={() => navigate(`/event/${data.id}`)}
+									onClick={() => navigate(`/product/${data.id}`)}
 								>
 									<Box
 										bgColor={"grey"}

@@ -45,7 +45,8 @@ export const DrawlistNotLogin = () => {
 					<Button
 						h={"40px"}
 						w={"full"}
-						bgColor={"home.primary"}
+						bgColor={"green"}
+						_hover={{color:'green', bgColor:'#EDF2F7'}}
 						color={"white"}
 						textAlign={"center"}
 					>
