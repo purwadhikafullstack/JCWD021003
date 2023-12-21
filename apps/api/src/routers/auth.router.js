@@ -5,6 +5,14 @@ import { verifyToken } from '../middleware/auth.middleware';
 import { body } from "express-validator";
 
 const authRouter = Router();
+
+// VALIDATION USING EXPRESS VALIDATOR
+const validations = [
+    body("email").notEmpty().withMessage("Email cannot be emptied"),
+    body("email").isEmail().withMessage("Email format is invalid"),
+    body("username").notEmpty().withMessage("Username cannot be emptied"),
+];
+
 //GET 
 authRouter.get("keep-login", verifyToken, keepLoginController)
 
@@ -17,11 +25,5 @@ authRouter.post("/request-password-reset", forgotPasswordController);
 authRouter.put("/email-verification", emailVerificationController);
 authRouter.put("/reset-password", resetPasswordController);
 
-// VALIDATION USING EXPRESS VALIDATOR
-const validations = [
-    body("email").notEmpty().withMessage("Email cannot be emptied"),
-    body("email").isEmail().withMessage("Email format is invalid"),
-    body("username").notEmpty().withMessage("Username cannot be emptied"),
-];
 
 export { authRouter };
