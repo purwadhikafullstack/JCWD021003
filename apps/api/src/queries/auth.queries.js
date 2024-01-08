@@ -11,6 +11,7 @@ export const registerQuery = async (email, username) => {
             {
                 email,
                 username,
+                password:"",
                 roleId: 3,
                 isVerified: false
             },
@@ -25,8 +26,9 @@ export const registerQuery = async (email, username) => {
 };
 
 // FIND USER
-export const findUserQuery = async ({ email = null, username = null }) => {
+export const findUserQuery = async ({ email, username}) => {
     try {
+        console.log(email, username)
         const res = await User.findOne({
             where: {
                 [Op.or]: {
@@ -35,7 +37,7 @@ export const findUserQuery = async ({ email = null, username = null }) => {
                 },
             },
         });
-
+        console.log(res)
         return res;
     } catch (err) {
         throw err;

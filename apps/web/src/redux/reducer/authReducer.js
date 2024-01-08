@@ -8,7 +8,7 @@ const initialState = {
 		id: null,
 		username: "",
 		email: "",
-		fullname: "",
+		roleId: null,
 		coin: null,
 		avatar: "",
 	},
@@ -20,15 +20,14 @@ export const AuthReducer = createSlice({
 	initialState,
 	reducers: {
 		setUser: (state, action) => {
-			const { id, email, username, password, fullname, coin, avatar } =
+			const { id, username, email , roleId, coin, avatar } =
 				action.payload;
 
 			state.user = {
 				id,
-				email,
 				username,
-				password,
-				fullname,
+				email,
+				roleId,
 				coin,
 				avatar
 			};
@@ -52,7 +51,7 @@ export const login = (email, password) => {
 	return async (dispatch) => {
 		try {
 			const res = await axios.post(
-				"http://localhost:8080/auth/login",
+				"http://localhost:8000/api/auth/login",
 				{
 					email,
 					password,
@@ -75,7 +74,7 @@ export const keepLogin = () => {
 
 			if (token) {
 				const res = await axios.get(
-					"http://localhost:8080/auth/keep-login",
+					"http://localhost:8080/api/auth/keep-login",
 					{
 						headers: {
 							Authorization: `Bearer ${token}`,

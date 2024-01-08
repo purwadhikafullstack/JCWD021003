@@ -1,5 +1,5 @@
 import { Flex, Image, Text } from "@chakra-ui/react";
-import ImgVector from "../../assets/3902762.jpg";
+import ImgVector from "../../assets/icon2.png";
 
 export const ImgSection = () => {
 	return (
@@ -24,10 +24,10 @@ export const ImgSection = () => {
 			</Flex>
 			<Flex direction={"column"} textAlign={"center"} w={"80%"}>
 				<Text fontWeight={600}>
-					a
+					Find Your Own Shoes
 				</Text>
 				<Text fontWeight={400}>
-					a
+					only on adaStore.
 				</Text>
 			</Flex>
 		</Flex>

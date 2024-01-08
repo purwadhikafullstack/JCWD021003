@@ -156,7 +156,7 @@ export const LoginSection = () => {
 
 					<Button
 						w={"full"}
-						bgColor={"home.primary"}
+						bgColor={"green"}
 						color={"white"}
 						type="submit"
 					>

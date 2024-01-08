@@ -1,9 +1,9 @@
 import { Box, Flex } from "@chakra-ui/react";
-import { Logo } from "../../Components/Logo";
-import { LoginSection } from "./login-section";
+import { Logo } from "../../components/Logo";
 import { ImgSection } from "../../components/img-section";
+import { RegisterSection } from "./register-section";
 
-export const Login = () => {
+export const Register = () => {
 	return (
 		<Flex
 			w={"100vw"}
@@ -19,14 +19,14 @@ export const Login = () => {
 				display={"flex"}
 				flexDirection={{base: "column-reverse", md: "row"}}
 				alignItems={"center"}
-				boxShadow={{base: "none",md: "0px 0px 13px 10px rgba(19, 86, 99, 0.2)"}}
+				boxShadow={{base: "none",md: "0px 0px 13px 10px rgba(255, 46, 99, 0.2)"}}
 				borderRadius={"10px"}
 				h={{base: "",md: "450px"}}
 				justifyContent={"center"}
 			>
-				<LoginSection />
-
 				<ImgSection />
+
+				<RegisterSection />
 			</Box>
 		</Flex>
 	);
