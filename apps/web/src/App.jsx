@@ -1,10 +1,10 @@
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/home/Home';
-import { Login } from './pages/Login';
-import { Register } from './pages/Register';
 import ScrollToTop from './components/ScrollToTop';
 import {Auth} from './components/Auth';
-import Signup from '../src/pages/Register/index2.jsx'
+import Signup from './pages/Register'
+import Signin from './pages/Login';
+import Verification from './pages/user-verification';
 
 function App() {
   return (
@@ -12,9 +12,9 @@ function App() {
     <ScrollToTop>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/register2" element={<Signup />} />
+        <Route path="/register" element={<Signup />} />
+        <Route path="/login" element={<Signin />} />
+        <Route path="/auth/email-verification" element={<Verification />} />
       </Routes>
     </ScrollToTop>
     </Auth>

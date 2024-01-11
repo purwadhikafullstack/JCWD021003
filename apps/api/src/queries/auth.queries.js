@@ -26,7 +26,7 @@ export const registerQuery = async (email, username) => {
 };
 
 // FIND USER
-export const findUserQuery = async ({ email, username}) => {
+export const findUserQuery = async ({ email = null, username=null}) => {
     try {
         console.log(email, username)
         const res = await User.findOne({
