@@ -58,6 +58,7 @@ export const login = (email, password) => {
 				}
 			)
 			localStorage.setItem("token", res?.data?.data?.token);
+			console.log(res.data?.data?.token);
 			dispatch(setUser(res?.data?.data?.user));
 			dispatch(loginSuccess());
 		} catch (err) {
@@ -74,7 +75,7 @@ export const keepLogin = () => {
 
 			if (token) {
 				const res = await axios.get(
-					"http://localhost:8080/api/auth/keep-login",
+					"http://localhost:8000/api/auth/keep-login",
 					{
 						headers: {
 							Authorization: `Bearer ${token}`,
