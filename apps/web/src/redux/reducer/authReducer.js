@@ -74,7 +74,7 @@ export const keepLogin = () => {
 
 			if (token) {
 				const res = await axios.get(
-					"http://localhost:8080/api/auth/keep-login",
+					"http://localhost:8000/api/auth/keep-login",
 					{
 						headers: {
 							Authorization: `Bearer ${token}`,
