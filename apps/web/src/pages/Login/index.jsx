@@ -1,13 +1,19 @@
-import { AbsoluteCenter, Box, Button, Flex, FormControl, Icon, Image, Input, InputGroup, InputLeftElement, Text } from "@chakra-ui/react"
+import { AbsoluteCenter, Box, Button, Flex, FormControl, Icon, Image, Input, InputGroup, InputLeftElement, Text, useToast } from "@chakra-ui/react"
 import model from '../../assets/icon2.png'
+import {Link, useNavigate} from 'react-router-dom'
 import { EnvelopeIcon, LockClosedIcon} from '@heroicons/react/24/outline'
 import { useFormik } from "formik"
 import {useDispatch} from 'react-redux'
+import {signInWithGoogle} from '../../firebase'
+import googleImg from '../../assets/google.png'
 import { login } from "../../redux/reducer/authReducer"
 // import logo from "../../assets/images/logo.png"
 function Signin() {
 
     const dispatch = useDispatch();
+	const navigate = useNavigate();
+	const toast = useToast();
+	
     const formik = useFormik({
         initialValues:{
             email: "",
@@ -18,6 +24,17 @@ function Signin() {
             resetForm({values:{email: "", password:""}})
         }
     }) 
+
+	const onLoginWithGoogle = async () => {
+		try {
+			const result = await signInWithGoogle();
+			if (result === "signin with google success") {
+				navigate("/");
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
   return (
     <>
         <Flex height={'100vh'} width={'100%'} boxShadow={'base'}>
@@ -78,6 +95,33 @@ function Signin() {
                 </FormControl>
 
                 <Button width={'100%'} height={'68px'} borderRadius={'16px'} fontSize={'24px'} fontWeight={'700'} color={'white'} bg={'green'} _hover={{bg: '#f50f5a'}} _active={{opacity:'70%'}} type="submit">SIGN IN</Button>
+
+				<Box
+						display={"flex"}
+						justifyContent={"center"}
+						alignItems={"center"}
+						flexDirection={"column"}
+						mt={"20px"}
+					>
+						<Text fontSize={"12px"} mb={"10px"}>
+							Or Sign in with
+						</Text>
+						<Button size={"sm"} onClick={onLoginWithGoogle}>
+							<Image
+								src={googleImg}
+								w={"15px"}
+								mr={"7px"}
+								alt="Google Image"
+							/>
+							Google
+						</Button>
+					</Box>
+				<Text display={"flex"} fontSize={"14px"} mt={"25px"}>
+					Belum Punya Akun?
+					<Link to="/register" style={{ marginLeft: "5px" }}>
+						Register
+					</Link>
+				</Text>
                 </form>
                 
                 </Box>
