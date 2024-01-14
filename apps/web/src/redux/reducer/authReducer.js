@@ -58,7 +58,6 @@ export const login = (email, password) => {
 				}
 			)
 			localStorage.setItem("token", res?.data?.data?.token);
-			console.log(res.data?.data?.token);
 			dispatch(setUser(res?.data?.data?.user));
 			dispatch(loginSuccess());
 		} catch (err) {
