@@ -8,7 +8,7 @@ const avatarStorage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     const id = req.params.id;
-    cb(null, `avatar_${id}-${Date.now()}-${file.originalname}`);
+    cb(null, `avatar_${id}-${file.originalname}`);
   },
 });
 
