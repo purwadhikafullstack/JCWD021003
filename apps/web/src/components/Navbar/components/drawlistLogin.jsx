@@ -46,21 +46,21 @@ export const DrawlistLogin = () => {
 							ratio={1}
 						>
 							<Image
-								src={`http://localhost:8080/uploads/avatar/${user?.avatar}`}
+								src={`${import.meta.env.VITE_API_IMAGE_URL}/avatar/${user?.avatar}`}
 							/>
 						</AspectRatio>
 						<Center flexDirection={"column"} >
-							<Text>{user.username}</Text>
-							<Text textAlign={"end"} w={"full"} fontSize={"12px"}>{user.coin} coin</Text>
+							<Text fontSize={'25px'} fontWeight={800}>{user.username}</Text>
+							{/* <Text textAlign={"end"} w={"full"} fontSize={"12px"}>{user.coin} coin</Text> */}
 						</Center>
 					</Flex>
 				</Box>
 				<Box display={"flex"} flexDirection={"column"} gap={5} mt={"20px"}>
-					<Link to="/dashboard">
+					<Link to="/profile">
 						<Text>Dashboard</Text>
 					</Link>
-					<Link to="/event">
-						<Text>Create Event</Text>
+					<Link to="/wishlist">
+						<Text>Wishlist</Text>
 					</Link>
 					<Link to="/discovery">
 						<Text>Discovery</Text>

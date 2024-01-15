@@ -17,13 +17,13 @@ export const Navbar = () => {
 		<Box
 			w={"100vw"}
 			h={"74px"}
-			pt={"25px"}
-			bgColor={"home.primary"}
+			py={"25px"}
+			bgColor={"black"}
 			display={"flex"}
 			alignItems={"center"}
 			top={-1}
 			color={"white"}
-			position={"fixed"}
+			// position={"fixed"}
 			zIndex={10}
 		>
 			<Box

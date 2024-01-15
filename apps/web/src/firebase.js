@@ -9,12 +9,13 @@ import {
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDWXEEtqcznkudA6uOaZqftnw13NyonYco",
-  authDomain: "mini-project-kelompok3.firebaseapp.com",
-  projectId: "mini-project-kelompok3",
-  storageBucket: "mini-project-kelompok3.appspot.com",
-  messagingSenderId: "126571210027",
-  appId: "1:126571210027:web:0097d7495726288c5a116e"
+  apiKey: "AIzaSyAy8h7tpyTCBpf3QSd9V6JqfvIjEMRusMA",
+  authDomain: "final-project-group-3-e0d7b.firebaseapp.com",
+  projectId: "final-project-group-3-e0d7b",
+  storageBucket: "final-project-group-3-e0d7b.appspot.com",
+  messagingSenderId: "716957093453",
+  appId: "1:716957093453:web:f3371cd498a08bdb681604",
+  measurementId: "G-C5R6RG72Q3"
 };
 import {
   getFirestore,

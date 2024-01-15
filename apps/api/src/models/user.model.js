@@ -4,6 +4,9 @@ export default class User extends Model {
 
     static associate(models) {
         this.belongsTo(models.Role, { foreignKey: 'roleId' });
+        this.hasMany(models.UserAddress, {foreignkey: 'userId'});
+        this.hasMany(models.Carts, {foreignKey: 'userId'});
+        this.hasMany(models.Orders, {foreignKey: 'userId'})
     }
 }
 

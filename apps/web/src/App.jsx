@@ -5,6 +5,7 @@ import {Auth} from './components/Auth';
 import Signup from './pages/Register'
 import Signin from './pages/Login';
 import Verification from './pages/user-verification';
+import Profile from './pages/profileUser';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/register" element={<Signup />} />
         <Route path="/login" element={<Signin />} />
         <Route path="/auth/email-verification" element={<Verification />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </ScrollToTop>
     </Auth>
