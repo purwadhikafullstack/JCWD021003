@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
   res.send(`Hello, Purwadhika Student !`);
 });
 
-router.use('/sample', sampleRouter);
+// router.use('/sample', sampleRouter);
 
 // add another router here ...
 router.use('/auth', authRouter);
