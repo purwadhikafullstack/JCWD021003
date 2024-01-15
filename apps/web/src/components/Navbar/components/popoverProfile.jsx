@@ -47,7 +47,7 @@ export const PopoverProfile = () => {
 					{user?.avatar ? (
 						<AspectRatio width="10" ratio={1}>
 							<Image
-								src={`http://localhost:8080/uploads/avatar/${user?.avatar}`}
+								src={`${import.meta.env.VITE_API_IMAGE_URL}/avatar/${user?.avatar}`}
 								transform={"scale(1.5)"}
 							/>
 						</AspectRatio>
@@ -58,7 +58,7 @@ export const PopoverProfile = () => {
 			</Button>
 			<PopoverContent color="black" w={"fit-content"} right={-6}>
 				<PopoverBody>
-					<Link to={"/dashboard"}>Dashboard</Link>
+					<Link to={"/profile"}>Dashboard</Link>
 				</PopoverBody>
 				<PopoverFooter>
 					<Link to={"/login"} onClick={logOut}>

@@ -46,7 +46,7 @@ export const DrawlistLogin = () => {
 							ratio={1}
 						>
 							<Image
-								src={`http://localhost:8080/uploads/avatar/${user?.avatar}`}
+								src={`http://localhost:8000/uploads/avatar/${user?.avatar}`}
 							/>
 						</AspectRatio>
 						<Center flexDirection={"column"} >
@@ -56,11 +56,11 @@ export const DrawlistLogin = () => {
 					</Flex>
 				</Box>
 				<Box display={"flex"} flexDirection={"column"} gap={5} mt={"20px"}>
-					<Link to="/dashboard">
+					<Link to="/profile">
 						<Text>Dashboard</Text>
 					</Link>
-					<Link to="/event">
-						<Text>Create Event</Text>
+					<Link to="/wishlist">
+						<Text>Wishlist</Text>
 					</Link>
 					<Link to="/discovery">
 						<Text>Discovery</Text>
