@@ -1,4 +1,4 @@
-import { AbsoluteCenter, Box, Button, Flex, FormControl, Icon, Image, Input, InputGroup, InputLeftElement, Text, useToast } from "@chakra-ui/react"
+import { AbsoluteCenter, Box, Button, Flex, FormControl, Icon, Image, Input, InputGroup, InputLeftElement, Text, useToast,IconButton } from "@chakra-ui/react"
 import model from '../../assets/icon2.png'
 import {Link, useNavigate} from 'react-router-dom'
 import { EnvelopeIcon, LockClosedIcon} from '@heroicons/react/24/outline'
@@ -7,6 +7,7 @@ import {useDispatch} from 'react-redux'
 import {signInWithGoogle} from '../../firebase'
 import googleImg from '../../assets/google.png'
 import { login } from "../../redux/reducer/authReducer"
+import { IoHome } from "react-icons/io5";
 // import logo from "../../assets/images/logo.png"
 function Signin() {
 
@@ -22,6 +23,13 @@ function Signin() {
         onSubmit: (values, {resetForm}) => {
             dispatch(login(values.email, values.password))
             resetForm({values:{email: "", password:""}})
+			toast({
+				title: 'Login Success.',
+				description: "Discover joy in every purchase.",
+				status: 'success',
+				duration: 5000,
+				isClosable: true,
+			  })
         }
     }) 
 
@@ -29,7 +37,6 @@ function Signin() {
 		try {
 			const result = await signInWithGoogle();
 			if (result === "signin with google success") {
-				navigate("/");
 			}
 		} catch (error) {
 			console.log(error);
@@ -122,6 +129,17 @@ function Signin() {
 						Register
 					</Link>
 				</Text>
+				<Flex justifyContent={'right'}
+                alignItems={'center'} 
+                gap={'24px'}
+                mt={'20px'}>
+                <Link to='/'>
+                    <IconButton
+                    colorScheme='red'
+                    size='lg'
+                    icon={<IoHome />} />
+                </Link>
+                </Flex>
                 </form>
                 
                 </Box>

@@ -32,6 +32,7 @@ export const updatePasswordController = async (req, res) => {
     try{
         const {id} = req.params
         const {password} = req.body
+        console.log(password)
         await updatePasswordService(id, password)
         return res.status(200).json({
             message: "Change Password Success",

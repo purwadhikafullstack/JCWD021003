@@ -1,4 +1,4 @@
-import { AbsoluteCenter, Box, Button, Divider, Flex, FormControl, FormErrorMessage, Icon, Image, Input, InputGroup, InputLeftElement, Text, useDisclosure } from "@chakra-ui/react"
+import { AbsoluteCenter, Box, Button, Divider, Flex, FormControl, FormErrorMessage, Icon, Image, Input, InputGroup, InputLeftElement, Text, useDisclosure, IconButton } from "@chakra-ui/react"
 import model from '../../assets/icon2.png'
 import { UserCircleIcon, EnvelopeIcon} from '@heroicons/react/24/outline'
 // import { instagram, gmail } from "../../assets/Icons/Icons"
@@ -8,6 +8,8 @@ import { SuccessModal, ErrorModal } from "./services/PopUpModal"
 import { BeatLoader } from "react-spinners";
 import { useState } from "react"
 import { registerScheme } from "./services/validation"
+import { IoHome } from "react-icons/io5";
+import {Link} from 'react-router-dom'
 // import { signInWithGoogle } from '../../firebase';
 
 function Signup({setOpenTab}) {
@@ -138,29 +140,18 @@ function Signup({setOpenTab}) {
                 </form>
                 <SuccessModal isOpen={isSuccessModalOpen} onClose={closeSuccessModal} />
                 <ErrorModal isOpen={isErrorModalOpen} onClose={closeErrorModal} />
-            
-                {/* <Box position='relative' margin={'32px 0'}>
-                    <Divider border={'1px solid #D9D9D9'} />
-                    <AbsoluteCenter bg='white' px='4'>
-                        or
-                    </AbsoluteCenter>
-                </Box> */}
-                {/* <Flex justifyContent={'center'}
+                            
+                <Flex justifyContent={'right'}
                 alignItems={'center'} 
-                gap={'24px'}>
-                    <Box width={'48px'} height={'48px'} bg={'green'} padding={'8px'} borderRadius={'12px'}>
-                        <Icon as={instagram} boxSize={'40px'} color={'white'}/>
-                    </Box>
-                    <Box width={'48px'} height={'48px'} bg={'green'} padding={'8px'} borderRadius={'12px'}>
-                        <Icon as={instagram} boxSize={'40px'} color={'white'}/>
-                    </Box>
-                    <Box width={'48px'} height={'48px'} bg={'green'} padding={'8px'} borderRadius={'12px'}>
-                        <Icon as={instagram} boxSize={'40px'} color={'white'}/>
-                    </Box>
-                    <Button width={'48px'} height={'48px'} bg={'green'} padding={'8px'} borderRadius={'12px'} onClick={onLoginWithGoogle}>
-                        <Icon as={gmail} boxSize={'40px'} color={'white'}/>
-                    </Button>
-                </Flex> */}
+                gap={'24px'}
+                mt={'20px'}>
+                <Link to='/'>
+                    <IconButton
+                    colorScheme='red'
+                    size='lg'
+                    icon={<IoHome />} />
+                </Link>
+                </Flex>
                 </Box>
             </Flex>
         </Flex>
