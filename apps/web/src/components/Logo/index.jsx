@@ -11,7 +11,7 @@ export const Logo = (props) => {
 						fontSize={`${props.size}`}
 						color={`${props.color}`}
 						// fontSize={"42px"}
-						// color={"home.primary"}
+						// color={"black"}
 					>
 						ada<span style={{ fontWeight: "200" }}>Store.</span>
 					</Text>

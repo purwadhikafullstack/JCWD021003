@@ -71,7 +71,7 @@ function Verification() {
                     />
                     <InputLeftElement top={'12px'} width={'72px'}>
                         <Flex justifyContent={'center'} alignItems={'center'} height={'64px'}>
-                        <Icon as={LockClosedIcon} boxSize={'24px'} margin={'auto'} position={'relative'} textColor={'brand.grey350'}/>
+                        <Icon as={LockClosedIcon} boxSize={'24px'} margin={'auto'} position={'relative'} textColor={'green.grey350'}/>
                         </Flex>
                     </InputLeftElement>
                     <InputRightElement top={'12px'} width={'54px'}>
@@ -112,7 +112,7 @@ function Verification() {
                     />
                     <InputLeftElement top={'12px'} width={'72px'}>
                         <Flex justifyContent={'center'} alignItems={'center'} height={'64px'}>
-                        <Icon as={LockClosedIcon} boxSize={'24px'} margin={'auto'} position={'relative'} textColor={'brand.grey350'}/>
+                        <Icon as={LockClosedIcon} boxSize={'24px'} margin={'auto'} position={'relative'} textColor={'green.grey350'}/>
                         </Flex>
                     </InputLeftElement>
                     <InputRightElement top={'12px'} width={'54px'}>

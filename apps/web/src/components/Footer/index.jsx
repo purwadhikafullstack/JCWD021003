@@ -19,7 +19,7 @@ export const Footer = () => {
 		>
 			<Box w={{base: "100%",md: "30%",lg: "50%"}} pt={"30px"}>
 				<Box>
-					<Logo posisi="static" size="42px" color="home.primary" />
+					<Logo posisi="static" size="42px" color="black" />
 
 					<Box w={"200px"} fontSize={{base: "12px",lg:"14px"}}>
 						<Text>Pacific Building</Text> 
@@ -29,7 +29,7 @@ export const Footer = () => {
 					<Flex mt={"20px"} gap={5}>
 						<Button
 							variant={"ghost"}
-							color={"home.primary"}
+							color={"black"}
 							_hover={{
 								bgColor: "none",
 								borderColor: "transparent",
@@ -44,7 +44,7 @@ export const Footer = () => {
 						</Button>
 						<Button
 							variant={"ghost"}
-							color={"home.primary"}
+							color={"black"}
 							_hover={{
 								bgColor: "none",
 								borderColor: "transparent",
@@ -58,7 +58,7 @@ export const Footer = () => {
 						</Button>
 						<Button
 							variant={"ghost"}
-							color={"home.primary"}
+							color={"black"}
 							_hover={{
 								bgColor: "none",
 								borderColor: "transparent",

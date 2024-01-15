@@ -32,10 +32,10 @@ export const DrawlistNotLogin = () => {
 					<Button
 						variant={"ghost"}
 						border={"1px solid"}
-						borderColor={"home.primary"}
+						borderColor={"black"}
 						h={"40px"}
 						w={"full"}
-						color={"home.primary"}
+						color={"black"}
 						textAlign={"center"}
 					>
 						Log in

@@ -82,7 +82,7 @@ function Signup({setOpenTab}) {
                     />
                     <InputLeftElement top={'12px'} width={'72px'}>
                         <Flex justifyContent={'center'} alignItems={'center'} height={'64px'}>
-                        <Icon as={UserCircleIcon} boxSize={'24px'} margin={'auto'} position={'relative'} textColor={'brand.grey350'}/>
+                        <Icon as={UserCircleIcon} boxSize={'24px'} margin={'auto'} position={'relative'} textColor={'green.grey350'}/>
                         </Flex>
                     </InputLeftElement>
                     </InputGroup>
@@ -114,7 +114,7 @@ function Signup({setOpenTab}) {
                     />
                     <InputLeftElement top={'12px'} width={'72px'}>
                         <Flex justifyContent={'center'} alignItems={'center'} height={'64px'}>
-                        <Icon as={EnvelopeIcon} boxSize={'24px'} margin={'auto'} position={'relative'} textColor={'brand.grey350'}/>
+                        <Icon as={EnvelopeIcon} boxSize={'24px'} margin={'auto'} position={'relative'} textColor={'green.grey350'}/>
                         </Flex>
                     </InputLeftElement>
                     </InputGroup>

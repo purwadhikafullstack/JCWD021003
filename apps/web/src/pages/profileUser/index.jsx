@@ -22,7 +22,7 @@ function Profile() {
 
   return (
     <Box bg={'#F1F1F1'}
-    height={'100vh'}>
+    w={'100vw'}>
         <Navbar/>
         <Box bg={"green.400"} padding={'0px 100px'}
         >
@@ -45,7 +45,7 @@ function Profile() {
                         </BreadcrumbLink>
                     </BreadcrumbItem>
                     <BreadcrumbItem isCurrentPage>
-                        <BreadcrumbLink color={'green'}
+                        <BreadcrumbLink color={'black'}
                         fontWeight={'700'}
                         fontSize={'12px'}>
                             Account Setting
@@ -64,6 +64,8 @@ function Profile() {
             <Box className="upload-photo"
             padding={'24px'}
             bg={'white'}
+            mb={'10px'}
+            w={'100vw'}
             >
                 <Text marginBottom={'24px'}
                 fontSize={'24px'}
@@ -79,6 +81,7 @@ function Profile() {
             padding={'24px'}
             bg={'white'}
             flexGrow={1}
+            mb={'20px'}
             >
                 <Text marginBottom={'24px'}
                 fontSize={'24px'}

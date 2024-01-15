@@ -60,7 +60,7 @@ export default function DrawerList() {
 						h={"70px"}
 						alignItems={"center"}
 					>
-						<Logo posisi="static" size="30px" color="home.primary" />
+						<Logo posisi="static" size="30px" color="black" />
 					</DrawerHeader>
 
 					<DrawerBody display={"flex"} justifyContent={"start"}>

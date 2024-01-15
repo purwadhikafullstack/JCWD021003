@@ -47,7 +47,7 @@ function UploadAvatar () {
             width={'258px'}
             height={'258px'}
             borderRadius={'full'}
-            bg={'brand.grey200'}
+            bg={'green.grey200'}
             position={'relative'}
             overflow={'hidden'}
             onClick={handleImageClick}>

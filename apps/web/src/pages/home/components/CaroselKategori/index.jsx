@@ -169,7 +169,7 @@ export const CarouselKategori = () => {
 						<Text
 							fontSize={{ base: "14px", lg: "20px" }}
 							fontWeight={600}
-							color={"home.primary"}
+							color={"black"}
 							textDecoration={"underline"}
 						>
 							See All Categories
