@@ -1,17 +1,13 @@
-import {
-	Box,
-	Text,
-	Button,
-} from "@chakra-ui/react";
+import { Box, Text, Button } from '@chakra-ui/react';
 // import React from "react";
 // import { useState } from "react";
-import { Link } from "react-router-dom";
-import { PopoverProfile } from "./components/popoverProfile";
-import DrawerList from "./components/drawerList";
-import { SearchProduct } from "./components/SearchProduct";
+import { Link } from 'react-router-dom';
+import { PopoverProfile } from './components/popoverProfile';
+import DrawerList from './components/drawerList';
+import { SearchProduct } from './components/SearchProduct';
 
 export const Navbar = () => {
-	const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
 
 	return (
 		<Box
@@ -48,51 +44,58 @@ export const Navbar = () => {
 				</Box>
 			</Box>
 
-			<Box
-				w={"45%"}
-				display={{ base: "none", md: "flex" }}
-				justifyContent={"end"}
-				alignItems={"center"}
-				px={"30px"}
-			>
-				<Box
-					display={"flex"}
-					mr={"14px"}
-					gap={{base: 3,xl: "50"}}
-					alignItems={"center"}
-				>
-					{/* <Link to="/event">
+      <Box
+        w={'45%'}
+        display={{ base: 'none', md: 'flex' }}
+        justifyContent={'end'}
+        alignItems={'center'}
+        px={'30px'}
+      >
+        <Box
+          display={'flex'}
+          mr={'14px'}
+          gap={{ base: 3, xl: '50' }}
+          alignItems={'center'}
+        >
+          {/* <Link to="/event">
 						<Text fontSize={{base: "12px",lg: "16px"}}>Create Event</Text>
 					</Link>
 					<Link to="/Discovery">
 						<Text fontSize={{base: "12px",lg: "16px"}}>Discovery</Text>
 					</Link> */}
-					{token ? (
-						<PopoverProfile />
-					) : (
-						<Box display={"flex"} gap={"5"} alignItems={"center"}>
-							<Link to="/login">
-								<Text fontSize={{base: "12px",lg: "16px"}}>Log in</Text>
-							</Link>
-							<Link to="/register">
-								<Button h={{base: "30px",lg: "40px"}} w={{base: "60px",lg: "108px"}} fontSize={{base: "12px",lg: "16px"}}>
-									Sign Up
-								</Button>
-							</Link>
-						</Box>
-					)}
-				</Box>
-			</Box>
+          {token ? (
+            <PopoverProfile />
+          ) : (
+            <Box display={'flex'} gap={'5'} alignItems={'center'}>
+              <Link to="/login">
+                <Text fontSize={{ base: '12px', lg: '16px' }}>Log in</Text>
+              </Link>
+              <Link to="/register">
+                <Button
+                  bgColor={'green'}
+                  _hover={{ color: 'green', bgColor: '#EDF2F7' }}
+                  color={'white'}
+                  h={{ base: '30px', lg: '40px' }}
+                  w={{ base: '60px', lg: '108px' }}
+                  fontSize={{ base: '12px', lg: '16px' }}
+                >
+                  Sign Up
+                </Button>
+              </Link>
+            </Box>
+          )}
+        </Box>
+      </Box>
 
-			<Box
-				w={"45%"}
-				display={{ base: "flex", md: "none" }}
-				justifyContent={"end"}
-				alignItems={"center"}
-				px={"20px"}
-			>
-				<DrawerList />
-			</Box>
-		</Box>
-	);
+      <Box
+        w={'45%'}
+        display={{ base: 'flex', md: 'none' }}
+        justifyContent={'end'}
+        alignItems={'center'}
+        px={'20px'}
+      >
+        <DrawerList />
+      </Box>
+    </Box>
+  );
 };
