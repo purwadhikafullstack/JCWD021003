@@ -9,6 +9,7 @@ import UploadAvatar from "./components/avatar"
 import UpdateUsername from "./components/editUsername";
 import UpdatePassword from "./components/editPassword";
 import UpdateEmail from "./components/editEmail"
+import { Footer } from "../../components/Footer"
 
 function Profile() {
     const user = useSelector((state) => state.AuthReducer.user);
@@ -24,7 +25,7 @@ function Profile() {
     height={'100vh'}>
         <Navbar/>
         <Box bg={"green.400"} padding={'0px 100px'}
-        marginBottom={'150px'}>
+        >
         <Flex className="top-container"
         justifyContent={'space-between'}
         alignItems={'center'}
@@ -104,7 +105,7 @@ function Profile() {
             </Box>
         </Flex>
         </Box>
-        {/* <Footer/> */}
+        <Footer/>
     </Box>
   )
 }

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { sampleRouter } from './routers/sample.router';
+// import { sampleRouter } from './routers/sample.router';
 import { authRouter} from './routers/auth.router'
 import { userRouter } from './routers/user.router';
 
