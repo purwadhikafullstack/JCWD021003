@@ -21,7 +21,7 @@ export const Hero = () => {
       bgColor={"black"}
       alignItems={'center'}
       h={{ base: '220px', sm: '300px', md: '400px', lg: '500px' }}
-      mt={{ base: '30px', sm: '60px', lg: '69px' }}
+      // mt={{ base: '30px', sm: '60px', lg: '69px' }}
       ml={'-1px'}
     >
       <Box
