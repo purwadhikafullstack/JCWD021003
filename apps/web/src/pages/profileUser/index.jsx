@@ -26,6 +26,7 @@ function Profile() {
         <Navbar/>
         <Box bg={"green.400"} padding={'0px 100px'}
         >
+
         <Flex className="top-container"
         justifyContent={'space-between'}
         alignItems={'center'}
