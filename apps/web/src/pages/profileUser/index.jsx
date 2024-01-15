@@ -1,14 +1,14 @@
 import { AbsoluteCenter, Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, Flex, FormControl, FormLabel, Icon, Image, Input, InputGroup, InputLeftElement, Text } from "@chakra-ui/react"
-// import model from '../../assets/images/signup-model.jpeg'
-
 import { HomeIcon} from '@heroicons/react/24/outline'
 import { PhotoIcon, CheckBadgeIcon} from '@heroicons/react/24/solid'
 import { ChevronRightIcon } from '@chakra-ui/icons'
 import {  useSelector} from 'react-redux'
 import { Navbar } from "../../components/Navbar"
-// import logo from "../../assets/images/logo.png"
 import { useState } from "react"
 import UploadAvatar from "./components/avatar"
+import UpdateUsername from "./components/editUsername";
+import UpdatePassword from "./components/editPassword";
+import UpdateEmail from "./components/editEmail"
 
 function Profile() {
     const user = useSelector((state) => state.AuthReducer.user);
@@ -39,11 +39,11 @@ function Profile() {
                 <Breadcrumb spacing='8px' separator={<ChevronRightIcon color='gray.500' />}>
                     <BreadcrumbItem >
                         <BreadcrumbLink>
-                        <Icon as={HomeIcon} boxSize={'16px'} color={'#838383'}/>
+                        <Icon as={HomeIcon} boxSize={'16px'}/>
                         </BreadcrumbLink>
                     </BreadcrumbItem>
                     <BreadcrumbItem isCurrentPage>
-                        <BreadcrumbLink color={'brand.lightred'}
+                        <BreadcrumbLink color={'green'}
                         fontWeight={'700'}
                         fontSize={'12px'}>
                             Account Setting
@@ -73,7 +73,7 @@ function Profile() {
                 </Flex>
                 <Text marginTop={'35px'}>*file extension only .jpg, .jpeg, .png and .gif (max 1MB)</Text>
             </Box>
-            {/* <Box className="profile-setting"
+            <Box className="profile-setting"
             padding={'24px'}
             bg={'white'}
             flexGrow={1}
@@ -101,7 +101,7 @@ function Profile() {
 
                     </Flex>
                 </Flex>
-            </Box> */}
+            </Box>
         </Flex>
         </Box>
         {/* <Footer/> */}

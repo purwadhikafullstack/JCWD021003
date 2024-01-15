@@ -19,7 +19,7 @@ export const SuccessModal = ({ isOpen, onClose }) => {
             </ModalBody>
   
             <ModalFooter>
-              <Button bg='brand.lightred' color='white' _hover={{bg: '#f50f5a'}} mr={3} onClick={onClose}>
+              <Button bg='green' color='white' _hover={{bg: '#f50f5a'}} mr={3} onClick={onClose}>
                 Close
               </Button>
             </ModalFooter>
@@ -43,7 +43,7 @@ export const SuccessModal = ({ isOpen, onClose }) => {
             Token is invalid!
           </ModalBody>
           <ModalFooter>
-              <Button bg='brand.lightred' color='white' _hover={{bg: '#f50f5a'}} mr={3} onClick={onClose}>
+              <Button bg='green' color='white' _hover={{bg: '#f50f5a'}} mr={3} onClick={onClose}>
                 Close
               </Button>
             </ModalFooter>

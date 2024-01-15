@@ -59,7 +59,7 @@ function Signup({setOpenTab}) {
             </Box>
             <Flex justifyContent={'center'} alignItems={'center'} alignContent={'center'} width={'50%'} margin={'50'}>
                 <Box width={'450px'}>
-                <Text fontWeight={'800'} color={'brand.lightred'} textAlign={'center'} fontSize={'42px'} marginBottom={'40px'}>SIGN UP</Text>
+                <Text fontWeight={'800'} color={'green'} textAlign={'center'} fontSize={'42px'} marginBottom={'40px'}>SIGN UP</Text>
                 <form onSubmit={formik.handleSubmit}>
                 <FormControl 
                 isInvalid={(formik.touched.username && formik.errors.username)}
@@ -123,7 +123,7 @@ function Signup({setOpenTab}) {
 					)}
                 </FormControl>
 
-                {loading ? (<Button width={'100%'} height={'68px'} borderRadius={'16px'} fontSize={'24px'} fontWeight={'700'} color={'white'} bg={'brand.lightred'} _hover={{bg: '#f50f5a'}} _active={{opacity:'70%'}}>
+                {loading ? (<Button width={'100%'} height={'68px'} borderRadius={'16px'} fontSize={'24px'} fontWeight={'700'} color={'white'} bg={'green'} _hover={{bg: '#f50f5a'}} _active={{opacity:'70%'}}>
                     <div className="sweet-loading">
                         <BeatLoader color={"#ffffff"}
 							loading={loading}
@@ -148,16 +148,16 @@ function Signup({setOpenTab}) {
                 {/* <Flex justifyContent={'center'}
                 alignItems={'center'} 
                 gap={'24px'}>
-                    <Box width={'48px'} height={'48px'} bg={'brand.lightred'} padding={'8px'} borderRadius={'12px'}>
+                    <Box width={'48px'} height={'48px'} bg={'green'} padding={'8px'} borderRadius={'12px'}>
                         <Icon as={instagram} boxSize={'40px'} color={'white'}/>
                     </Box>
-                    <Box width={'48px'} height={'48px'} bg={'brand.lightred'} padding={'8px'} borderRadius={'12px'}>
+                    <Box width={'48px'} height={'48px'} bg={'green'} padding={'8px'} borderRadius={'12px'}>
                         <Icon as={instagram} boxSize={'40px'} color={'white'}/>
                     </Box>
-                    <Box width={'48px'} height={'48px'} bg={'brand.lightred'} padding={'8px'} borderRadius={'12px'}>
+                    <Box width={'48px'} height={'48px'} bg={'green'} padding={'8px'} borderRadius={'12px'}>
                         <Icon as={instagram} boxSize={'40px'} color={'white'}/>
                     </Box>
-                    <Button width={'48px'} height={'48px'} bg={'brand.lightred'} padding={'8px'} borderRadius={'12px'} onClick={onLoginWithGoogle}>
+                    <Button width={'48px'} height={'48px'} bg={'green'} padding={'8px'} borderRadius={'12px'} onClick={onLoginWithGoogle}>
                         <Icon as={gmail} boxSize={'40px'} color={'white'}/>
                     </Button>
                 </Flex> */}

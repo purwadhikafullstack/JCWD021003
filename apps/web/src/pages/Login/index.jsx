@@ -13,7 +13,7 @@ function Signin() {
     const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const toast = useToast();
-	
+
     const formik = useFormik({
         initialValues:{
             email: "",
@@ -46,7 +46,7 @@ function Signin() {
             </Box>
             <Flex justifyContent={'center'} alignItems={'center'} alignContent={'center'} width={'50%'} margin={'50'}>
                 <Box width={'450px'}>
-                <Text fontWeight={'800'} color={'brand.lightred'} textAlign={'center'} fontSize={'42px'} marginBottom={'40px'}>SIGN IN</Text>
+                <Text fontWeight={'800'} color={'green'} textAlign={'center'} fontSize={'42px'} marginBottom={'40px'}>SIGN IN</Text>
                 <form onSubmit={formik.handleSubmit}>
                 <FormControl>    
                     <InputGroup marginBottom={'32px'}>

@@ -107,9 +107,9 @@ function UploadAvatar () {
             
             <Button
             variant={'outline'}
-            borderColor={'brand.lightred'}
+            borderColor={'green'}
             bg={'white'}
-            color={'brand.lightred'}
+            color={'green'}
             _hover={{borderColor:'#f62252', color:'#f62252'}}
             _active={{borderColor:'#f95278', color:'#f95278'}}
             onClick={() => {

@@ -48,7 +48,7 @@ function Verification() {
             </Box>
             <Flex justifyContent={'center'} alignItems={'center'} alignContent={'center'} width={'50%'} margin={'50'}>
                 <Box width={'450px'}>
-                <Text fontWeight={'800'} color={'brand.lightred'} textAlign={'center'} fontSize={'42px'} marginBottom={'48px'} lineHeight={'1.0'}>SET PASSWORD</Text>
+                <Text fontWeight={'800'} color={'green'} textAlign={'center'} fontSize={'42px'} marginBottom={'48px'} lineHeight={'1.0'}>SET PASSWORD</Text>
                 <form onSubmit={formik.handleSubmit}>
                 <FormControl 
                 isInvalid={ formik.touched.password && formik.errors.password}
@@ -134,7 +134,7 @@ function Verification() {
 						</FormErrorMessage>)}
                 </FormControl>
 
-                {loading ? (<Button width={'100%'} height={'68px'} borderRadius={'16px'} fontSize={'24px'} fontWeight={'700'} color={'white'} bg={'brand.lightred'} _hover={{bg: '#f50f5a'}} _active={{opacity:'70%'}}>
+                {loading ? (<Button width={'100%'} height={'68px'} borderRadius={'16px'} fontSize={'24px'} fontWeight={'700'} color={'white'} bg={'green'} _hover={{bg: '#f50f5a'}} _active={{opacity:'70%'}}>
                     <div className="sweet-loading">
                         <BeatLoader color={"#ffffff"}
 							loading={loading}
