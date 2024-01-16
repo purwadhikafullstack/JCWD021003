@@ -34,7 +34,7 @@ function Profile() {
             <Flex className="account-settings-left"
             flexDir={'column'}
             gap={'16px'}>
-                <Text fontSize={'24px'}
+                <Text mt={"20px"} fontSize={'24px'}
                 fontWeight={'700'}>Account Setting</Text>
                 <Flex className="breadcrumb"
                 >

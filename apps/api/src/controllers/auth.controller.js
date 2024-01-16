@@ -1,4 +1,4 @@
-import { registerService, emailVerificationService, loginService, keepLoginService, forgotPasswordService, resetPasswordService } from "../services/auth.services";
+import { registerService, emailVerificationService, loginService, keepLoginService, forgotPasswordService, resetPasswordService, googleCallbackService } from "../services/auth.services";
 
 export const registerController = async (req, res) => {
     try {
@@ -96,3 +96,16 @@ export const resetPasswordController = async (req, res) => {
     return res.status(500).send(err.message)
   }
 };
+
+// export const googleLoginController = (req, res) => {
+//   res.redirect(authorizationUrl)
+// };
+
+// export const googleLoginCallbackController = async (req, res) => {
+//   const {code} = req.query;
+//   const result = await googleCallbackService(code);
+//   return res.status(200).json({
+//     message: "Result Success",
+//     data: result,
+//   })
+// };

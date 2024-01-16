@@ -1,10 +1,11 @@
-import { Box, Text, Button } from '@chakra-ui/react';
+import { Box, Text, Button,Image } from '@chakra-ui/react';
 // import React from "react";
 // import { useState } from "react";
 import { Link } from 'react-router-dom';
 import { PopoverProfile } from './components/popoverProfile';
 import DrawerList from './components/drawerList';
 import { SearchProduct } from './components/SearchProduct';
+import logo from '../../assets/logo3.png'
 
 export const Navbar = () => {
   const token = localStorage.getItem('token');
@@ -34,9 +35,10 @@ export const Navbar = () => {
 						fontSize={{ base: "20px", md: "34px" }}
 						_hover={{ color: "white" }}
 					>
-						<Text fontWeight={400}>
+						{/* <Text fontWeight={400}>
 							ada<span style={{ fontWeight: "200" }}>Store.</span>
-						</Text>
+						</Text> */}
+						<Image src={logo}/>
 					</Box>
 				</Link>
 				<Box ml={{base: "10px",lg: "44px"}} display={{ base: "none", md: "block" }}>

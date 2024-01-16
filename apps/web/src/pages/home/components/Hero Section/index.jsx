@@ -61,11 +61,12 @@ export const Hero = () => {
       </Box>
       <Swiper
         slidesPerView={1}
+        initialSlide={0}
         style={{ height: '100%' }}
         spaceBetween={30}
         loop={true}
         autoplay={{
-          delay: 5500,
+          delay: 3000,
           disableOnInteraction: false,
         }}
         scrollbar={{
@@ -74,8 +75,29 @@ export const Hero = () => {
         }}
         modules={[Autoplay, Scrollbar]}
         className="mySwiper"
-        pag
-      >
+        >
+        <SwiperSlide>
+          <Box
+            color={'white'}
+            display={'flex'}
+            justifyContent={'center'}
+            alignItems={'center'}
+            h={'full'}
+          >
+            <Image src={Banner} h={'full'} w={'full'} objectFit={"contain"} />
+          </Box>
+        </SwiperSlide>
+        <SwiperSlide>
+          <Box
+            color={'white'}
+            display={'flex'}
+            justifyContent={'center'}
+            alignItems={'center'}
+            h={'full'}
+          >
+            <Image src={Banner2} h={'full'} w={'full'} objectFit={"contain"} />
+          </Box>
+        </SwiperSlide>
         <SwiperSlide>
           <Box
             color={'white'}

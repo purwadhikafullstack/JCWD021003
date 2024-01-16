@@ -26,20 +26,20 @@ export const SearchProduct = () => {
 	const [product, setProduct] = useState();
 	const navigate = useNavigate()
 
-	const findProduct = async () => {
-		try {
-			const response = await axios.get(
-				`http://localhost:8080/product?title=${title}`
-			);
-			setProduct(response?.data?.data);
-		} catch (err) {
-			console.log(err);
-		}
-	};
+	// const findProduct = async () => {
+	// 	try {
+	// 		const response = await axios.get(
+	// 			`http://localhost:8080/product?title=${title}`
+	// 		);
+	// 		setProduct(response?.data?.data);
+	// 	} catch (err) {
+	// 		console.log(err);
+	// 	}
+	// };
 
-	useEffect(() => {
-		findProduct();
-	}, [title]);
+	// useEffect(() => {
+	// 	findProduct();
+	// }, [title]);
 
 	const handeSearchlinput = (event) => {
 		setTitle(event.target.value);
@@ -107,7 +107,7 @@ export const SearchProduct = () => {
 										borderLeftRadius={"5px"}
 										h={"full"}
 									>
-										<Image src={`http://localhost:8080/uploads/banner/${data?.banner}`} w={"full"} h={"full"}/>
+										{/* <Image src={`http://localhost:8080/uploads/banner/${data?.banner}`} w={"full"} h={"full"}/> */}
 									</Box>
 									<Box w={"65%"} p={"5px 8px"}>
 										<Box

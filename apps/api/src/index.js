@@ -1,9 +1,10 @@
 import express, { json, Express } from 'express';
 import cors from 'cors';
 import { join } from 'path';
-import { NODE_ENV, PORT } from './config';
+import { NODE_ENV, PORT,GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } from './config';
 import router from './router';
 import { DB } from './db';
+// import {google} from 'googleapis'
 
 /**
  * Serve "web" project build result (for production only)
@@ -68,5 +69,23 @@ const main = () => {
     }
   });
 };
+
+//google social login
+// const oauth2Client =new google.auth.Oauth2(
+// GOOGLE_CLIENT_ID,
+// GOOGLE_CLIENT_SECRET,
+// 'http://localhost:8000/api/auth/google/callback'
+// );
+
+// const scopes = [
+//   'https://www.googleapis.com/auth/userinfo.email',
+//   'https://www.googleapis.com/auth/userinfo.profile'
+// ]
+
+// const authorizationUrl= oauth2Client.generateAuthUrl({
+//   access_type: 'offline',
+//   scope: scopes,
+//   include_granted_scopes: true,
+// })
 
 main();

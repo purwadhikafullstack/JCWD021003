@@ -5,6 +5,7 @@ import handlebars from "handlebars";
 import fs from "fs";
 import path from "path";
 import transporter from "../utils/transporter";
+import {oauth2 } from "googleapis/build/src/apis/oauth2";
 
 //POST USER REGISTRATION
 export const registerService = async (email, username) => {
@@ -173,4 +174,14 @@ export const resetPasswordService = async (token, password) => {
     } catch (err) {
         throw err
     }
+}
+
+export const googleCallbackService = async (code) => {
+    const {tokens} = await oauth2Client.getToken(code)
+    oauth2Client.setCredentials(tokens);
+
+    const oauth2 = google.oauth2({
+        auth: oauth2Client,
+        version:'v2'
+    })
 }
