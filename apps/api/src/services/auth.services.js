@@ -1,4 +1,4 @@
-import { registerQuery, findUserQuery, emailVerificationQuery, verifiedUserQuery, keepLoginQuery, forgotPasswordQuery, resetPasswordQuery, checkTokenUsageQuery } from "../queries/auth.queries";
+import { registerQuery, findUserQuery, emailVerificationQuery, verifiedUserQuery, keepLoginQuery, forgotPasswordQuery, resetPasswordQuery, checkTokenUsageQuery, registerGoogleLoginQuery } from "../queries/auth.queries";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken";
 import handlebars from "handlebars";
@@ -94,6 +94,30 @@ export const loginService = async (email, password) => {
             email: check.email,
             username: check.username,
             roleId: check.roleId,
+        };
+
+        const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, {
+            expiresIn: "1hr",
+        });
+        return { user: check, token };
+    } catch (err) {
+        throw err;
+    }
+};
+
+export const GoogleloginService = async (username, email, avatar) => {
+    try {
+        const check = await findUserQuery({ email });
+        if (!check) {
+            const res=await registerGoogleLoginQuery(username, email, avatar)
+        }
+        
+        let payload = {
+            id: check.id,
+            email: check.email,
+            username: check.username,
+            roleId: check.roleId,
+            avatar: check.avatar
         };
 
         const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, {

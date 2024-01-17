@@ -6,14 +6,14 @@ import { useFormik } from "formik"
 import {useDispatch} from 'react-redux'
 import {signInWithGoogle} from '../../firebase'
 import googleImg from '../../assets/google.png'
-import { login } from "../../redux/reducer/authReducer"
+import { login, Googlelogin } from "../../redux/reducer/authReducer"
 import { IoHome } from "react-icons/io5";
 // import logo from "../../assets/images/logo.png"
 function Signin() {
 
     const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const toast = useToast();
+	const toasts = useToast();
 
     const formik = useFormik({
         initialValues:{
@@ -23,20 +23,18 @@ function Signin() {
         onSubmit: (values, {resetForm}) => {
             dispatch(login(values.email, values.password))
             resetForm({values:{email: "", password:""}})
-			toast({
-				title: 'Login Success.',
-				description: "Discover joy in every purchase.",
-				status: 'success',
-				duration: 5000,
-				isClosable: true,
-			  })
+			
         }
     }) 
 
 	const onLoginWithGoogle = async () => {
 		try {
 			const result = await signInWithGoogle();
-			if (result === "signin with google success") {
+			// if (result === "signin with google success") {
+			// }
+			if (result) {
+				console.log('result',result)
+				dispatch(Googlelogin(result.username, result.email, result.avatar))
 			}
 		} catch (error) {
 			console.log(error);

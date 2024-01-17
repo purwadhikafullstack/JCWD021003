@@ -60,7 +60,28 @@ export const login = (email, password) => {
 			localStorage.setItem("token", res?.data?.data?.token);
 			dispatch(setUser(res?.data?.data?.user));
 			dispatch(loginSuccess());
-		} catch (err) {
+			} catch (err) {
+			alert(err?.response?.data.message);
+			throw err;
+		}
+	};
+};
+
+export const Googlelogin = (username, email, avatar) => {
+	return async (dispatch) => {
+		try {
+			const res = await axios.post(
+				"http://localhost:8000/api/auth/google",
+				{
+					username,
+					email,
+					avatar,
+				}
+			)
+			localStorage.setItem("token", res?.data?.data?.token);
+			dispatch(setUser(res?.data?.data?.user));
+			dispatch(loginSuccess());
+			} catch (err) {
 			alert(err?.response?.data.message);
 			throw err;
 		}

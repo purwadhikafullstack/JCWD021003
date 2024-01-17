@@ -25,6 +25,29 @@ export const registerQuery = async (email, username) => {
     }
 };
 
+export const registerGoogleLoginQuery = async (username, email, avatar) => {
+    const t = await User.sequelize.transaction();
+    try {
+
+        const res = await User.create(
+            {
+                email,
+                username,
+                password:"",
+                roleId: 3,
+                isVerified: true,
+                avatar,
+            },
+            { transaction: t }
+        );
+        await t.commit();
+        return res;
+    } catch (err) {
+        await t.rollback();
+        throw err;
+    }
+};
+
 // FIND USER
 export const findUserQuery = async ({ email = null, username=null}) => {
     try {

@@ -35,17 +35,32 @@ const signInWithGoogle = async () => {
   try {
     const res = await signInWithPopup(auth, googleProvider);
     const user = res.user;
+    console.log("user",user);
     const q = query(collection(db, 'users'), where('uid', '==', user.uid));
     const docs = await getDocs(q);
+    // console.log("docs",docs)
     if (docs.docs.length === 0) {
       await addDoc(collection(db, 'users'), {
         uid: user.uid,
-        name: user.displayName,
+        username: user.displayName,
         authProvider: 'google',
         email: user.email,
+        avatar: user.photoURL
       });
     }
-    return 'signin with google success';
+    // const userRef = firestore.collection('users');
+    // const querySnapshot = await userRef.where('uid', '==', uid).get();
+    //   console.log("snapshot",querySnapshot);
+    const querySnapshot = await getDocs(q);
+        if (querySnapshot.empty) {
+          console.log('No matching documents.');
+          return null; // or handle the case when no user is found
+        }
+    
+        // Assuming there is only one document with the given UID
+        const userData = querySnapshot.docs[0].data();
+        // console.log('userData',userData)
+    return userData;
   } catch (err) {
     throw err;
   }
