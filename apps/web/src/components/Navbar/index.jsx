@@ -38,7 +38,7 @@ export const Navbar = () => {
 						{/* <Text fontWeight={400}>
 							ada<span style={{ fontWeight: "200" }}>Store.</span>
 						</Text> */}
-						<Image src={logo}/>
+						<Image src={logo} w={{base:'65%',sm:'50%', md:'80%',lg:'100%'}}/>
 					</Box>
 				</Link>
 				<Box ml={{base: "10px",lg: "44px"}} display={{ base: "none", md: "block" }}>

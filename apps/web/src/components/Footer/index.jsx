@@ -21,7 +21,7 @@ export const Footer = () => {
 				<Box>
 					<Logo posisi="static" size="42px" color="black" />
 
-					<Box w={"200px"} fontSize={{base: "12px",lg:"14px"}}>
+					<Box mt={"10px"} w={"200px"} fontSize={{base: "12px",lg:"14px"}}>
 						<Text>Pacific Building</Text> 
 						Suite 971 Jl. Gatot Soebroto No. 22
                         Trenggalek, SG 44083

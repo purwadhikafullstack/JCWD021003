@@ -16,7 +16,7 @@ export const Logo = (props) => {
 					>
 						ada<span style={{ fontWeight: "200" }}>Store.</span>
 					</Text> */}
-					<Image src={logo}/>
+					<Image src={logo} alignItems={'center'} w={{base:'50%',sm:'50%', md:'70%',lg:'70%'}}/>
 				</Link>
 			</Box>
   )

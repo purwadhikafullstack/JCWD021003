@@ -106,19 +106,19 @@ export const CarouselKategori = () => {
 							justifyContent: "center",
 							alignItems: "center",
 						}}
-						slidesPerView={1.5}
+						slidesPerView={3}
 						breakpoints={{
 							640: {
-								slidesPerView: 2.5,
-								spaceBetween: 20,
+								slidesPerView: 5,
+								spaceBetween: 0,
 							},
 							768: {
-								slidesPerView: 2.5,
-								spaceBetween: 40,
+								slidesPerView: 5,
+								spaceBetween: 0,
 							},
 							1150: {
-								slidesPerView: 3.5,
-								spaceBetween: 50,
+								slidesPerView: 5,
+								spaceBetween: 0,
 							},
 						}}
 						spaceBetween={10}
@@ -130,7 +130,7 @@ export const CarouselKategori = () => {
 						}}
 						modules={[Navigation]}
 					>
-						{category?.map((data, index) => {
+						{category?.map((data) => {
 							console.log("data", data)
 							// console.log("index", index)
 							return (
@@ -140,24 +140,25 @@ export const CarouselKategori = () => {
 										justifyContent: "center",
 										alignItems: "center",
 									}}
-									key={index}
+									key={data.id}
 								>
 									<Box
 										display={"flex"}
 										justifyContent={"center"}
 										alignItems={"center"}
 										color={"white"}
-										h={"100%"}
-										w={"95%"}
+										fontWeight={600}
+										h={"90px"}
+										w={"90px"}
 										borderRadius={"30px"}
-										backgroundImage={data.image}
-										backgroundSize={"110%"}
+										backgroundImage={`${import.meta.env.VITE_API_IMAGE_URL}/categories/${data?.image}`}
+										backgroundSize={"100%"}
 										backgroundPosition={"center"}
 										backgroundRepeat={"no-repeat"}
 										cursor={"pointer"}
 										onClick={() => {
 											navigate("/discovery");
-											sessionStorage.setItem("id", index + 1);
+											sessionStorage.setItem('');
 										}}
 									>
 										{data.name}

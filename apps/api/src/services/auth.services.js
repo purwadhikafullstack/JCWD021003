@@ -107,9 +107,9 @@ export const loginService = async (email, password) => {
 
 export const GoogleloginService = async (username, email, avatar) => {
     try {
-        const check = await findUserQuery({ email });
+        let check = await findUserQuery({ email });
         if (!check) {
-            const res=await registerGoogleLoginQuery(username, email, avatar)
+            check =await registerGoogleLoginQuery(username, email, avatar)
         }
         
         let payload = {

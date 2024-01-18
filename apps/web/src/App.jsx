@@ -6,6 +6,7 @@ import Signup from './pages/Register'
 import Signin from './pages/Login';
 import Verification from './pages/user-verification';
 import Profile from './pages/profileUser';
+import CreateAddress from './pages/user-address';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/login" element={<Signin />} />
         <Route path="/auth/email-verification" element={<Verification />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/create-address" element={<CreateAddress />} />
       </Routes>
     </ScrollToTop>
     </Auth>
