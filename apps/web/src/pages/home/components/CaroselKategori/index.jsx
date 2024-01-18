@@ -22,15 +22,16 @@ export const CarouselKategori = () => {
 	const dataCategory = async () => {
 		try {
 			const response = await axios.get(
-				"http://localhost:8080/product/category"
+				"http://localhost:8000/api/product/category"
 			);
+			console.log('category', response.data.data)
 			setCategory(response.data.data);
 		} catch (err) {
 			console.log(err.message);
 		}
 	};
 
-	const Image = [];
+	// const Image = [];
 
 	useEffect(() => {
 		dataCategory();
@@ -129,7 +130,9 @@ export const CarouselKategori = () => {
 						}}
 						modules={[Navigation]}
 					>
-						{category?.slice(0, 7).map((data, index) => {
+						{category?.map((data, index) => {
+							console.log("data", data)
+							// console.log("index", index)
 							return (
 								<SwiperSlide
 									style={{
@@ -147,7 +150,7 @@ export const CarouselKategori = () => {
 										h={"100%"}
 										w={"95%"}
 										borderRadius={"30px"}
-										backgroundImage={Image[index]}
+										backgroundImage={data.image}
 										backgroundSize={"110%"}
 										backgroundPosition={"center"}
 										backgroundRepeat={"no-repeat"}
@@ -157,7 +160,7 @@ export const CarouselKategori = () => {
 											sessionStorage.setItem("id", index + 1);
 										}}
 									>
-										{data.category.toUpperCase()}
+										{data.name}
 									</Box>
 								</SwiperSlide>
 							);

@@ -2,6 +2,7 @@ import { Router, static as static_} from 'express';
 // import { sampleRouter } from './routers/sample.router';
 import { authRouter} from './routers/auth.router'
 import { userRouter } from './routers/user.router';
+import {productRouter} from './routers/product.router';
 import path from 'path';
 
 const router = Router();
@@ -15,6 +16,7 @@ router.get('/', (req, res) => {
 // add another router here ...
 router.use('/auth', authRouter);
 router.use('/user', userRouter);
+router.use('/product', productRouter);
 router.use("/uploads", static_(path.join(__dirname, "./public/images")));
 
 

@@ -9,7 +9,7 @@ function Home() {
     <Box bgColor="white" maxW={'100vw'} id="home">
       <Navbar />
       <Hero />
-      {/* <CarouselKategori /> */}
+      <CarouselKategori />
       <Footer />
     </Box>
   );

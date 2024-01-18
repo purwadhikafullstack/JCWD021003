@@ -39,18 +39,7 @@ function Signup({setOpenTab}) {
         }
     }) 
 
-    const onLoginWithGoogle = async () => {
-        try {
-          const result = await signInWithGoogle();
-          if (result === 'signin with google success') {
-            setOpenTab(3);
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      };
-
-  return (
+     return (
     <>
         <Flex height={'100vh'} width={'100%'} boxShadow={'base'}>
             <Box width={'50%'} height={'100vh'} position={'relative'}>
