@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Box, Text, Image } from "@chakra-ui/react"
 import { Link } from "react-router-dom"
-import logo from '../../assets/logo.png'
+import logo from '../../assets/logoClean.png'
 
 export const Logo = (props) => {
   return (

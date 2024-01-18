@@ -59,14 +59,15 @@ function FormCreateAddress () {
         <>
             <form onSubmit={formik.handleSubmit}>
                 <Flex>
-                    <Box>  
-                        <Text>Full Name</Text>
+                    <Box mr={"20px"}>  
+                        <Text fontWeight={700}>Full Name</Text>
                             <Input
                             name="fullName"
                             value={formik.values.fullName}
-                            onChange={formik.handleChange}/>
-                            <Text>ADDRESS</Text>
-                            <Text>Province</Text>
+                            onChange={formik.handleChange}
+                            placeholder="User Name"/>
+                            <Text fontWeight={700}>ADDRESS</Text>
+                            <Text fontWeight={700}>Province</Text>
                             <Select value={selectedProvince}
                                     onChange={(e) => setSelectedProvince(e.target.value)}>
                                 <option value="">Select a Province</option>
@@ -94,17 +95,22 @@ function FormCreateAddress () {
                             </Select>
                         </Box>
                         <Box>
-                            <Text>Phone Number</Text>
+                            <Text fontWeight={700}>Phone Number</Text>
                             <Input
                             name="phoneNumber"
                             value={formik.values.phoneNumber}
-                            onChange={formik.handleChange}/>
-                            <Text>Address (Ex : Street, Residence, number of house)</Text>
+                            onChange={formik.handleChange}
+                            placeholder="Phone Number"
+                            mb={"50px"}/>
+                            <Text fontWeight={700}>Address</Text>
                             <Input name="specificAddress"
                             value={formik.values.specificAddress}
-                            onChange={formik.handleChange}/>
+                            onChange={formik.handleChange}
+                            placeholder="Ex : Street, Residence, number of house"/>
+
+                             <Button type="submit">Save</Button>
+
                         </Box>
-                        <Button type="sumbit">Save</Button>
                 </Flex>
             </form>
         </>

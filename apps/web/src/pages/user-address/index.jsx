@@ -10,7 +10,7 @@ function CreateAddress() {
   const [address, setAddress] = useState('');
 
   return (
-    <Box bg={'#F1F1F1'} height={'100%'}>
+    <Box bg={'green.400'} height={'100%'}>
       <Navbar />
       <Box padding={'0px 100px'} marginBottom={'150px'}>
         <Flex
@@ -55,7 +55,7 @@ function CreateAddress() {
           </Flex>
         </Flex>
         <Box width={'100%'} bg={'white'} padding={'24px'} mb={'40px'}>
-          <Text fontSize={'24px'} fontWeight={'700'}>
+          <Text fontSize={'24px'} fontWeight={'700'} mb={"20px"}>
             Address
           </Text>
           

@@ -42,7 +42,7 @@ function Signin() {
 	};
   return (
     <>
-        <Flex height={'100vh'} width={'100%'} boxShadow={'base'}>
+        <Flex height={'100%'} width={'100%'} boxShadow={'base'}>
             <Box width={'50%'} height={'100vh'} position={'relative'}>
                 <Image borderTopRightRadius={'20'} borderBottomRightRadius={'20'} src={model} width={'730px'} height={'100vh'} objectFit={'cover'} opacity={'75%'}/>
                 {/* <AbsoluteCenter>

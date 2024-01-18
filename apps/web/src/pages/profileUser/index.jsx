@@ -1,5 +1,6 @@
 import { AbsoluteCenter, Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, Flex, FormControl, FormLabel, Icon, Image, Input, InputGroup, InputLeftElement, Text } from "@chakra-ui/react"
 import { HomeIcon} from '@heroicons/react/24/outline'
+import {Link} from 'react-router-dom'
 import { PhotoIcon, CheckBadgeIcon} from '@heroicons/react/24/solid'
 import { ChevronRightIcon } from '@chakra-ui/icons'
 import {  useSelector} from 'react-redux'
@@ -104,6 +105,13 @@ function Profile() {
                     <Flex w={'100%'}>
                     <UpdatePassword/>
 
+                    </Flex>
+                </Flex>
+                <Flex alignItems={'center'}>
+                    <Flex w={'100%'}>
+                        <Link to={'/create-address'}>
+                    <Button onClick={""}> Manage Address</Button>
+                        </Link>
                     </Flex>
                 </Flex>
             </Box>
