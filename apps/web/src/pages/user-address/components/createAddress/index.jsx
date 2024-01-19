@@ -77,7 +77,7 @@ function FormCreateAddress () {
                                     </option>
                                 ))}
                             </Select>
-                            <Text>City</Text>
+                            <Text fontWeight={700}>City</Text>
                             <Select 
                             name="cityId"
                             onChange={(e) => {
@@ -106,9 +106,9 @@ function FormCreateAddress () {
                             <Input name="specificAddress"
                             value={formik.values.specificAddress}
                             onChange={formik.handleChange}
-                            placeholder="Ex : Street, Residence, number of house"/>
+                            placeholder="Ex : Street, Residence, number of house" mb={"10px"}/>
 
-                             <Button type="submit">Save</Button>
+                             <Button colorScheme="red" type="submit">Save</Button>
 
                         </Box>
                 </Flex>

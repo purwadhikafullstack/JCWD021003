@@ -110,7 +110,7 @@ function Profile() {
                 <Flex alignItems={'center'}>
                     <Flex w={'100%'}>
                         <Link to={'/create-address'}>
-                    <Button onClick={""}> Manage Address</Button>
+                    <Button bg="green" color={'white'}> Manage Address</Button>
                         </Link>
                     </Flex>
                 </Flex>
