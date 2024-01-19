@@ -1,6 +1,7 @@
 import UserAddress from '../models/userAddress.model'
 import Province from '../models/province.model'
 import City from '../models/city.model'
+import opencage from 'opencage-api-client'
 
 //FIND
 export const findMainUserAddressQuery = async (id) => {
@@ -48,5 +49,16 @@ export const createUserAddressQuery = async (id, specificAddress, cityId, fullNa
             })
     } catch (err){
         throw err;
+    }
+}
+
+export const opencageQuery = async (latitude, longitude, API_KEY) => {
+    try{
+        const response = await opencage.geocode({ q: `${latitude}, ${longitude}`,
+        key: API_KEY,
+        language: 'en' })
+        return response.results[0]
+    } catch (err){
+        throw err
     }
 }
