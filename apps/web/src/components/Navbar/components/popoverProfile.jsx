@@ -17,7 +17,7 @@ import { RiLogoutBoxLine } from "react-icons/ri";
 
 export const PopoverProfile = () => {
 	const user = useSelector((state) => state.AuthReducer.user);
-	console.log(user)
+	// console.log(user)
 	const logOut = () => {
 		localStorage.removeItem("token");
 	};

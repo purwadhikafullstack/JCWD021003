@@ -2,13 +2,21 @@ import { Box, Button, Flex, Input, Select, Text,Breadcrumb, BreadcrumbItem,Bread
 import { Navbar } from '../../components/Navbar';
 import { Footer } from '../../components/Footer';
 import FormCreateAddress from './components/createAddress';
+import FormCurrentAddress from './components/currentAddress';
 import { ChevronRightIcon } from '@chakra-ui/icons'
 import { HomeIcon } from '@heroicons/react/24/outline';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 function CreateAddress() {
-  const [address, setAddress] = useState('');
-
+    // const [formCurrentLocation, setFormCurrentLocation] = useState(false)
+    
+    // const handleClick = async () => {
+    //     try {
+    //         setFormCurrentLocation(true)
+    //     } catch (error) {
+    //         console.error("Error fetching address:", error);
+    //     }
+    // };
   return (
     <Box bg={'green.400'} height={'100%'}>
       <Navbar />
@@ -59,12 +67,22 @@ function CreateAddress() {
             Address
           </Text>
           
-          {/* <Box width={'100%'} height={'474px'} bg={'green.100'}>
-            MAP
-          </Box>
-          <Text>Contact</Text> */}
-
-          <FormCreateAddress />
+          {/* <Button color='brand.lightred' borderColor={'brand.lightred'} 
+                    variant={'outline'} padding={'9px 11px'} mt={'32px'}
+                    mb={'40px'}_hover={{opacity: '80%' }} _active={{ opacity: '50%'}}
+                    onClick={handleClick}
+                    >
+                        <Text>
+                        Use your current location
+                        </Text>
+                    </Button> */}
+         {/* <Box width={'100%'} height={'474px'} bg={'green.100'}>
+                        MAP
+         </Box> */}
+         <Text>
+                        Contact
+         </Text>
+         {formCurrentLocation ? <FormCurrentAddress/> : <FormCreateAddress/>}
         </Box>
       </Box>
       <Footer />

@@ -3,7 +3,7 @@ import { Model, DataTypes } from 'sequelize';
 export default class Warehouse extends Model {
    static associate(models) {
     this.belongsTo(models.User, { foreignKey: 'userId' });
-    this.hasMany(models.City, { foreignKey: 'cityId' });
+    this.belongsTo(models.City, { foreignKey: 'cityId' });
     this.hasMany(models.Orders, { foreignKey: 'warehouseId' });
   }
 }

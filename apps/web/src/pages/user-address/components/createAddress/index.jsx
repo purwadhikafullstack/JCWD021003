@@ -17,16 +17,17 @@ function FormCreateAddress () {
     useEffect(() => {
         getProvince().then((data) => {
             setProvinceList(data);
-            console.log(data)
+            // console.log(data)
         });
     }, []);
 
 
     useEffect(() => {
         if (selectedProvince !== "") {
+            // console.log('id province',selectedProvince)
             getCity(selectedProvince).then((data) => {
                 setCityList(data);
-                console.log(data);
+                // console.log('set city',data);
             });
         }
     }, [selectedProvince]);

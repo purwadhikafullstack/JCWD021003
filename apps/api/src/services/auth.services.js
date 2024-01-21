@@ -97,7 +97,7 @@ export const loginService = async (email, password) => {
         };
 
         const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, {
-            expiresIn: "1hr",
+            expiresIn: "3hr",
         });
         return { user: check, token };
     } catch (err) {

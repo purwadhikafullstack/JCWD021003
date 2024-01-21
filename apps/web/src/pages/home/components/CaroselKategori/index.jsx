@@ -24,7 +24,7 @@ export const CarouselKategori = () => {
 			const response = await axios.get(
 				"http://localhost:8000/api/product/category"
 			);
-			console.log('category', response.data.data)
+			// console.log('category', response.data.data)
 			setCategory(response.data.data);
 		} catch (err) {
 			console.log(err.message);
@@ -131,7 +131,7 @@ export const CarouselKategori = () => {
 						modules={[Navigation]}
 					>
 						{category?.map((data) => {
-							console.log("data", data)
+							// console.log("data", data)
 							// console.log("index", index)
 							return (
 								<SwiperSlide
