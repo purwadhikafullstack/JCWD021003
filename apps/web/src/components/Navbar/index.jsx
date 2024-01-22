@@ -10,8 +10,7 @@ import {useSelector} from 'react-redux'
 
 export const Navbar = () => {
 //   const token = localStorage.getItem('token');
-  const user = useSelector((state) => state.AuthReducer.user);
-
+  const user = useSelector((state) => state.AuthReducer.isLogin);
 	return (
 		<Box
 			w={"100vw"}
@@ -40,7 +39,7 @@ export const Navbar = () => {
 						{/* <Text fontWeight={400}>
 							ada<span style={{ fontWeight: "200" }}>Store.</span>
 						</Text> */}
-						<Image src={logo} w={{base:'65%',sm:'50%', md:'80%',lg:'100%'}}/>
+						<Image src={logo} w={{base:'65%',sm:'50%', md:'70%',lg:'70%'}}/>
 					</Box>
 				</Link>
 				<Box ml={{base: "10px",lg: "44px"}} display={{ base: "none", md: "block" }}>
@@ -67,7 +66,7 @@ export const Navbar = () => {
 					<Link to="/Discovery">
 						<Text fontSize={{base: "12px",lg: "16px"}}>Discovery</Text>
 					</Link> */}
-          {user != null ? (
+          {user ? (
             <PopoverProfile />
           ) : (
             <Box display={'flex'} gap={'5'} alignItems={'center'}>

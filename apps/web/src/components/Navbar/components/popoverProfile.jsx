@@ -20,6 +20,8 @@ export const PopoverProfile = () => {
 	// console.log(user)
 	const logOut = () => {
 		localStorage.removeItem("token");
+		dispatch(logoutSuccess());
+
 	};
 
 	return (
