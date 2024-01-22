@@ -6,9 +6,11 @@ import { PopoverProfile } from './components/popoverProfile';
 import DrawerList from './components/drawerList';
 import { SearchProduct } from './components/SearchProduct';
 import logo from '../../assets/logo3.png'
+import {useSelector} from 'react-redux'
 
 export const Navbar = () => {
-  const token = localStorage.getItem('token');
+//   const token = localStorage.getItem('token');
+  const user = useSelector((state) => state.AuthReducer.user);
 
 	return (
 		<Box
@@ -65,7 +67,7 @@ export const Navbar = () => {
 					<Link to="/Discovery">
 						<Text fontSize={{base: "12px",lg: "16px"}}>Discovery</Text>
 					</Link> */}
-          {token ? (
+          {user != null ? (
             <PopoverProfile />
           ) : (
             <Box display={'flex'} gap={'5'} alignItems={'center'}>

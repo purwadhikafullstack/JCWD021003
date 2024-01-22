@@ -2,7 +2,7 @@ import { Box, Button, Flex, Input, Select, Text,Breadcrumb, BreadcrumbItem,Bread
 import { Navbar } from '../../components/Navbar';
 import { Footer } from '../../components/Footer';
 import FormCreateAddress from './components/createAddress';
-import FormCurrentAddress from './components/currentAddress';
+// import FormCurrentAddress from './components/currentAddress';
 import { ChevronRightIcon } from '@chakra-ui/icons'
 import { HomeIcon } from '@heroicons/react/24/outline';
 import { useState } from 'react';
@@ -82,7 +82,7 @@ function CreateAddress() {
          <Text>
                         Contact
          </Text>
-         {formCurrentLocation ? <FormCurrentAddress/> : <FormCreateAddress/>}
+         <FormCreateAddress/>
         </Box>
       </Box>
       <Footer />

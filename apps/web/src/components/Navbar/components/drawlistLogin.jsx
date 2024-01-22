@@ -57,13 +57,13 @@ export const DrawlistLogin = () => {
 				</Box>
 				<Box display={"flex"} flexDirection={"column"} gap={5} mt={"20px"}>
 					<Link to="/profile">
-						<Text>Dashboard</Text>
+						<Text fontWeight={800}>Dashboard</Text>
 					</Link>
 					<Link to="/wishlist">
-						<Text>Wishlist</Text>
+						<Text fontWeight={800}>Wishlist</Text>
 					</Link>
 					<Link to="/discovery">
-						<Text>Discovery</Text>
+						<Text fontWeight={800}>Discovery</Text>
 					</Link>
 				</Box>
 			</Box>

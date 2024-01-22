@@ -35,6 +35,7 @@ function Signin() {
 			if (result) {
 				console.log('result',result)
 				dispatch(Googlelogin(result.username, result.email, result.avatar))
+				navigate('/')
 			}
 		} catch (error) {
 			console.log(error);
