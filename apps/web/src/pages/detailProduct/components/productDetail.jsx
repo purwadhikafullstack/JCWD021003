@@ -1,14 +1,23 @@
 // ProductDetail.jsx
 
 import React, { useState } from 'react';
-import { Box, Image, Text, Button, VStack, HStack, Input } from '@chakra-ui/react';
-import currencyFormatter from 'currency-formatter';
+import {
+  Box,
+  Image,
+  Text,
+  Button,
+  VStack,
+  HStack,
+  Input,
+} from '@chakra-ui/react';
+// import currencyFormatter from 'currency-formatter';
 
-const ProductDetail = () => {
+const ProductDetail = ({ product }) => {
+  const { name, price, description } = product;
   const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState('');
 
-  const formattedPrice = currencyFormatter.format(price, { code: 'IDR' });
+//   const formattedPrice = currencyFormatter.format(price, { code: 'IDR' });
 
   const handleQuantityChange = (e) => {
     const newQuantity = parseInt(e.target.value, 10) || 1;
@@ -21,13 +30,15 @@ const ProductDetail = () => {
 
   const handleCheckout = () => {
     // Implement your checkout logic here
-    console.log(`Product: ${name}, Quantity: ${quantity}, Size: ${selectedSize}`);
+    console.log(
+      `Product: ${name}, Quantity: ${quantity}, Size: ${selectedSize}`,
+    );
   };
 
   return (
     <HStack spacing="8">
       {/* Left column for product image */}
-      <Image src={image} alt={name} objectFit="cover" boxSize="300px" />
+      <Image src={"image"} alt={name} objectFit="cover" boxSize="300px" />
 
       {/* Right column for product details */}
       <VStack align="start" spacing="4">
@@ -35,10 +46,10 @@ const ProductDetail = () => {
           {name}
         </Text>
         <Text fontSize="lg" fontWeight="bold">
-          {formattedPrice}
+          {price}
         </Text>
         <Text fontSize="md" color="gray.500" mb="4">
-          {category}
+          {/* {category} */}
         </Text>
         <Text fontSize="md">{description}</Text>
 

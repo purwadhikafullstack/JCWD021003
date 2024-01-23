@@ -30,10 +30,10 @@ export const getProductQuery = async (
       }
    
     const res = await Product.findAll({
-      include: [
-        {model: category}
-      ],
-      order: {...filter,}
+      // include: [
+      //   {model: category}
+      // ],
+      ...filter
     })
     return res
   } catch (err) {
@@ -50,3 +50,15 @@ export const productCategoryQuery = async () => {
     throw err;
   }
 };
+
+export const productDetailQuery = async (id) =>{
+  try {
+    const res = await Product.findByPk(id, {
+      include : [category]
+    })
+
+    return res
+  } catch (err) {
+    throw err
+  }
+}

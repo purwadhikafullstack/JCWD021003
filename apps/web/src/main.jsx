@@ -10,11 +10,11 @@ import './index.css';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
-      <ChakraProvider>
-        <BrowserRouter>
+      <BrowserRouter>
+        <ChakraProvider>
           <App />
-        </BrowserRouter>
-      </ChakraProvider>
+        </ChakraProvider>
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>,
 );

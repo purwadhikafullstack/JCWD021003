@@ -1,4 +1,4 @@
-import {getProductQuery, productCategoryQuery} from '../queries/product.queries'
+import {getProductQuery, productCategoryQuery, productDetailQuery} from '../queries/product.queries'
 
 
 export const getProductService = async (name, category_Id, id) => {
@@ -13,6 +13,15 @@ export const getProductService = async (name, category_Id, id) => {
 export const productCategoryService = async () => {
 	try {
 		const res = await productCategoryQuery();
+		return res;
+	} catch (err) {
+		throw err;
+	}
+};
+
+export const productDetailService = async (id) => {
+	try {
+		const res = productDetailQuery(id);
 		return res;
 	} catch (err) {
 		throw err;

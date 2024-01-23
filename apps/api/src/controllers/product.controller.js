@@ -1,4 +1,4 @@
-import {getProductService, productCategoryService} from '../services/product.services'
+import {getProductService, productCategoryService, productDetailService} from '../services/product.services'
 
 export const getProductController = async (req, res) => {
 	try {
@@ -16,6 +16,19 @@ export const getProductController = async (req, res) => {
 	  })
 	}
   }
+
+  export const productDetailController = async (req, res) => {
+	try {
+		const { id } = req.params;
+		const result = await productDetailService(id);
+		res.status(200).json({
+			message: "Product success",
+			data: result,
+		});
+	} catch (err) {
+		res.status(500).send(err.message);
+	}
+};
 
 export const productCategoryController = async (req, res) => {
 	try {

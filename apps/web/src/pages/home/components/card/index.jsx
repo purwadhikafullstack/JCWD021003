@@ -3,10 +3,10 @@ import { Box, Image, Text, Button } from '@chakra-ui/react';
 import currencyFormatter from 'currency-formatter';
 import { useNavigate } from 'react-router-dom';
 
-export const ProductCard = ({ image, name, category, price, onAddToCart }) => {
+export const ProductCard = ({ id, image, name, category, price, onAddToCart }) => {
   const navigate = useNavigate();
   const handleCardClick = () => {
-    navigate(`/products/${id}`);
+    navigate(`/product/${id}`);
   };
   const formattedPrice = currencyFormatter.format(price, { code: 'IDR' });
   return (
