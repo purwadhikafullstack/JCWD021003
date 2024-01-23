@@ -12,12 +12,15 @@ import { Products } from '../../../dummy/product';
 
 function Home() {
  
+  const handleAddToCart =() => {
+    console.log('add to cart jalan');
+  }
   return (
     <Box bgColor="white" maxW={'100vw'} id="home">
       <Navbar />
       <Hero />
       <CarouselKategori />
-      <SimpleGrid columns={3} spacing={4}>
+      <SimpleGrid columns={{md:3, sm:2,base:1}} spacing={4} mx={"15px"}>
         {Products?.map((data) => (
           <ProductCard
             key={data.id}

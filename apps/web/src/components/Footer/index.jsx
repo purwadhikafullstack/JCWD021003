@@ -90,7 +90,7 @@ export const Footer = () => {
 							fontSize={{base: "12px",lg: "14px"}}
 							gap={3}	
 						>
-							<Text fontWeight={500} fontSize={{base: "14px",lg: "16px"}}>
+							<Text fontWeight={900} fontSize={{base: "14px",lg: "16px"}}>
 								About AdaStore
 							</Text>
 							<Link>

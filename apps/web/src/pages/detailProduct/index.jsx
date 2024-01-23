@@ -1,25 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import {
-  Box,
-  Image,
-  Text,
-  Button,
-  VStack,
-  HStack,
-  Input,
-} from '@chakra-ui/react';
+import {  Box,  Image,  Text,  Button,  VStack,  HStack,  Input,} from '@chakra-ui/react';
 import currencyFormatter from 'currency-formatter';
 import { Navbar } from '../../components/Navbar';
 import { Products } from '../../../dummy/product';
+import { Footer } from '../../components/Footer';
 // import ProductDetail from './components/productDetail';
 
 export const ProductDetailPage = () => {
   const { id } = useParams();
   const { productId } = useParams();
   const [product, setProduct] = useState();
-
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [quantity, setQuantity] = useState(1);
@@ -42,10 +34,8 @@ export const ProductDetailPage = () => {
   useEffect(() => {
     const fetchProductDetail = () => {
       const productIdInt = parseInt(id, 10);
-      console.log('cek', productIdInt);
       // Find the product in the local product list
       const selectedProduct = Products.find((p) => p.id === productIdInt);
-      console.log('selectedProduct', selectedProduct);
       if (selectedProduct) {
         setProduct(selectedProduct);
         setLoading(false);
@@ -71,6 +61,14 @@ export const ProductDetailPage = () => {
     setSelectedSize(size);
   };
 
+  const handleQuantityIncrement = () => {
+    setQuantity(quantity + 1);
+  };
+
+  const handleQuantityDecrement = () => {
+    setQuantity(Math.max(1, quantity - 1));
+  };
+
   const handleCheckout = () => {
     // Implement your checkout logic here
     console.log(
@@ -93,61 +91,68 @@ export const ProductDetailPage = () => {
   return (
     <Box>
       <Navbar />
-      <HStack spacing="8" h={'100vh'}>
-        {/* Left column for product image */}
-        <Image
-          src={product?.image}
-          alt={product?.name}
-          objectFit="scale-down"
-          boxSize="300px"
-        />
+      <Box m={{base:'20px',sm:'30px',md:"40px"}} display="grid" gridTemplateColumns={{ base: '1fr', sm:"1fr", md: 'repeat(2, 1fr)' }} gap="8">
+      {/* Left column for product image */}
+      <Image src={product.image} alt={product.name} objectFit="scale-down" boxSize="100%" />
 
-        {/* Right column for product details */}
-        <VStack align="start" spacing="4">
-          <Text fontWeight="semibold" fontSize="xl">
-            {product?.name}
+      {/* Right column for product details */}
+      <Box>
+        <Text fontWeight="semibold" fontSize="xl">
+          {product.name}
+        </Text>
+        <Text fontSize="lg" fontWeight="bold">
+          {formattedPrice}
+        </Text>
+        <Text fontSize="md" color="gray.500" mb="4">
+          {product.category}
+        </Text>
+
+        {/* Size buttons (for shoes) */}
+        <HStack spacing="2" mb="4">
+          <Button size="sm" onClick={() => handleSizeSelect('S')}>
+            S
+          </Button>
+          <Button size="sm" onClick={() => handleSizeSelect('M')}>
+            M
+          </Button>
+          <Button size="sm" onClick={() => handleSizeSelect('L')}>
+            L
+          </Button>
+        </HStack>
+
+        {/* Quantity input with buttons */}
+        <Box>
+          <Text fontSize="md" mb="2">
+            Quantity:
           </Text>
-          <Text fontSize="lg" fontWeight="bold">
-            {formattedPrice}
-          </Text>
-          {/* <Text fontSize="md" color="gray.500" mb="4">
-        {product.category}
-      </Text> */}
-          <Text fontSize="md">{product?.description}</Text>
-
-          {/* Size buttons (for shoes) */}
-          <HStack spacing="2" mb="4">
-            <Button size="sm" onClick={() => handleSizeSelect('S')}>
-              S
+          <HStack>
+            <Button size="sm" onClick={handleQuantityDecrement}>
+              -
             </Button>
-            <Button size="sm" onClick={() => handleSizeSelect('M')}>
-              M
-            </Button>
-            <Button size="sm" onClick={() => handleSizeSelect('L')}>
-              L
-            </Button>
-          </HStack>
-
-          {/* Quantity input */}
-          <Box>
-            <Text fontSize="md" mb="2">
-              Quantity:
-            </Text>
             <Input
               type="number"
               min={1}
               value={quantity}
-              onChange={handleQuantityChange}
+              onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
               w="60px"
+              textAlign="center"
             />
-          </Box>
+            <Button size="sm" onClick={handleQuantityIncrement}>
+              +
+            </Button>
+          </HStack>
+        </Box>
 
-          {/* Checkout button */}
-          <Button colorScheme="teal" onClick={handleCheckout} mt="4">
-            Checkout
-          </Button>
-        </VStack>
-      </HStack>
+        {/* Checkout button */}
+        <Button colorScheme="teal" onClick={handleCheckout} mt="4" w="100%">
+          Checkout
+        </Button>
+        <Box mt={"20px"} p={"20px"} bgColor={"#F8F8FF"} borderRadius={"20px"}>
+        <Text fontSize="md">{product.description}</Text>
+        </Box>
+      </Box>
+    </Box>
+      <Footer/>
     </Box>
   );
 };

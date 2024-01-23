@@ -17,12 +17,13 @@ export const ProductCard = ({ id, image, name, category, price, onAddToCart }) =
       overflow="hidden"
       boxShadow="md"
       m="4"
-      cursor="pointer"
-      onClick={handleCardClick}
+      
     >
-      <Image src={image} alt={name} objectFit="scale-down" h="200px" mx={'auto'} />
+      <Image src={image} alt={name} objectFit="scale-down" h="200px" mx={'auto'} cursor="pointer"
+      onClick={handleCardClick}/>
 
-      <Box p="6">
+      <Box p="6" cursor="pointer" h={"150px"}
+      onClick={handleCardClick}>
         <Text fontWeight="semibold" fontSize="lg" mb="2">
           {name}
         </Text>
@@ -32,7 +33,10 @@ export const ProductCard = ({ id, image, name, category, price, onAddToCart }) =
         <Text fontSize="lg" fontWeight="bold" mb="4">
           {formattedPrice}
         </Text>
-        <Button
+       
+      </Box>
+      <Box p={6}>
+      <Button
           onClick={onAddToCart}
           bgGradient={'linear(to-r, #45b649, #a8e063)'}
           fontWeight={700}

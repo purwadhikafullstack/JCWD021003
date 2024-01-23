@@ -23,16 +23,16 @@ export const getProductQuery = async (
       }
       if(category_Id){
         filter.where = {
-          id: {
+          category_Id: {
             [Op.eq]: category_Id,
           },
         }
       }
    
     const res = await Product.findAll({
-      // include: [
-      //   {model: category}
-      // ],
+      include: [
+        {model: category}
+      ],
       ...filter
     })
     return res
