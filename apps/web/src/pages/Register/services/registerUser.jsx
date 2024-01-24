@@ -10,10 +10,10 @@ export const register = async (email, username, setLoading, openSuccessModal, op
         });
         setLoading(false);
         openSuccessModal();
-        console.log("success");
+        // console.log("success");
     } catch (err) {
         setLoading(false);
         openErrorModal();
-        console.log("here's the error", err.message);
+        // console.log("here's the error", err.message);
     }
 };

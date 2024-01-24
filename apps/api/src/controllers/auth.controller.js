@@ -111,12 +111,3 @@ export const googleLoginController = async(req, res) => {
     return res.status(500).send(err.message);
   }
 };
-
-// export const googleLoginCallbackController = async (req, res) => {
-//   const {code} = req.query;
-//   const result = await googleCallbackService(code);
-//   return res.status(200).json({
-//     message: "Result Success",
-//     data: result,
-//   })
-// };

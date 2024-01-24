@@ -1,4 +1,4 @@
-import { AbsoluteCenter, Box, Button, Flex, FormControl, FormErrorMessage, Icon, Image, Input, InputGroup, InputLeftElement, InputRightElement, Text, useDisclosure } from "@chakra-ui/react"
+import { AbsoluteCenter, Box, Button, Flex, FormControl, FormErrorMessage, Icon, Image, Input, InputGroup, InputLeftElement, InputRightElement, Text, useDisclosure, IconButton } from "@chakra-ui/react"
 import model from '../../assets/icon2.png'
 import {LockClosedIcon, EyeSlashIcon, EyeIcon} from '@heroicons/react/24/outline'
 import { useFormik } from "formik"
@@ -8,7 +8,9 @@ import { useState } from "react"
 import { SuccessModal } from "./services/PopModal"
 import { ErrorModal } from "./services/PopModal"
 import { BeatLoader } from "react-spinners"
-// import logo from "../../assets/images/logo.png"
+import {useNavigate, Link} from 'react-router-dom'
+import { IoHome } from "react-icons/io5";
+
 function Verification() {
     const [showPassword, setShowPassword] = useState(false);
     const [showPasswordConfirmation, setShowPasswordConfirmation] = useState(false);
@@ -19,6 +21,7 @@ function Verification() {
         margin: "0 auto",
         borderColor: "white",
     };
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
 
     const formik = useFormik({
@@ -145,6 +148,19 @@ function Verification() {
                     </div></Button>) : (
                     <Button width={'100%'} height={'68px'} borderRadius={'16px'} fontSize={'24px'} fontWeight={'700'} color={'white'} bg={'green'} _hover={{bg: '#f50f5a'}} _active={{opacity:'70%'}} type="submit">CONFIRM</Button>
                 )}
+                <Box>
+                <Flex justifyContent={'right'}
+                alignItems={'center'} 
+                gap={'24px'}
+                mt={'20px'}>
+                <Link to='/'>
+                    <IconButton
+                    colorScheme='red'
+                    size='lg'
+                    icon={<IoHome />} />
+                </Link>
+                </Flex>
+                </Box>
                 </form>
                 <SuccessModal isOpen={isSuccessModalOpen} onClose={closeSuccessModal} />
                 <ErrorModal isOpen={isErrorModalOpen} onClose={closeErrorModal} />

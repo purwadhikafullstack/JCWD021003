@@ -1,19 +1,22 @@
-import { AbsoluteCenter, Box, Button, Flex, FormControl, Icon, Image, Input, InputGroup, InputLeftElement, Text, useToast,IconButton } from "@chakra-ui/react"
+import { AbsoluteCenter, Box, Button, Flex, FormControl, Icon, Image, Input, InputGroup, InputLeftElement,InputRightElement, Text, useToast,IconButton } from "@chakra-ui/react"
 import model from '../../assets/icon2.png'
 import {Link, useNavigate} from 'react-router-dom'
-import { EnvelopeIcon, LockClosedIcon} from '@heroicons/react/24/outline'
+import { EnvelopeIcon, LockClosedIcon,EyeSlashIcon, EyeIcon} from '@heroicons/react/24/outline'
 import { useFormik } from "formik"
 import {useDispatch} from 'react-redux'
 import {signInWithGoogle} from '../../firebase'
 import googleImg from '../../assets/google.png'
 import { login, Googlelogin } from "../../redux/reducer/authReducer"
 import { IoHome } from "react-icons/io5";
+import { useState } from "react"
+
 // import logo from "../../assets/images/logo.png"
 function Signin() {
-
     const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const toasts = useToast();
+    const [showPassword, setShowPassword] = useState(false);
+
 
     const formik = useFormik({
         initialValues:{
@@ -23,15 +26,13 @@ function Signin() {
         onSubmit: (values, {resetForm}) => {
             dispatch(login(values.email, values.password))
             resetForm({values:{email: "", password:""}})
-			
+            navigate('/')
         }
     }) 
 
 	const onLoginWithGoogle = async () => {
 		try {
 			const result = await signInWithGoogle();
-			// if (result === "signin with google success") {
-			// }
 			if (result) {
 				console.log('result',result)
 				dispatch(Googlelogin(result.username, result.email, result.avatar))
@@ -80,6 +81,7 @@ function Signin() {
                 <FormControl>
                     <InputGroup marginBottom={'32px'}>
                     <Input
+                        type={showPassword ? "text" : "password"}
                         name="password"
                         placeholder="Password"
                         value={formik.values.password}
@@ -97,6 +99,18 @@ function Signin() {
                         <Icon as={LockClosedIcon} boxSize={'24px'} margin={'auto'} position={'relative'} textColor={'green.grey350'}/>
                         </Flex>
                     </InputLeftElement>
+                    <InputRightElement top={'12px'} width={'54px'}>
+						<Button
+							variant={"ghost"}
+							onClick={() => setShowPassword((showPassword) => !showPassword)}
+							backgroundColor={"transparent"}
+                            height={'64px'}
+                            _hover={'none'}
+                            color={'#707070'}
+						>
+							{showPassword ? <Icon as={EyeIcon} boxSize={'24px'}/> : <Icon as={EyeSlashIcon} boxSize={'24px'}/>}
+						</Button>
+					</InputRightElement>
                     </InputGroup>
                 </FormControl>
 

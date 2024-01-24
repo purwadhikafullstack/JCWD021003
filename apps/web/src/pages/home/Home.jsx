@@ -12,9 +12,8 @@ import { Products } from '../../../dummy/product';
 
 function Home() {
  
-  const handleAddToCart =() => {
-    console.log('add to cart jalan');
-  }
+  // const handleAddToCart =() => {
+  // }
   return (
     <Box bgColor="white" maxW={'100vw'} id="home">
       <Navbar />

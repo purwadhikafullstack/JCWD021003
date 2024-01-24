@@ -12,7 +12,7 @@ import { IoHome } from "react-icons/io5";
 import {Link} from 'react-router-dom'
 // import { signInWithGoogle } from '../../firebase';
 
-function Signup({setOpenTab}) {
+function Signup() {
     const { isOpen: isSuccessModalOpen, onOpen: openSuccessModal, onClose: closeSuccessModal } = useDisclosure();
     const { isOpen: isErrorModalOpen, onOpen: openErrorModal, onClose: closeErrorModal } = useDisclosure();
 

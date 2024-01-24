@@ -15,15 +15,12 @@ const validations = [
 
 //GET 
 authRouter.get("/keep-login", verifyToken, keepLoginController)
-// authRouter.get("/google/callback", googleLoginCallbackController)
-
 
 //POST
 authRouter.post("/user-registration", validator(validations), registerController);
 authRouter.post("/login", loginController);
 authRouter.post("/request-password-reset", forgotPasswordController);
 authRouter.post("/google", googleLoginController)
-
 
 // PUT
 authRouter.put("/email-verification", emailVerificationController);

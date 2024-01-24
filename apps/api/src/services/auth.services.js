@@ -199,13 +199,3 @@ export const resetPasswordService = async (token, password) => {
         throw err
     }
 }
-
-export const googleCallbackService = async (code) => {
-    const {tokens} = await oauth2Client.getToken(code)
-    oauth2Client.setCredentials(tokens);
-
-    const oauth2 = google.oauth2({
-        auth: oauth2Client,
-        version:'v2'
-    })
-}
