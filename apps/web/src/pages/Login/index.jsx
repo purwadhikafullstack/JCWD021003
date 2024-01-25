@@ -1,4 +1,4 @@
-import { AbsoluteCenter, Box, Button, Flex, FormControl, Icon, Image, Input, InputGroup, InputLeftElement,InputRightElement, Text, useToast,IconButton } from "@chakra-ui/react"
+import { AbsoluteCenter, Box, Button, Flex, FormControl, Icon, Image, Input, InputGroup, InputLeftElement,InputRightElement, Text, useToast,IconButton,useDisclosure } from "@chakra-ui/react"
 import model from '../../assets/icon2.png'
 import {Link, useNavigate} from 'react-router-dom'
 import { EnvelopeIcon, LockClosedIcon,EyeSlashIcon, EyeIcon} from '@heroicons/react/24/outline'
@@ -9,14 +9,23 @@ import googleImg from '../../assets/google.png'
 import { login, Googlelogin } from "../../redux/reducer/authReducer"
 import { IoHome } from "react-icons/io5";
 import { useState } from "react"
+import { SuccessModal,ErrorModal } from "./services/PopModal"
+import { BeatLoader } from "react-spinners"
+
 
 // import logo from "../../assets/images/logo.png"
 function Signin() {
     const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const toasts = useToast();
     const [showPassword, setShowPassword] = useState(false);
-
+    const { isOpen: isSuccessModalOpen, onOpen: openSuccessModal, onClose: closeSuccessModal } = useDisclosure();
+    const { isOpen: isErrorModalOpen, onOpen: openErrorModal, onClose: closeErrorModal } = useDisclosure();
+    const override = {
+        display: "block",
+        margin: "0 auto",
+        borderColor: "white",
+    };
+    const [loading, setLoading] = useState(false);
 
     const formik = useFormik({
         initialValues:{
@@ -24,7 +33,7 @@ function Signin() {
             password:"",
         },
         onSubmit: (values, {resetForm}) => {
-            dispatch(login(values.email, values.password))
+            dispatch(login(values.email, values.password,setLoading, openSuccessModal, openErrorModal))
             resetForm({values:{email: "", password:""}})
         }
     }) 
@@ -34,8 +43,8 @@ function Signin() {
 			const result = await signInWithGoogle();
 			if (result) {
 				console.log('result',result)
-				dispatch(Googlelogin(result.username, result.email, result.avatar))
-				navigate('/')
+				dispatch(Googlelogin(result.username, result.email, result.avatar,setLoading, openSuccessModal, openErrorModal))
+				// navigate('/')
 			}
 		} catch (error) {
 			console.log(error);
@@ -114,13 +123,23 @@ function Signin() {
                     <Flex justifyContent={"center"} mb={"25px"}>
 					<Link to="/password-reset-request" style={{ marginLeft: "5px" }}>
                     <Text display={"flex"} fontSize={"14px"}>
-					Forget Password?
+					Forget&nbsp;<b>Password</b>?
                     </Text>
 					</Link>
                     </Flex>
                 </FormControl>
-
-                <Button width={'100%'} height={'68px'} borderRadius={'16px'} fontSize={'24px'} fontWeight={'700'} color={'white'} bg={'green'} _hover={{bg: '#f50f5a'}} _active={{opacity:'70%'}} type="submit">SIGN IN</Button>
+                {loading ? (<Button width={'100%'} height={'68px'} borderRadius={'16px'} fontSize={'24px'} fontWeight={'700'} color={'white'} bg={'green'} _hover={{bg: '#f50f5a'}} _active={{opacity:'70%'}}>
+                    <div className="sweet-loading">
+                        <BeatLoader color={"#ffffff"}
+							loading={loading}
+							cssOverride={override}
+							size={10}
+							aria-label="spiner"
+							data-testid="loader"/>
+                    </div></Button>) : (
+                    <Button width={'100%'} height={'68px'} borderRadius={'16px'} fontSize={'24px'} fontWeight={'700'} color={'white'} bg={'green'} _hover={{bg: '#f50f5a'}} _active={{opacity:'70%'}} type="submit">SIGN IN</Button>
+                )}
+                {/* <Button width={'100%'} height={'68px'} borderRadius={'16px'} fontSize={'24px'} fontWeight={'700'} color={'white'} bg={'green'} _hover={{bg: 'red'}} _active={{opacity:'70%'}} type="submit">SIGN IN</Button> */}
 
 				<Box
 						display={"flex"}
@@ -129,10 +148,10 @@ function Signin() {
 						flexDirection={"column"}
 						mt={"20px"}
 					>
-						<Text fontSize={"12px"} mb={"10px"}>
+						<Text fontWeight={600} fontSize={"12px"} mb={"10px"}>
 							Or Sign in with
 						</Text>
-						<Button size={"sm"} onClick={onLoginWithGoogle}>
+						<Button border={'1.3px solid black'} bgColor={"white"} size={"sm"} _hover={{bgColor:'green',color:'white'}} onClick={onLoginWithGoogle}>
 							<Image
 								src={googleImg}
 								w={"15px"}
@@ -142,10 +161,10 @@ function Signin() {
 							Google
 						</Button>
 					</Box>
-				<Text display={"flex"} fontSize={"14px"} mt={"25px"}>
-					Belum Punya Akun?
+				<Text fontWeight={600} display={"flex"} fontSize={"14px"} mt={"25px"} py={"auto"} alignItems={"center"}>
+					Don't have an account?
 					<Link to="/register" style={{ marginLeft: "5px" }}>
-						Register
+                        <Button color={"white"} bg={"green"} borderRadius={20} _hover={{bgColor:'red'}}>Register</Button>
 					</Link>
 				</Text>
 				<Flex justifyContent={'right'}
@@ -160,7 +179,8 @@ function Signin() {
                 </Link>
                 </Flex>
                 </form>
-                
+                <SuccessModal isOpen={isSuccessModalOpen} onClose={closeSuccessModal} />
+                <ErrorModal isOpen={isErrorModalOpen} onClose={closeErrorModal} />
                 </Box>
             </Flex>
         </Flex>

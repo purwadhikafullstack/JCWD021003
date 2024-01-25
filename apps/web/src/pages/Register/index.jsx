@@ -8,8 +8,8 @@ import { SuccessModal, ErrorModal } from "./services/PopUpModal"
 import { BeatLoader } from "react-spinners";
 import { useState } from "react"
 import { registerScheme } from "./services/validation"
-import { IoHome } from "react-icons/io5";
-import {Link} from 'react-router-dom'
+import { IoHome,IoArrowBack  } from "react-icons/io5";
+import {Link, useNavigate} from 'react-router-dom'
 // import { signInWithGoogle } from '../../firebase';
 
 function Signup() {
@@ -23,6 +23,7 @@ function Signup() {
     };
     const [loading, setLoading] = useState(false);
     
+    const navigate = useNavigate()
     const formik = useFormik({
         initialValues:{
             email: "",
@@ -130,10 +131,17 @@ function Signup() {
                 <SuccessModal isOpen={isSuccessModalOpen} onClose={closeSuccessModal} />
                 <ErrorModal isOpen={isErrorModalOpen} onClose={closeErrorModal} />
                             
-                <Flex justifyContent={'right'}
+                <Flex justifyContent={'space-between'}
                 alignItems={'center'} 
                 gap={'24px'}
                 mt={'20px'}>
+                <Link>
+                    <IconButton
+                    colorScheme='red'
+                    size='lg'
+                    icon={<IoArrowBack  />}
+                    onClick={()=>navigate(-1)} />
+                </Link>
                 <Link to='/'>
                     <IconButton
                     colorScheme='red'

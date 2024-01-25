@@ -46,7 +46,7 @@ export const AuthReducer = createSlice({
 	},
 });
 
-export const login = (email, password) => {
+export const login = (email, password, setLoading, openSuccessModal, openErrorModal) => {
 	return async (dispatch) => {
 		try {
 			const res = await axios.post(
@@ -59,14 +59,18 @@ export const login = (email, password) => {
 			localStorage.setItem("token", res?.data?.data?.token);
 			dispatch(setUser(res?.data?.data?.user));
 			dispatch(loginSuccess());
+			openSuccessModal();
+       		setLoading(false);
 			} catch (err) {
-			alert(err?.response?.data.message);
+			// alert(err?.response?.data.message);
+			openErrorModal();
+			setLoading(false);
 			throw err;
 		}
 	};
 };
 
-export const Googlelogin = (username, email, avatar) => {
+export const Googlelogin = (username, email, avatar,setLoading, openSuccessModal, openErrorModal) => {
 	return async (dispatch) => {
 		try {
 			const res = await axios.post(
@@ -79,6 +83,8 @@ export const Googlelogin = (username, email, avatar) => {
 			)
 			localStorage.setItem("token", res?.data?.data?.token);
 			dispatch(setUser(res?.data?.data?.user));
+			openSuccessModal();
+       		setLoading(false);
 			dispatch(loginSuccess());
 			} catch (err) {
 			alert(err?.response?.data.message);

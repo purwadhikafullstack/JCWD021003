@@ -143,7 +143,9 @@ export const keepLoginService = async (id) => {
 
 export const forgotPasswordService = async (email) => {
     try {
-
+        //Check email
+        const check = await findUserQuery({email});
+        if (!check) throw new Error("Email doesn't exist");
 // GENERATE TOKEN TO SET PASSWORD BASED ON THE TOKEN
         const secretKey = process.env.JWT_SECRET_KEY;
         if (!secretKey) {

@@ -93,10 +93,10 @@ export const Footer = () => {
 							<Text fontWeight={900} fontSize={{base: "14px",lg: "16px"}}>
 								About AdaStore
 							</Text>
-							<Link>
+							<Link to={'/login'}>
 								<Text fontWeight={400}>Login</Text>
 							</Link>
-							<Link>
+							<Link to={'/register'}>
 								<Text fontWeight={400}>Sign Up</Text>
 							</Link>
 							
