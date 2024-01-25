@@ -30,13 +30,14 @@ function Signup() {
             username:"",
         },
         validationSchema: registerScheme,
-        onSubmit: async (values, {resetForm}) => {
+        onSubmit: async (values) => {
             try{
                 await register(values.email, values.username, setLoading, openSuccessModal, openErrorModal);
             } catch (err){
                 console.log("gagal error");
             }
-            resetForm({values:{email: "", username:""}})
+            // resetForm({values:{email: "", username:""}})
+            formik.resetForm();
         }
     }) 
 

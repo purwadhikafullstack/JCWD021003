@@ -15,16 +15,21 @@ import {
     Select,
     Link,
     FormErrorMessage,
-    Icon} from '@chakra-ui/react'
+    Icon, useToast} from '@chakra-ui/react'
 import { useFormik } from "formik";
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { ChevronRightIcon } from '@chakra-ui/icons'
+import {useState, useEffect} from 'react'
+import { setUser, updateUser } from '../../../../redux/reducer/authReducer';
 
 
 function UpdateUsername() {
-  const { isOpen, onOpen, onClose } = useDisclosure()
   const user = useSelector((state) => state.AuthReducer.user);
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const dispatch = useDispatch();
+  const toast = useToast()
+
   const editUsername = async (
     username
   ) => {
@@ -32,12 +37,18 @@ function UpdateUsername() {
       await axios.patch(`http://localhost:8000/api/user/update-username/${user.id}`, {
       username,
     });
-
+    dispatch(setUser({...user, username}))
+    toast({
+      title: "Username successfully changed",
+      status: "success",
+    });
     onClose();
     } catch (err){
       console.log(err)
     }
   };
+
+
 
   const formik = useFormik({
     initialValues:{
@@ -45,9 +56,8 @@ function UpdateUsername() {
     },
 
     onSubmit: (values) => {
-      editUsername(
-          values.username,
-          )
+      editUsername(values.username,)
+      formik.resetForm()
         }
       });
 
@@ -62,7 +72,7 @@ function UpdateUsername() {
                     bg={'transparent'}
                     fontWeight={'500'}
                     onClick={onOpen}>
-                        <span>{user?.username}</span>   
+                        <span>{user.username}</span>   
                         <span>
                             <Icon as={ChevronRightIcon}/>
                         </span>   
@@ -84,7 +94,7 @@ function UpdateUsername() {
                         <Input name="username"
                         // placeholder='Enter username'
                         value={formik.values.username}
-                        onChange={formik.handleChange} />
+                        onChange={(e)=>{formik.handleChange(e)}} />
 
                         {formik.touched.username && formik.errors.username && (
                           <FormErrorMessage>

@@ -1,4 +1,4 @@
-import { findMainUserAddressService, createUserAddressService, findProvinceService, findCityService, opencageService,findCityOpenCageBasedService } from "../services/userAddress.services";
+import { findMainUserAddressService, createUserAddressService, findProvinceService, findCityService, opencageService,findCityOpenCageBasedService,findCityOpenCageBasedService2 } from "../services/userAddress.services";
 
 export const findMainUserAddressController = async (req, res) => {
     try{
@@ -78,7 +78,7 @@ export const opencageController = async (req, res) => {
 export const findCityOpenCageBasedController = async (req, res) => {
     try {
         const {city} = req.query
-        const result = await findCityOpenCageBasedService(city)
+        const result = await findCityOpenCageBasedService2(city)
         return res.status(200).json({
             message: "success",
             data: result

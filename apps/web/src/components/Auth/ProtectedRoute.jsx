@@ -5,9 +5,8 @@ export const LoggedInRoute = ({ children }) => {
 
 	const check = localStorage.getItem("token");
 
-	if (check) {
-		return <>{children}</>;
-	} else if (!check) {
-		return <Navigate to="/login" />;
-	}
+	// if (check) 	return children;
+	
+	return check && children || <Navigate to="/login" />;
+	
 };

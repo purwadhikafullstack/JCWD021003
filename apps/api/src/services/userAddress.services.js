@@ -1,4 +1,4 @@
-import { findMainUserAddressQuery, createUserAddressQuery, findProvinceQuery, findCityQuery, opencageQuery, findCityOpenCageBasedQuery } from "../queries/userAddress.queries";
+import { findMainUserAddressQuery, createUserAddressQuery, findProvinceQuery, findCityQuery, opencageQuery, findCityOpenCageBasedQuery, CityOpencageQuery } from "../queries/userAddress.queries";
 
 export const findMainUserAddressService = async (id) => {
     try{
@@ -49,6 +49,16 @@ export const opencageService = async (latitude, longitude) => {
 export const findCityOpenCageBasedService = async (cityName) => {
     try{
         const res = await findCityOpenCageBasedQuery(cityName)
+        return res
+    } catch (err){
+        throw err
+    }
+}
+
+export const findCityOpenCageBasedService2 = async (city) => {
+    try{
+        const API_KEY = process.env.OPENCAGE_API_KEY;
+        const res = await CityOpencageQuery(city, API_KEY)
         return res
     } catch (err){
         throw err

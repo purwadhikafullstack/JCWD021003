@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -44,7 +44,23 @@ export const AuthReducer = createSlice({
 			state.isLogin = true;
 		},
 	},
+	// extra Reducer
+	// extraReducers: (builder) => {
+	// 	builder.addCase(updateUser.fulfilled, (state, action) => {
+	// 	  const updatedUser = action.payload;
+	
+	// 	  state.user = {
+	// 		...state.user,
+	// 		...updatedUser,
+	// 	  };
+	// 	});
+	//   },
 });
+
+export const updateUser = createAsyncThunk('AuthReducer/updateUser', async (updatedUserData) => {
+	const response = await axios.patch(`http://localhost:8000/api/user/update-user`, updatedUserData);
+	return response.data;
+  });
 
 export const login = (email, password, setLoading, openSuccessModal, openErrorModal) => {
 	return async (dispatch) => {

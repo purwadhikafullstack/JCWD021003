@@ -30,14 +30,13 @@ function Verification() {
             confirmationPassword:"",
         },
         validationSchema: PasswordSchema,
-        onSubmit: async (values, {resetForm}) => {
+        onSubmit: async (values) => {
             try{
                 await verification(values.password, setLoading, openSuccessModal, openErrorModal);    
             } catch (err){
                 console.log(err.message);
             }
-            
-            resetForm({values:{password: "", confirmationPassword:"",}})
+            formik.resetForm()
         }
     }) 
   return (

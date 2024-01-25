@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/home/Home';
-// import ScrollToTop from './components/ScrollToTop';
+import ScrollToTop from './components/ScrollToTop';
 import { Auth } from './components/Auth';
 import Signup from './pages/Register';
 import Signin from './pages/Login';
@@ -15,7 +15,7 @@ import ResetPassword from './pages/ResetPassword';
 function App() {
   return (
     <Auth>
-      {/* <ScrollToTop> */}
+      <ScrollToTop>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Signup />} />
@@ -36,7 +36,7 @@ function App() {
 
           <Route path="/product/:id" element={<ProductDetailPage/>} />
         </Routes>
-      {/* </ScrollToTop> */}
+      </ScrollToTop>
     </Auth>
   );
 }

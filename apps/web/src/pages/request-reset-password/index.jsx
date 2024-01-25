@@ -27,14 +27,15 @@ function RequestPasswordReset() {
             email: "",
         },
         validationSchema: EmailScheme,
-        onSubmit: async (values, {resetForm}) => {
+        onSubmit: async (values) => {
             try{
                 await createRequest(values.email, setLoading, openSuccessModal, openErrorModal);
             } catch {
                 console.log("gagal error");
             }
             
-            resetForm({values:{email: "",}})
+            // resetForm({values:{email: "",}})
+            formik.resetForm();
         }
     }) 
   return (

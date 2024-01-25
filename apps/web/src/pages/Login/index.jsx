@@ -1,9 +1,9 @@
 import { AbsoluteCenter, Box, Button, Flex, FormControl, Icon, Image, Input, InputGroup, InputLeftElement,InputRightElement, Text, useToast,IconButton,useDisclosure } from "@chakra-ui/react"
 import model from '../../assets/icon2.png'
-import {Link, useNavigate} from 'react-router-dom'
+import {Link, useNavigate, Navigate} from 'react-router-dom'
 import { EnvelopeIcon, LockClosedIcon,EyeSlashIcon, EyeIcon} from '@heroicons/react/24/outline'
 import { useFormik } from "formik"
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {signInWithGoogle} from '../../firebase'
 import googleImg from '../../assets/google.png'
 import { login, Googlelogin } from "../../redux/reducer/authReducer"
@@ -12,9 +12,8 @@ import { useState } from "react"
 import { SuccessModal,ErrorModal } from "./services/PopModal"
 import { BeatLoader } from "react-spinners"
 
-
-// import logo from "../../assets/images/logo.png"
 function Signin() {
+    const isLogin = useSelector((state) => state.AuthReducer.isLogin);
     const dispatch = useDispatch();
 	const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
@@ -32,9 +31,9 @@ function Signin() {
             email: "",
             password:"",
         },
-        onSubmit: (values, {resetForm}) => {
+        onSubmit: (values) => {
             dispatch(login(values.email, values.password,setLoading, openSuccessModal, openErrorModal))
-            resetForm({values:{email: "", password:""}})
+            formik.resetForm();
         }
     }) 
 
@@ -44,12 +43,14 @@ function Signin() {
 			if (result) {
 				console.log('result',result)
 				dispatch(Googlelogin(result.username, result.email, result.avatar,setLoading, openSuccessModal, openErrorModal))
-				// navigate('/')
 			}
 		} catch (error) {
 			console.log(error);
 		}
 	};
+    if (isLogin){
+        return <Navigate to={'/'} replace={true}/>
+    }
   return (
     <>
         <Flex height={'100%'} width={'100%'} boxShadow={'base'}>

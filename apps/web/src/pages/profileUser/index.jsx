@@ -87,6 +87,8 @@ function Profile() {
                 <Text marginBottom={'24px'}
                 fontSize={'24px'}
                 fontWeight={'700'}>Profile Setting</Text>
+
+{/* //Username editing */}
                 <Flex alignItems={'center'}>
                     <Flex w={'100px'} alignContent={'center'}>
                         <Text>Username</Text>

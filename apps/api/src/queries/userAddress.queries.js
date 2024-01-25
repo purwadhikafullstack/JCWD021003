@@ -1,6 +1,6 @@
 import UserAddress from '../models/userAddress.model'
 import Province from '../models/province.model'
-import City from '../models/city.model'
+import City from '../models/city.model.js'
 import opencage from 'opencage-api-client'
 import { Op } from 'sequelize';
 
@@ -73,6 +73,18 @@ export const opencageQuery = async (latitude, longitude, API_KEY) => {
         language: 'en' })
         console.log('res api opencage',response.results[1])
         return response.results[0]
+    } catch (err){
+        throw err
+    }
+}
+
+export const CityOpencageQuery = async (city, API_KEY) => {
+    try{
+        const response = await opencage.geocode({ q: `${city}`,
+        key: API_KEY,
+        language: 'en' })
+        console.log('res api opencage',response.results[1])
+        return response
     } catch (err){
         throw err
     }

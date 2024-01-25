@@ -85,19 +85,14 @@ function FormCurrentAddress () {
             fullName:"", 
             phoneNumber:""
         },
-        onSubmit: async (values, {resetForm}) => {
+        onSubmit: async (values) => {
             try{
                 console.log("Formik Submission Values:", values);
                 await createUserAddress(user.id, values.specificAddress, values.cityId, values.fullName, values.phoneNumber);    
             } catch (err){
                 console.log(err.message);
             }
-            resetForm({values:
-                {specificAddress:"", 
-                cityId: "", 
-                fullName:"", 
-                phoneNumber:"",
-                }})
+           formik.resetForm();
         }
     })
 
