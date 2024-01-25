@@ -9,6 +9,8 @@ import Profile from './pages/profileUser';
 import CreateAddress from './pages/user-address';
 import { ProductDetailPage } from './pages/detailProduct';
 import { LoggedInRoute } from './components/Auth/ProtectedRoute';
+import RequestPasswordReset from './pages/request-reset-password';
+import ResetPassword from './pages/ResetPassword';
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
           <Route path="/register" element={<Signup />} />
           <Route path="/login" element={<Signin />} />
           <Route path="/auth/email-verification" element={<Verification />} />
+          <Route path="/password-reset-request" element={<RequestPasswordReset />} />
+          <Route path='/auth/reset-password' element={<ResetPassword />} />
           <Route path="/profile"
             element={
               <LoggedInRoute>

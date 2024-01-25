@@ -26,7 +26,6 @@ function Signin() {
         onSubmit: (values, {resetForm}) => {
             dispatch(login(values.email, values.password))
             resetForm({values:{email: "", password:""}})
-            navigate('/')
         }
     }) 
 
@@ -79,7 +78,7 @@ function Signin() {
                     </InputGroup>
                 </FormControl>
                 <FormControl>
-                    <InputGroup marginBottom={'32px'}>
+                    <InputGroup marginBottom={'12px'}>
                     <Input
                         type={showPassword ? "text" : "password"}
                         name="password"
@@ -112,6 +111,13 @@ function Signin() {
 						</Button>
 					</InputRightElement>
                     </InputGroup>
+                    <Flex justifyContent={"center"} mb={"25px"}>
+					<Link to="/password-reset-request" style={{ marginLeft: "5px" }}>
+                    <Text display={"flex"} fontSize={"14px"}>
+					Forget Password?
+                    </Text>
+					</Link>
+                    </Flex>
                 </FormControl>
 
                 <Button width={'100%'} height={'68px'} borderRadius={'16px'} fontSize={'24px'} fontWeight={'700'} color={'white'} bg={'green'} _hover={{bg: '#f50f5a'}} _active={{opacity:'70%'}} type="submit">SIGN IN</Button>

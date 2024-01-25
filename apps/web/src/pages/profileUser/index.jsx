@@ -41,7 +41,7 @@ function Profile() {
                 >
                 <Breadcrumb spacing='8px' separator={<ChevronRightIcon color='gray.500' />}>
                     <BreadcrumbItem >
-                        <BreadcrumbLink>
+                        <BreadcrumbLink href="/" >
                         <Icon as={HomeIcon} boxSize={'16px'}/>
                         </BreadcrumbLink>
                     </BreadcrumbItem>

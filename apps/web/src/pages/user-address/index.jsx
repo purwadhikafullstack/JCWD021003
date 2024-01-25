@@ -43,20 +43,21 @@ function CreateAddress() {
               </BreadcrumbItem>
               <BreadcrumbItem>
                 <BreadcrumbLink
-                  color={'brand.lightred'}
+                  color={'black'}
                   fontWeight={'700'}
                   fontSize={'12px'}
+                  href='/profile'
                 >
-                  Manage Address
+                  Profile
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbItem isCurrentPage>
                 <BreadcrumbLink
-                  color={'brand.lightred'}
+                  color={'black'}
                   fontWeight={'700'}
                   fontSize={'12px'}
                 >
-                  Create Address
+                  Manage Address
                 </BreadcrumbLink>
               </BreadcrumbItem>
             </Breadcrumb>{' '}
