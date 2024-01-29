@@ -9,6 +9,7 @@ import { CarouselKategori } from './components/CaroselKategori';
 import { ProductCard } from './components/card';
 import Shoes1 from '../../assets/shoes1.png';
 import { Products } from '../../../dummy/product';
+import { CardContainer } from './components/CardContainer';
 
 function Home() {
  
@@ -19,7 +20,7 @@ function Home() {
       <Navbar />
       <Hero />
       <CarouselKategori />
-      <SimpleGrid columns={{md:3, sm:2,base:1}} spacing={4} mx={"15px"}>
+      {/* <SimpleGrid columns={{md:3, sm:2,base:1}} spacing={4} mx={"15px"}>
         {Products?.map((data) => (
           <ProductCard
             key={data.id}
@@ -31,8 +32,8 @@ function Home() {
             onAddToCart={() => handleAddToCart(data.id)}
           />
         ))}
-      </SimpleGrid>
-      {/* <CardContainer/> */}
+      </SimpleGrid> */}
+      <CardContainer/>
       <Footer />
     </Box>
   );
