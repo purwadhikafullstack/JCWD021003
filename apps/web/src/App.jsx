@@ -12,6 +12,7 @@ import { LoggedInRoute } from './components/Auth/ProtectedRoute';
 import RequestPasswordReset from './pages/request-reset-password';
 import ResetPassword from './pages/ResetPassword';
 import CartPage from './pages/cartPage';
+import CheckoutPage from './pages/Checkout';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
 
           <Route path="/product/:id" element={<ProductDetailPage/>} />
           <Route path='/cart' element={<CartPage />} />
+          <Route path='/cart/shipment' element={<CheckoutPage/>}/>
         </Routes>
       </ScrollToTop>
     </Auth>

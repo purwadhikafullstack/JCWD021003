@@ -1,23 +1,28 @@
-// CartPage.js
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCart, removeFromCart,updateQuantity } from '../../redux/reducer/cartReducer';
-import { Box, Heading, Text, HStack, Divider, Image,IconButton } from '@chakra-ui/react';
+import { Box, Heading, Text, HStack, Divider, Image,IconButton,Button } from '@chakra-ui/react';
 import { FaPlus, FaMinus, FaTrash } from 'react-icons/fa';
 import currencyFormatter from 'currency-formatter';
 import { Navbar } from '../../components/Navbar';
+import { useNavigate } from 'react-router-dom';
 
-const CartPage = () => {
+export const CartPage = () => {
   const { items, totalCount, totalPrice } = useSelector(selectCart);
-  console.log('ini',items)
-  console.log('totalCount',totalCount)
+  const navigate = useNavigate()
   const dispatch = useDispatch();
+  const cartData = useSelector((state) => state.cart.items);
+
   const handleRemove = (productId) => {
     dispatch(removeFromCart(productId));
   };
 
   const handleUpdateQuantity = (productId, newQuantity) => {
     dispatch(updateQuantity({ productId, newQuantity }));
+  };
+
+  const handleProceedToCheckout = () => {
+    navigate('/cart/shipment', { state: { cartData } });
   };
 
   return (
@@ -44,7 +49,6 @@ const CartPage = () => {
                 {item.name}
               </Text>
               <Text>{currencyFormatter.format(item.price, { code: 'IDR' })}</Text>
-              {/* Add more details as needed */}
             </Box>
 
             {/* Quantity controls on the left */}
@@ -71,21 +75,17 @@ const CartPage = () => {
           </HStack>
           </Box>
         ))}
-
         <Divider my={8} />
-
         <Box>
           <Text fontSize="lg" fontWeight="semibold" mb={2}>
             Total Items: {totalCount}
           </Text>
           <Text fontSize="lg" fontWeight="semibold">
             Total Price: {currencyFormatter.format(totalPrice, { code: 'IDR' })}{' '}
-            {/* Replace with the actual calculation */}
           </Text>
+          <Button onClick={handleProceedToCheckout}>Proceed to Checkout</Button>
         </Box>
       </Box>
     </Box>
   );
 };
-
-export default CartPage;
