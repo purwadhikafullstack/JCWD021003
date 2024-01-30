@@ -1,9 +1,10 @@
-import { findMainUserAddressService, createUserAddressService, findProvinceService, findCityService, opencageService,findCityOpenCageBasedService,findCityOpenCageBasedService2 } from "../services/userAddress.services";
+import { findUserAddressService, createUserAddressService, findProvinceService, findCityService, opencageService,findCityOpenCageBasedService,findCityOpenCageBasedService2,
+    updateUserAddressService, updateMainAddressService, deleteUserAddressService, findLongLatService,findCitybyIdService} from "../services/userAddress.services";
 
-export const findMainUserAddressController = async (req, res) => {
+export const findUserAddressController = async (req, res) => {
     try{
         const {id} = req.params
-        const result = await findMainUserAddressService(id)
+        const result = await findUserAddressService(id)
         return res.status(200).json({
             message: "success",
             data: result
@@ -43,12 +44,26 @@ export const findCityController = async (req, res) => {
     }
 }
 
+export const findCitybyCityIdController = async (req, res) => {
+    try{
+        const {cityId} = req.params
+        const result = await findCitybyIdService(cityId)
+        return res.status(200).json({
+            message: "success find city",
+            data: result
+        })
+    } catch (err){
+        return res.status(500).json({
+            message: err.message
+        })
+    }
+}
+
 export const createUserAddressController = async (req, res) => {
     try{
-        const {id} = req.params
-        // console.log("ini id",id)
-        const { specificAddress, cityId, fullName, phoneNumber} = req.body
-        const result = await createUserAddressService (id, specificAddress, cityId, fullName, phoneNumber)
+        const {id} = req.query
+        const { specificAddress, cityId, fullName, phoneNumber,postalCode,lat,lng} = req.body
+        const result = await createUserAddressService (id, specificAddress, cityId, fullName, phoneNumber, postalCode, lat, lng)
         return res.status(200).json({
             message: "success",
             data: result
@@ -111,3 +126,64 @@ export const findOpencageAndCityController = async (req, res) => {
         });
     }
 };
+
+//find long lat from postalcode
+
+export const findLongLatController =async(req,res) => {
+    try{
+        const {postalCode} = req.body
+        await findLongLatService(postalCode)
+        return res.status(200).json({
+            message: "find Latitude Longitude success",
+            data: result
+        })
+    } catch (err){
+        return res.status(500).json({
+            message: err.message
+        });
+    }
+}
+
+//UPDATE USER ADDRESS
+export const updateUserAddressController = async (req, res) => {
+    try{
+        const {id} = req.params
+        const {specificAddress, cityId, fullName, phoneNumber, postalCode} = req.body
+        await updateUserAddressService(id, specificAddress, cityId, fullName, phoneNumber, postalCode)
+        return res.status(200).json({
+            message: "success",
+        })
+    } catch (err){
+        return res.status(500).json({
+            message: err.message
+        });
+    }
+}
+
+export const updateMainAddressController = async (req, res) => {
+try {
+    const {id, userId} = req.query
+    await updateMainAddressService(id, userId)
+    return res.status(200).json({
+        message: "success",
+    })
+} catch (err){
+    return res.status(500).json({
+        message: err.message
+    });
+}
+}
+
+export const deleteUserAddressController = async (req, res) => {
+    try{
+        const {id} = req.params
+        await deleteUserAddressService(id)
+        return res.status(200).json({
+            message: "success",
+        })
+    } catch (err){
+        return res.status(500).json({
+            message: err.message
+        });
+    }
+}

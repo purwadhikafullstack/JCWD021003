@@ -5,18 +5,27 @@ import opencage from 'opencage-api-client'
 import { Op } from 'sequelize';
 
 //FIND
-export const findMainUserAddressQuery = async (id) => {
-    try{
-        return await UserAddress.findOne(
-            {where:
-                {userId: id,
-                isMainAddress: true},
-            }
-        )
-    } catch (err){
+export const findUserAddressQuery = async (userId) => {
+    try {
+        return await UserAddress.findAll({
+            where: { userId: userId },
+            include: [
+                {
+                    model: City,
+                    attributes: ['name'], 
+                    include: [
+                        {
+                            model: Province,
+                            attributes: ['name', 'id'] 
+                        }
+                    ]
+                }
+            ]
+        });
+    } catch (err) {
         throw err;
     }
-}
+};
 
 export const findProvinceQuery = async () => {
     try{
@@ -38,6 +47,18 @@ export const findCityQuery = async (id) => {
     }
 }
 
+export const findCitybyIdQuery = async (cityId) => {
+    try{
+        return await City.findOne({
+            where: {
+                id: cityId,
+              },
+        })
+    } catch (err){
+        throw err
+    }
+}
+
 export const findCityOpenCageBasedQuery = async (cityName) => {
     try{
         return await City.findOne(
@@ -51,7 +72,7 @@ export const findCityOpenCageBasedQuery = async (cityName) => {
 }
 
 // POST 
-export const createUserAddressQuery = async (id, specificAddress, cityId, fullName, phoneNumber) => {
+export const createUserAddressQuery = async (id, specificAddress, cityId, fullName, phoneNumber, postalCode, lat, lng) => {
     try{
         return await UserAddress.create(
             {   specificAddress,
@@ -59,7 +80,10 @@ export const createUserAddressQuery = async (id, specificAddress, cityId, fullNa
                 userId: id,
                 fullName,
                 phoneNumber,
-                isMainAddress: true
+                isMainAddress: true,
+                postalCode,
+                latitude: lat, 
+                longitude: lng
             })
     } catch (err){
         throw err;
@@ -78,14 +102,62 @@ export const opencageQuery = async (latitude, longitude, API_KEY) => {
     }
 }
 
+export const LongLatQuery = async ( postalCode,API_KEY) => {
+    try{
+        const response = await opencage.geocode({ q: `${postalCode}`,
+        key: API_KEY,
+        language: 'en' })
+        return response.results[0]
+    } catch (err){
+        throw err
+    }
+}
+
 export const CityOpencageQuery = async (city, API_KEY) => {
     try{
         const response = await opencage.geocode({ q: `${city}`,
         key: API_KEY,
         language: 'en' })
-        console.log('res api opencage',response.results[1])
         return response
     } catch (err){
         throw err
+    }
+}
+
+export const updateMainAddressQuery = async (id) => {
+    try{
+        await UserAddress.update(
+            {isMainAddress: true},
+            {where: 
+            {id: id}}
+        )
+    } catch (err){
+        throw err;
+    }
+}
+
+export const removeMainAddressQuery = async (userId) => {
+    try{
+        await UserAddress.update(
+            {isMainAddress: false},
+            {where: 
+            {userId: userId,
+            isMainAddress: true}}
+        )
+    } catch (err){
+        throw err;
+    }
+}
+
+//DELETE
+export const deleteUserAddressQuery = async (id) => {
+    try{
+        await UserAddress.destroy(
+            {where: {
+                id: id
+            }}
+        )
+    } catch (err){
+        throw err;
     }
 }

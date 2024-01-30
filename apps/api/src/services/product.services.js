@@ -1,9 +1,9 @@
 import {getProductQuery, productCategoryQuery, productDetailQuery} from '../queries/product.queries'
 
 
-export const getProductService = async (name, category_Id, id) => {
+export const getProductService = async (name, category_Id, id, page,pageSize,) => {
 	try {
-	  const res = await getProductQuery(name, category_Id, id)
+	  const res = await getProductQuery(name, category_Id, id, page,pageSize,)
 	  return res
 	} catch (err) {
 	  throw err

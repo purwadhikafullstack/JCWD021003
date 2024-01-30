@@ -4,7 +4,7 @@ export default class City extends Model {
    static associate(models) {
     this.belongsTo(models.Province, { foreignKey: 'provinceId' });
     this.hasMany(models.UserAddress, { foreignKey: 'cityId' });
-    this.hasOne(models.Warehouse, { foreignKey: 'cityId' });
+    this.hasOne(models.WarehouseAddress, { foreignKey: 'cityId' });
   }
 }
 

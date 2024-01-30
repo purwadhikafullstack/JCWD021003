@@ -2,9 +2,9 @@ import {getProductService, productCategoryService, productDetailService} from '.
 
 export const getProductController = async (req, res) => {
 	try {
-	  const { name, category_Id} = req.query
+	  const { name, category_Id, page, pageSize} = req.query
 	  const { id } = req.params
-	  const result = await getProductService(name,category_Id, id)
+	  const result = await getProductService(name,category_Id, id, page, pageSize)
 	  return res.status(200).json({
 		message: 'Success',
 		data: result,

@@ -7,7 +7,7 @@ import currencyFormatter from 'currency-formatter';
 import { Navbar } from '../../components/Navbar';
 import { useNavigate } from 'react-router-dom';
 
-export const CartPage = () => {
+const CartPage = () => {
   const { items, totalCount, totalPrice } = useSelector(selectCart);
   const navigate = useNavigate()
   const dispatch = useDispatch();
@@ -89,3 +89,4 @@ export const CartPage = () => {
     </Box>
   );
 };
+export default CartPage;

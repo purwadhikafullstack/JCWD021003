@@ -63,7 +63,7 @@ function CreateAddress() {
             </Breadcrumb>{' '}
           </Flex>
         </Flex>
-        <Box width={'100%'} bg={'white'} padding={'24px'} mb={'40px'}>
+        <Box width={'100%'} bg={'white'} padding={'24px'} mb={'40px'} borderRadius={"20px"}>
           <Text fontSize={'24px'} fontWeight={'700'} mb={"20px"}>
             Address
           </Text>

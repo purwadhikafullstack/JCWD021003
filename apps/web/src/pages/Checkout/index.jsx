@@ -7,7 +7,7 @@ import currencyFormatter from 'currency-formatter';
 import { Navbar } from '../../components/Navbar';
 
 
-export const CheckoutPage = () => {
+const CheckoutPage = () => {
   const location = useLocation();
   const cartData = location.state?.cartData || [];
   const [buyerAddress, setBuyerAddress] = useState(''); 
@@ -160,3 +160,4 @@ export const CheckoutPage = () => {
     </Box>
   );
 };
+export default CheckoutPage;
