@@ -26,11 +26,24 @@ export const findWarehouseProvinceQuery = async (provinceId) => {
 
 export const findWarehousesQuery = async () => {
     try{
-        return await Warehouse.findAll({
+        const warehouses = await Warehouse.findAll({
             include: [{
                 model: WarehouseAddress
             }]
-        })
+        });
+        const warehousesWithCoordinates = warehouses.map(warehouse => {
+            const warehouseAddress = warehouse.WarehouseAddress;
+            const latitude = warehouseAddress.latitude; 
+            const longitude = warehouseAddress.longitude; 
+
+            return {
+                ...warehouse.dataValues, 
+                latitude,
+                longitude,
+            };
+        });
+
+        return warehousesWithCoordinates;
     } catch (err){
         throw err
     }

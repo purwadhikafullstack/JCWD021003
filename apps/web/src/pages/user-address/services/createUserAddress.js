@@ -23,13 +23,13 @@ export const getCoordinates = async (cityName) => {
   }
 };
 
-export const createUserAddress = async (id, specificAddress, cityId, fullName, phoneNumber, postalCode,lat, lng) => {
+export const createUserAddress = async (id, specificAddress, cityId, fullName, phoneNumber, postalCode,openSuccessModal, openErrorModal) => {
   try {
-    // const cityName = await getCityName(cityId);
-    // console.log('cityName',cityName);
+    const cityName = await getCityName(cityId);
+    console.log('cityName',cityName);
 
-    // const { latitude, longitude } = await getCoordinates(cityName);
-    // console.log()
+    const { latitude, longitude } = await getCoordinates(cityName);
+    console.log(latitude, longitude);
 
     await axios.post(`http://localhost:8000/api/user-address/create-user-address?id=${id}`, {
       specificAddress,
@@ -37,12 +37,13 @@ export const createUserAddress = async (id, specificAddress, cityId, fullName, p
       fullName,
       phoneNumber,
       postalCode,
-      lat,
-      lng,
+      latitude,
+      longitude,
     });
-
+    openSuccessModal();
     console.log('User address created successfully');
   } catch (err) {
+    openErrorModal();
     console.error(err);
     throw new Error('Failed to create user address');
   }

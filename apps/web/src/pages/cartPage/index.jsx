@@ -1,11 +1,12 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCart, removeFromCart,updateQuantity } from '../../redux/reducer/cartReducer';
-import { Box, Heading, Text, HStack, Divider, Image,IconButton,Button } from '@chakra-ui/react';
+import { Flex, Box, Heading, Text, HStack, Divider, Image,IconButton,Button } from '@chakra-ui/react';
 import { FaPlus, FaMinus, FaTrash } from 'react-icons/fa';
 import currencyFormatter from 'currency-formatter';
 import { Navbar } from '../../components/Navbar';
 import { useNavigate } from 'react-router-dom';
+import { Footer } from '../../components/Footer';
 
 const CartPage = () => {
   const { items, totalCount, totalPrice } = useSelector(selectCart);
@@ -26,9 +27,9 @@ const CartPage = () => {
   };
 
   return (
-    <Box>
+    <Box h={'100vh'}>
       <Navbar />
-      <Box p={8}>
+      <Box p={8} minH={'65vh'} h={'fit-content'}>
         <Heading mb={4}>Shopping Cart</Heading>
         {items.map((item) => (
           <Box
@@ -76,16 +77,23 @@ const CartPage = () => {
           </Box>
         ))}
         <Divider my={8} />
-        <Box>
-          <Text fontSize="lg" fontWeight="semibold" mb={2}>
-            Total Items: {totalCount}
-          </Text>
-          <Text fontSize="lg" fontWeight="semibold">
-            Total Price: {currencyFormatter.format(totalPrice, { code: 'IDR' })}{' '}
-          </Text>
-          <Button onClick={handleProceedToCheckout}>Proceed to Checkout</Button>
-        </Box>
+        <Flex justifyContent="flex-end" flexDirection="column" alignItems="flex-end">
+      <Box>
+        <Text fontSize="lg" fontWeight="semibold">
+          Total Items: {totalCount}
+        </Text>
       </Box>
+      <Box mt={2}>
+        <Text fontSize="lg" fontWeight="semibold">
+          Total Price: {currencyFormatter.format(totalPrice, { code: 'IDR' })}{' '}
+        </Text>
+      </Box>
+      <Button color={'white'} bgColor={'green'} mt={4} onClick={handleProceedToCheckout}>
+        Proceed to Checkout
+      </Button>
+    </Flex>
+      </Box>
+      <Footer/>
     </Box>
   );
 };

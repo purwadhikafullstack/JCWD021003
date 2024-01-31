@@ -6,7 +6,7 @@ export const findUserAddressController = async (req, res) => {
         const {id} = req.params
         const result = await findUserAddressService(id)
         return res.status(200).json({
-            message: "success",
+            message: "find user address success",
             data: result
         });
     } catch (err){
@@ -62,10 +62,10 @@ export const findCitybyCityIdController = async (req, res) => {
 export const createUserAddressController = async (req, res) => {
     try{
         const {id} = req.query
-        const { specificAddress, cityId, fullName, phoneNumber,postalCode,lat,lng} = req.body
-        const result = await createUserAddressService (id, specificAddress, cityId, fullName, phoneNumber, postalCode, lat, lng)
+        const { specificAddress, cityId, fullName, phoneNumber,postalCode,latitude,longitude} = req.body
+        const result = await createUserAddressService (id, specificAddress, cityId, fullName, phoneNumber, postalCode,latitude,longitude)
         return res.status(200).json({
-            message: "success",
+            message: "create user address success",
             data: result
         })
     } catch (err){
@@ -151,7 +151,7 @@ export const updateUserAddressController = async (req, res) => {
         const {specificAddress, cityId, fullName, phoneNumber, postalCode} = req.body
         await updateUserAddressService(id, specificAddress, cityId, fullName, phoneNumber, postalCode)
         return res.status(200).json({
-            message: "success",
+            message: "update user data success",
         })
     } catch (err){
         return res.status(500).json({
@@ -165,7 +165,7 @@ try {
     const {id, userId} = req.query
     await updateMainAddressService(id, userId)
     return res.status(200).json({
-        message: "success",
+        message: "update mainAddress success",
     })
 } catch (err){
     return res.status(500).json({
@@ -179,7 +179,7 @@ export const deleteUserAddressController = async (req, res) => {
         const {id} = req.params
         await deleteUserAddressService(id)
         return res.status(200).json({
-            message: "success",
+            message: "delete user Address success",
         })
     } catch (err){
         return res.status(500).json({

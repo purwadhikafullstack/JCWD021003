@@ -2,8 +2,8 @@ import {findWarehouseAddressService,getShippingCostService} from '../services/wa
 
 export const findWarehouseAddressController = async (req, res) => {
     try{
-        const {provinceId, userLat, userLong} = req.query
-        const result = await findWarehouseAddressService(provinceId, userLat, userLong)
+        const {userLat, userLong} = req.query
+        const result = await findWarehouseAddressService(userLat, userLong)
         return res.status(200).json({
             message: "find nearest warehouse success",
             data: result

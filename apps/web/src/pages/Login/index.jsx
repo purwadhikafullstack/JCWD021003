@@ -41,7 +41,6 @@ function Signin() {
 		try {
 			const result = await signInWithGoogle();
 			if (result) {
-				console.log('result',result)
 				dispatch(Googlelogin(result.username, result.email, result.avatar,setLoading, openSuccessModal, openErrorModal))
 			}
 		} catch (error) {

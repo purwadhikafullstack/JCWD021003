@@ -30,12 +30,10 @@ function RequestPasswordReset() {
         onSubmit: async (values) => {
             try{
                 await createRequest(values.email, setLoading, openSuccessModal, openErrorModal);
+                formik.resetForm();
             } catch {
                 console.log("gagal error");
             }
-            
-            // resetForm({values:{email: "",}})
-            formik.resetForm();
         }
     }) 
   return (

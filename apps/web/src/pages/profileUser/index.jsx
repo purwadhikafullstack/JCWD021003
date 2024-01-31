@@ -37,6 +37,7 @@ function Profile() {
             gap={'16px'}>
                 <Text mt={"20px"} fontSize={'24px'}
                 fontWeight={'700'}>Account Setting</Text>
+                <Box bgColor={'white'} borderRadius={'15px'} p={'5px 10px'}>
                 <Flex className="breadcrumb"
                 >
                 <Breadcrumb spacing='8px' separator={<ChevronRightIcon color='gray.500' />}>
@@ -54,6 +55,7 @@ function Profile() {
                     </BreadcrumbItem>
                 </Breadcrumb>
                 </Flex>
+                </Box>
             </Flex>
         </Flex>
 
@@ -67,6 +69,7 @@ function Profile() {
             bg={'white'}
             mb={'10px'}
             w={'100vw'}
+            borderRadius={'20px'}
             >
                 <Text marginBottom={'24px'}
                 fontSize={'24px'}
@@ -82,7 +85,8 @@ function Profile() {
             padding={'24px'}
             bg={'white'}
             flexGrow={1}
-            mb={'20px'}
+            mb={'40px'}
+            borderRadius={'20px'}
             >
                 <Text marginBottom={'24px'}
                 fontSize={'24px'}
@@ -110,8 +114,8 @@ function Profile() {
                     </Flex>
                 </Flex>
                 <Flex alignItems={'center'}>
-                    <Flex w={'100%'}>
-                        <Link to={'/create-address'}>
+                    <Flex w={'100%'} mt={'10px'}>
+                        <Link to={'/manage-address'}>
                     <Button bg="green" color={'white'}> Manage Address</Button>
                         </Link>
                     </Flex>

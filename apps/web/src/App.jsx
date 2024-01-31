@@ -6,13 +6,14 @@ import Signup from './pages/Register';
 import Signin from './pages/Login';
 import Verification from './pages/user-verification';
 import Profile from './pages/profileUser';
-import CreateAddress from './pages/user-address';
 import { ProductDetailPage } from './pages/detailProduct';
 import { LoggedInRoute } from './components/Auth/ProtectedRoute';
 import RequestPasswordReset from './pages/request-reset-password';
 import ResetPassword from './pages/ResetPassword';
 import CartPage from './pages/cartPage';
 import CheckoutPage from './pages/Checkout';
+import ManageAddress from './pages/user-address';
+import CreateAddress from './pages/create Address';
 
 function App() {
   return (
@@ -31,10 +32,11 @@ function App() {
                 <Profile />
               </LoggedInRoute> }
           />
-          <Route path="/create-address" element={
+          <Route path="/manage-address" element={
           <LoggedInRoute>
-          <CreateAddress />
+          <ManageAddress />
           </LoggedInRoute>} />
+          <Route path='/create-address' element={<CreateAddress/>}/>
 
           <Route path="/product/:id" element={<ProductDetailPage/>} />
           <Route path='/cart' element={<CartPage />} />

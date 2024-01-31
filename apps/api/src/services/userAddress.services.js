@@ -1,5 +1,5 @@
 import { findUserAddressQuery, createUserAddressQuery, findProvinceQuery, findCityQuery, opencageQuery, findCityOpenCageBasedQuery, CityOpencageQuery,
-    updateUserAddressQuery,updateMainAddressQuery,deleteUserAddressQuery,LongLatQuery,findCitybyIdQuery } from "../queries/userAddress.queries";
+    updateUserAddressQuery,updateMainAddressQuery,deleteUserAddressQuery,LongLatQuery,findCitybyIdQuery,findOneUserAddress, removeMainAddressQuery } from "../queries/userAddress.queries";
 
 export const findUserAddressService = async (id) => {
     try{
@@ -47,9 +47,13 @@ export const findLongLatService = async (postalCode) => {
     }
 }
 
-export const createUserAddressService = async (id, specificAddress, cityId, fullName, phoneNumber, postalCode, lat, lng) => {
+export const createUserAddressService = async (id, specificAddress, cityId, fullName, phoneNumber, postalCode, latitude,longitude) => {
     try {
-        const res = await createUserAddressQuery(id, specificAddress, cityId, fullName, phoneNumber, postalCode, lat, lng)
+        const existingAddress = await findOneUserAddress(id)
+
+        const isMainAddress = !existingAddress;
+
+        const res = await createUserAddressQuery(id, specificAddress, cityId, fullName, phoneNumber,isMainAddress, postalCode,latitude,longitude)
         return res
     } catch (err){
         throw err

@@ -27,6 +27,16 @@ export const findUserAddressQuery = async (userId) => {
     }
 };
 
+export const findOneUserAddress = async (id) => {
+    try{
+        return await UserAddress.findOne({
+            where:{userId: id}
+        })
+    } catch (err){
+        throw err;
+    }
+}
+
 export const findProvinceQuery = async () => {
     try{
         return await Province.findAll()
@@ -72,7 +82,7 @@ export const findCityOpenCageBasedQuery = async (cityName) => {
 }
 
 // POST 
-export const createUserAddressQuery = async (id, specificAddress, cityId, fullName, phoneNumber, postalCode, lat, lng) => {
+export const createUserAddressQuery = async (id, specificAddress, cityId, fullName, phoneNumber,isMainAddress, postalCode,latitude,longitude) => {
     try{
         return await UserAddress.create(
             {   specificAddress,
@@ -80,10 +90,10 @@ export const createUserAddressQuery = async (id, specificAddress, cityId, fullNa
                 userId: id,
                 fullName,
                 phoneNumber,
-                isMainAddress: true,
+                isMainAddress,
                 postalCode,
-                latitude: lat, 
-                longitude: lng
+                latitude, 
+                longitude
             })
     } catch (err){
         throw err;
@@ -130,6 +140,19 @@ export const updateMainAddressQuery = async (id) => {
             {isMainAddress: true},
             {where: 
             {id: id}}
+        )
+    } catch (err){
+        throw err;
+    }
+}
+
+export const updateUserAddressQuery  = async (id, specificAddress, cityId, fullName, phoneNumber, postalCode) => {
+    try {
+        await UserAddress.update(
+            {specificAddress, cityId, fullName, phoneNumber, postalCode},
+            {where:
+                {id: id}
+            }
         )
     } catch (err){
         throw err;

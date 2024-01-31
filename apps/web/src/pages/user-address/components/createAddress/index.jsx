@@ -1,10 +1,11 @@
-import { Box, Button, Flex, Input, Select, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Input, Select, Text, useDisclosure } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { useSelector } from "react-redux";
-import { createUserAddress,getCityName,getCoordinates } from "../../services/createUserAddress";
+import { createUserAddress} from "../../services/createUserAddress";
 import { getCity, getProvince } from "../../services/getUserAddress";
 import { useNavigate } from "react-router-dom";
+import { SuccessModal,ErrorModal } from "./services/popModal";
 import axios from "axios";
 
 function FormCreateAddress () {
@@ -12,9 +13,10 @@ function FormCreateAddress () {
     const [selectedProvince, setSelectedProvince] = useState("")
     const [citylist, setCityList] = useState([])
     const [selectedCity, setSelectedCity] = useState("")
-    const navigate = useNavigate()
+    const { isOpen: isSuccessModalOpen, onOpen: openSuccessModal, onClose: closeSuccessModal } = useDisclosure();
+    const { isOpen: isErrorModalOpen, onOpen: openErrorModal, onClose: closeErrorModal } = useDisclosure();
     const user = useSelector((state) => state.AuthReducer.user);
-
+    const navigate = useNavigate();
 
     useEffect(() => {
         getProvince().then((data) => {
@@ -39,15 +41,7 @@ function FormCreateAddress () {
         },
         onSubmit: async (values) => {
             try{
-                const { data: cityName } = await axios.get(
-                    `http://localhost:8000/api/user-address/specific-city/${values.cityId}`);
-                const { data: coordinates } = await axios.get(
-                     `http://localhost:8000/api/user-address/city?city=${cityName.data}`);
-                      console.log('coordinates',coordinates.data)
-                      const { lat, lng } = coordinates.data;
-                //  const cityname = await getCityName(values.cityId)
-                // await getCoordinates(cityname)
-                await createUserAddress(user.id, values.specificAddress, values.cityId, values.fullName, values.phoneNumber,values.postalCode,lat, lng); 
+               await createUserAddress(user.id, values.specificAddress, values.cityId, values.fullName, values.phoneNumber,values.postalCode, openSuccessModal, openErrorModal); 
                 formik.resetForm();   
             } catch (err){
                 console.log(err.message);
@@ -59,7 +53,8 @@ function FormCreateAddress () {
         <>
             <form onSubmit={formik.handleSubmit}>
                 <Flex>
-                    <Box mr={"20px"}>  
+                    <Box mr={"20px"}> 
+                         <Text>Contact</Text> 
                         <Text fontWeight={700}>Full Name</Text>
                             <Input
                             name="fullName"
@@ -96,7 +91,7 @@ function FormCreateAddress () {
                                 ))}
                             </Select>
                         </Box>
-                        <Box w={"50%"}>
+                        <Box w={"50%"} mt={"25px"}>
                             <Text fontWeight={700}>Phone Number</Text>
                             <Input
                             name="phoneNumber"
@@ -132,7 +127,10 @@ function FormCreateAddress () {
                             />
 
                              <Button colorScheme="red" type="submit" ml={"10px"}>Save</Button>
+                             <Button colorScheme="red" onClick={()=>navigate(-1)} ml={"10px"}>Cancel</Button>
 
+                             <SuccessModal isOpen={isSuccessModalOpen} onClose={closeSuccessModal} />
+                             <ErrorModal isOpen={isErrorModalOpen} onClose={closeErrorModal} />
                         </Box>
                 </Flex>
             </form>
