@@ -11,14 +11,11 @@ const cartSlice = createSlice({
     addToCart: (state, action) => {
         const { id, name, price, image } = action.payload;
 
-        // Check if the item is already in the cart
         const existingItem = state.items.find((item) => item.id === id);
   
         if (existingItem) {
-          // If it exists, just increase the quantity
           existingItem.quantity += 1;
         } else {
-          // If it doesn't exist, add a new item with initial quantity 1
           state.items.push({
             id,
             name,
@@ -28,24 +25,23 @@ const cartSlice = createSlice({
           });
         }
   
-        // Update total count
         state.totalCount += 1;
 
         state.totalPrice = state.items.reduce((total, item) => {
             return total + item.price * item.quantity;
           }, 0);
+          localStorage.setItem('cart', JSON.stringify(state));
+
     },
     removeFromCart: (state, action) => {
         const productIdToRemove = action.payload;
         const removedItem = state.items.find((item) => item.id === productIdToRemove);
 
       if (removedItem) {
-        // Decrement the totalCount by the quantity of the removed item
         state.totalCount -= removedItem.quantity;
 
         state.totalPrice -= removedItem.price * removedItem.quantity;
 
-        // Remove the item from the cart
         state.items = state.items.filter((item) => item.id !== productIdToRemove);
       }
       },

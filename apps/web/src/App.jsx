@@ -25,22 +25,49 @@ function App() {
           <Route path="/login" element={<Signin />} />
           <Route path="/auth/email-verification" element={<Verification />} />
           <Route path="/password-reset-request" element={<RequestPasswordReset />} />
-          <Route path='/auth/reset-password' element={<ResetPassword />} />
-          <Route path="/profile"
+          <Route path="/auth/reset-password" element={<ResetPassword />} />
+          <Route
+            path="/profile"
             element={
               <LoggedInRoute>
                 <Profile />
-              </LoggedInRoute> }
+              </LoggedInRoute>
+            }
           />
-          <Route path="/manage-address" element={
-          <LoggedInRoute>
-          <ManageAddress />
-          </LoggedInRoute>} />
-          <Route path='/create-address' element={<CreateAddress/>}/>
+          <Route
+            path="/manage-address"
+            element={
+              <LoggedInRoute>
+                <ManageAddress />
+              </LoggedInRoute>
+            }
+          />
+          <Route
+            path="/create-address"
+            element={
+              <LoggedInRoute>
+                <CreateAddress />
+              </LoggedInRoute>
+            }
+          />
 
-          <Route path="/product/:id" element={<ProductDetailPage/>} />
-          <Route path='/cart' element={<CartPage />} />
-          <Route path='/cart/shipment' element={<CheckoutPage/>}/>
+          <Route path="/product/:id" element={<ProductDetailPage />} />
+          <Route
+            path="/cart"
+            element={
+              <LoggedInRoute>
+                <CartPage />
+              </LoggedInRoute>
+            }
+          />
+          <Route
+            path="/cart/shipment"
+            element={
+              <LoggedInRoute>
+                <CheckoutPage />
+              </LoggedInRoute>
+            }
+          />
         </Routes>
       </ScrollToTop>
     </Auth>

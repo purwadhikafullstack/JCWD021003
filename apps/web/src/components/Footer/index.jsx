@@ -18,7 +18,7 @@ export const Footer = () => {
 			flexDirection={{base: "column", md: "row"}}
 			// mb={"25px"}
 		>
-			<Box w={{base: "100%",md: "30%",lg: "50%"}} pt={"30px"}>
+			<Box w={{base: "100%",md: "30%",lg: "40%"}} pt={"30px"}>
 				<Box>
 					<Logo posisi="static" size="42px" color="black" />
 

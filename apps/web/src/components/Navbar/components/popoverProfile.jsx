@@ -23,7 +23,7 @@ export const PopoverProfile = () => {
           <Link to="/cart">
             <IconButton
               icon={<RiShoppingBag3Line />}
-              colorScheme="teal"
+              colorScheme="green"
 			  bgColor={'transparent'}
               aria-label="Shopping Bag"
 			  fontSize={'35px'}

@@ -1,20 +1,17 @@
-import {
-  Box,
-  Flex,
-  Icon,
-  Radio,
-  RadioGroup,
-  Select,
-  Text,
-} from '@chakra-ui/react';
+import {  Box,  Flex,  Icon,  Radio,  RadioGroup,  Select,  Text,} from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { getShippingCost } from '../services/ShippingCostApi';
 import { CheckIcon } from '@heroicons/react/24/outline';
 import currencyFormatter from 'currency-formatter';
+// import './style.css';
 
-function ShippingCost({ nearestWarehouse, selectedAddress,updateShippingCost }) {
+function ShippingCost({
+  nearestWarehouse,
+  selectedAddress,
+  updateShippingCost,
+}) {
   const [shippingCost, setShippingCost] = useState(null);
-  const [selectedCourier, setSelectedCourier] = useState('jne');
+  const [selectedCourier, setSelectedCourier] = useState('');
   const [courierService, setCourierService] = useState([]);
   const [selectedService, setSelectedService] = useState('');
   const [costResult, setCostResult] = useState('');
@@ -38,7 +35,6 @@ function ShippingCost({ nearestWarehouse, selectedAddress,updateShippingCost }) 
     };
     fetchData();
   }, [nearestWarehouse, selectedAddress, selectedCourier]);
-  console.log(shippingCost);
 
   useEffect(() => {
     const courierCosts = shippingCost?.find(
@@ -56,11 +52,19 @@ function ShippingCost({ nearestWarehouse, selectedAddress,updateShippingCost }) 
   }, [selectedService, courierService]);
 
   useEffect(() => {
-    const cost = courierService.find((cost) => cost.service === selectedService)
-    ?.cost[0].value;
-    updateShippingCost(cost);
-  }, [updateShippingCost]);
+    const selectedCost = courierService.find(
+      (cost) => cost.service === selectedService,
+    )?.cost[0].value;
 
+    if (selectedCost !== undefined) {
+      setCostResult(selectedCost);
+      updateShippingCost(selectedCost);
+    }
+
+    console.log(selectedCost);
+  }, [selectedService, courierService, updateShippingCost]);
+
+  console.log('cek', courierService);
   return (
     <>
       <Flex
@@ -68,7 +72,7 @@ function ShippingCost({ nearestWarehouse, selectedAddress,updateShippingCost }) 
         border={'1px solid #818181'}
         bg={'white'}
         padding={'24px'}
-        my={'10px'}
+        mt={'10px'}
         flexDir={'column'}
         w={'100%'}
       >
@@ -84,22 +88,29 @@ function ShippingCost({ nearestWarehouse, selectedAddress,updateShippingCost }) 
           mb={'24px'}
           value={selectedCourier}
           onChange={(e) => setSelectedCourier(e.target.value)}
+          initialValue={''}
+          size={'md'}
         >
+          <option value="" disabled> Select Courier </option>
           <option value="jne">JNE</option>
           <option value="tiki">TIKI</option>
           <option value="pos">POS INDONESIA</option>
         </Select>
         <RadioGroup onChange={setSelectedService} value={selectedService}>
-          <Text mb={'15px'} fontWeight={'700'}>
-            Choose Service
-          </Text>
+          {courierService.length > 0 && (
+            <Text mb={'15px'} fontWeight={'700'}>
+              Choose Service
+            </Text>
+          )}
           {courierService.map((result, index) => (
             <Box
               key={result.service + index}
               borderRadius={'10px'}
               mb={'15px'}
               p={'0 10px 10px'}
-              border={selectedService === result.service ? 'none' : '1px solid green'}
+              border={
+                selectedService === result.service ? 'none' : '1px solid green'
+              }
               bg={selectedService === result.service ? 'green' : 'white'}
             >
               <Radio
@@ -111,18 +122,40 @@ function ShippingCost({ nearestWarehouse, selectedAddress,updateShippingCost }) 
               >
                 <Flex gap={'24px'} align={'center'}>
                   <Box minW={'250px'}>
-                    <Text color={selectedService === result.service ? 'white' : 'green'} fontSize={'18px'} fontWeight={'700'}>
+                    <Text
+                      color={
+                        selectedService === result.service ? 'white' : 'green'
+                      }
+                      fontSize={'18px'}
+                      fontWeight={'700'}
+                    >
                       {result.service}
                     </Text>
-                    <Text color={selectedService === result.service ? 'white' : 'green'}>{result.description}</Text>
+                    <Text
+                      color={
+                        selectedService === result.service ? 'white' : 'green'
+                      }
+                    >
+                      {result.description}
+                    </Text>
                   </Box>
                   <Box>
-                    <Text fontSize={'18px'} fontWeight={'700'} color={selectedService === result.service ? 'white' : 'green'}>
+                    <Text
+                      fontSize={'18px'}
+                      fontWeight={'700'}
+                      color={
+                        selectedService === result.service ? 'white' : 'green'
+                      }
+                    >
                       {currencyFormatter.format(result.cost[0].value, {
                         code: 'IDR',
                       })}
                     </Text>
-                    <Text color={selectedService === result.service ? 'white' : 'green'}>
+                    <Text
+                      color={
+                        selectedService === result.service ? 'white' : 'green'
+                      }
+                    >
                       Estimasi tiba {result.cost[0].etd} hari
                     </Text>
                   </Box>
@@ -141,9 +174,8 @@ function ShippingCost({ nearestWarehouse, selectedAddress,updateShippingCost }) 
         </RadioGroup>
 
         <Box mt="20px">
-          <Text fontWeight={700} display={selectedService ? 'block' : 'none'}>
-            Cost:
-            {currencyFormatter.format(costResult, { code: 'IDR' })}
+          <Text fontWeight={700} display={costResult > 0 ? 'block' : 'none'}>
+            Cost: {currencyFormatter.format(costResult, { code: 'IDR' })}
           </Text>
         </Box>
       </Flex>

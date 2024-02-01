@@ -2,8 +2,11 @@ import React from 'react';
 import { Box, Image, Text, Button } from '@chakra-ui/react';
 import currencyFormatter from 'currency-formatter';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 export const ProductCard = ({ id, image, name, category, price, onAddToCart }) => {
+  const isLogin = useSelector((state) => state.AuthReducer.isLogin);
+
   const navigate = useNavigate();
   const handleCardClick = () => {
     navigate(`/product/${id}`);
@@ -37,14 +40,15 @@ export const ProductCard = ({ id, image, name, category, price, onAddToCart }) =
       </Box>
       <Box p={6}>
       <Button
-          onClick={onAddToCart}
-          bgGradient={'linear(to-r, #45b649, #a8e063)'}
-          fontWeight={700}
-          color={'white'}
-          size="sm"
-        >
-          Add to Cart
-        </Button>
+        onClick={isLogin ? onAddToCart : null}
+        isDisabled={!isLogin}
+        bgGradient={'linear(to-r, #45b649, #a8e063)'}
+        fontWeight={700}
+        color={'white'}
+        size="sm"
+      >
+        {isLogin ? 'Add to Bag' : 'Log in to Add to Bag'}
+      </Button>
       </Box>
     </Box>
   );

@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { findUserAddress } from '../user-address/services/getUserAddress';
-import { getNearestWarehouse} from './services/ShippingCostApi';
-import { Box,  Text,  Button,  Select,  FormControl,  FormLabel,  Modal,
-  ModalOverlay,  ModalContent,  ModalHeader,  ModalCloseButton,  ModalBody,
-  ModalFooter,  Grid,  GridItem,  Image,  Flex,  Icon,} from '@chakra-ui/react';
+import { getNearestWarehouse } from './services/ShippingCostApi';
+import {  Box, Text,  Button,  Grid,  GridItem,  Image,  Flex,  Icon,Center} from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 import currencyFormatter from 'currency-formatter';
 import { Navbar } from '../../components/Navbar';
@@ -36,7 +34,6 @@ const CheckoutPage = () => {
     }
   };
 
-  //   console.log('data alamat',selectedAddress);
   useEffect(() => {
     fetchData();
   }, [user.id]);
@@ -74,13 +71,11 @@ const CheckoutPage = () => {
   const updateShippingCost = (cost) => {
     setShippingCost(cost);
   };
-  console.log('passing', shippingCost);
   return (
-    <Box bgColor={'#F0F3F7'} h={'fit-content'}>
+    <Box bgColor={'#F0F3F7'} h={'fit-content'} minH={'100vh'}>
       <Navbar />
       <Text p={'10px 20px'} fontSize={'30px'} fontWeight={900}>
-        {' '}
-        Delivery{' '}
+        Delivery
       </Text>
       <Grid templateColumns="2fr 1fr" gap={8} h={'100%'} px={'20px'}>
         {/* Left Column */}
@@ -90,12 +85,6 @@ const CheckoutPage = () => {
               <Text fontSize="xl" fontWeight="bold" mb={4}>
                 Delivery Address:
               </Text>
-              {/* <Box display={'flex'} alignItems={'center'} gap={'8px'}>
-                <Icon as={MapPinIcon} fontSize={'22px'} color={'#CD0244'} />
-                <Text fontFamily={'body'} fontWeight={'700'} fontSize={'16px'}>
-                    Delivery Address
-                </Text>
-            </Box> */}
               {selectedAddress && (
                 <Flex
                   key={selectedAddress?.id}
@@ -158,7 +147,12 @@ const CheckoutPage = () => {
             </Box>
 
             {/* Cart Items */}
-            <Box bgColor={'white'} padding={'20px'} borderRadius={'20px'}>
+            <Box
+              bgColor={'white'}
+              padding={'20px'}
+              borderRadius={'20px'}
+              mb={'20px'}
+            >
               <Text fontSize="xl" fontWeight="bold">
                 Cart Items:
               </Text>
@@ -187,20 +181,6 @@ const CheckoutPage = () => {
                 </Flex>
               ))}
               <Box w={'100%'}>
-                {/* <FormControl>
-                  <Select
-                    w={'50%'}
-                    placeholder="Select Courier"
-                    value={selectedDeliveryOption}
-                    onChange={(e) => setSelectedDeliveryOption(e.target.value)}
-                  >
-                    {deliveryOptions.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                  </Select>
-                </FormControl> */}
                 <ShippingCost
                   nearestWarehouse={nearestWarehouse}
                   selectedAddress={selectedAddress}
@@ -217,17 +197,29 @@ const CheckoutPage = () => {
             <Text fontSize="xl" fontWeight="bold" mb={4}>
               Shopping Summary:
             </Text>
-            <Text>Total Price: {formatCurrency(totalCost)}</Text>
+            <Flex justifyContent="space-between" alignItems="center" mb={2}>
+              <Text>Total Price:</Text>
+              <Text>{formatCurrency(totalCost)}</Text>
+            </Flex>
 
             {hasShippingFee && (
-              <Text>Total Delivery Fee: {formatCurrency(shippingCost)}</Text>
+              <Flex justifyContent="space-between" alignItems="center" mb={2}>
+                <Text>Total Delivery Fee:</Text>
+                <Text>{formatCurrency(shippingCost)}</Text>
+              </Flex>
             )}
-            <Text>Shopping Total: {formatCurrency(totalCostWithShipping)}</Text>
+
+            <Flex justifyContent="space-between" alignItems="center" mb={2}>
+              <Text>Shopping Total:</Text>
+              <Text>{formatCurrency(totalCostWithShipping)}</Text>
+            </Flex>
 
             {/* Payment Button */}
-            <Button bgColor="green" color={'white'} mt={4}>
+            <Center>
+            <Button bgColor="green" color={'white'} mt={4} >
               Proceed to Payment
             </Button>
+            </Center>
           </Box>
         </GridItem>
       </Grid>
