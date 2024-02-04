@@ -1,14 +1,16 @@
 import {
-  Popover,  PopoverTrigger,  PopoverContent,  PopoverBody,  Button,  PopoverFooter,
-  Text,  Flex,  Image,  AspectRatio,Box, IconButton, Avatar, Badge} from '@chakra-ui/react';
+  Popover,  PopoverTrigger,  PopoverContent,  PopoverBody,
+  Button,  PopoverFooter,  Text,  Flex,  Image,  AspectRatio,
+  Box,  IconButton,  Avatar,  Badge,} from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { RiLogoutBoxLine } from 'react-icons/ri';
 import { selectCart } from '../../../redux/reducer/cartReducer';
-import { RiShoppingBag3Line } from "react-icons/ri";
+import { RiShoppingBag3Line } from 'react-icons/ri';
 
 export const PopoverProfile = () => {
   const user = useSelector((state) => state.AuthReducer.user);
+  const userRoleId = useSelector((state) => state.AuthReducer.user.roleId);
   const dispatch = useDispatch();
   const { totalCount } = useSelector(selectCart);
 
@@ -19,19 +21,23 @@ export const PopoverProfile = () => {
 
   return (
     <Popover placement="bottom-start">
-		 <Box ml="auto" mr={'15px'}>
-          <Link to="/cart">
-            <IconButton
-              icon={<RiShoppingBag3Line />}
-              colorScheme="green"
-			  bgColor={'transparent'}
-              aria-label="Shopping Bag"
-			  fontSize={'35px'}
-            />
-            {/* Display the quantity if it's greater than 0 */}
-            {totalCount > 0 && <Badge borderRadius={'5px'} variant={"solid"} colorScheme={"red"}>{totalCount}</Badge>}
-          </Link>
-        </Box>
+      <Box ml="auto" mr={'15px'}>
+        <Link to="/cart">
+          <IconButton
+            icon={<RiShoppingBag3Line />}
+            colorScheme="green"
+            bgColor={'transparent'}
+            aria-label="Shopping Bag"
+            fontSize={'35px'}
+          />
+          {/* Display the quantity if it's greater than 0 */}
+          {totalCount > 0 && (
+            <Badge borderRadius={'5px'} variant={'solid'} colorScheme={'red'}>
+              {totalCount}
+            </Badge>
+          )}
+        </Link>
+      </Box>
       <Button
         alignItems={'center'}
         variant={'ghost'}
@@ -51,7 +57,6 @@ export const PopoverProfile = () => {
         outline={'1px solid white'}
         overflow={'hidden'}
       >
-       
         <PopoverTrigger>
           {user?.avatar ? (
             <AspectRatio width="10" ratio={1}>
@@ -68,8 +73,15 @@ export const PopoverProfile = () => {
         </PopoverTrigger>
       </Button>
       <PopoverContent color="black" w={'fit-content'} right={-6}>
+        {userRoleId === 1 && (
+          <PopoverBody>
+            <Link to={'/admin-dashboard/account-management'}>
+              Admin Dashboard
+            </Link>
+          </PopoverBody>
+        )}
         <PopoverBody>
-          <Link to={'/profile'}>Dashboard</Link>
+          <Link to={'/profile'}> Profile Setting</Link>
         </PopoverBody>
         <PopoverFooter>
           <Link to={'/login'} onClick={logOut}>
