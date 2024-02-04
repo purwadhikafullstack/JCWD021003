@@ -27,7 +27,7 @@ const CartPage = () => {
   };
 
   return (
-    <Box h={'100vh'}>
+    <Box>
       <Navbar />
       <Box p={8} minH={'65vh'} h={'fit-content'}>
         <Heading mb={4}>Shopping Cart</Heading>

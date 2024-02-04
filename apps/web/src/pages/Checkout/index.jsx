@@ -7,8 +7,8 @@ import { useSelector } from 'react-redux';
 import currencyFormatter from 'currency-formatter';
 import { Navbar } from '../../components/Navbar';
 import ChangeAddressModal from './components/Modal ChangeAddress';
-import { MapPinIcon } from '@heroicons/react/24/outline';
 import ShippingCost from './components/shippingCost';
+import { Footer } from '../../components/Footer';
 
 const CheckoutPage = () => {
   const location = useLocation();
@@ -223,6 +223,7 @@ const CheckoutPage = () => {
           </Box>
         </GridItem>
       </Grid>
+      <Footer/>
     </Box>
   );
 };

@@ -26,7 +26,6 @@ function ShippingCost({
             1000,
             selectedCourier,
           );
-          console.log('shipping', shippingCostData);
           setShippingCost(shippingCostData.rajaongkir.results);
         } catch (err) {
           console.error(err.message);
@@ -48,7 +47,6 @@ function ShippingCost({
       ?.cost[0].value;
     setCostResult(cost);
     updateShippingCost(cost);
-    console.log(cost);
   }, [selectedService, courierService]);
 
   useEffect(() => {
@@ -61,10 +59,9 @@ function ShippingCost({
       updateShippingCost(selectedCost);
     }
 
-    console.log(selectedCost);
   }, [selectedService, courierService, updateShippingCost]);
 
-  console.log('cek', courierService);
+//   console.log('cek', courierService);
   return (
     <>
       <Flex

@@ -21,3 +21,28 @@ export const verifyToken = (req, res, next) => {
         return res.status(500).send("Invalid Token");
     }
 };
+
+export const checkRoleSuperadmin = (req, res, next) => {
+    try {
+      if (req.user.roleId == 1) {
+        console.log("ini req user", req.user);
+        next();
+      } else {
+        return res.status(500).send("Unauthorized");
+      }
+    } catch (err) {
+      return res.status(500).send("Unauthorized");
+    }
+  };
+  
+  export const checkRoleAdmin = (req, res, next) => {
+    try {
+      if (req.user.roleId == 2) {
+        next();
+      } else {
+        return res.status(500).send("Unauthorized");
+      }
+    } catch (err) {
+      return res.status(500).send("Unauthorized");
+    }
+  };

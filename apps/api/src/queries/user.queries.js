@@ -1,4 +1,7 @@
 import User from '../models/user.model';
+import UserAddress from '../models/userAddress.model';
+import Warehouse from '../models/warehouse.model';
+import City from '../models/city.model';
 
 // FIND
 export const findUsernameQuery = async (username) => {
@@ -19,6 +22,40 @@ export const findEmailQuery = async (email) => {
     }
 }
 
+export const findUserQuery = async () => {
+    try{
+        const res = await User.findAll({
+            where:{roleId: 3}
+        })
+        return res
+    } catch (err){
+        throw err;
+    }
+}
+
+export const findAdminQuery = async () => {
+    try{
+        const res = await User.findAll({
+            where: { roleId: 2 },
+            include: [
+                {
+                    model: UserAddress,
+                    include: [
+                        {
+                            model: City
+                        }
+                    ]
+                },
+                {
+                    model: Warehouse
+                }
+            ]
+        });
+        return res
+    } catch (err){
+        throw err;
+    }
+}
 //UPDATE
 export const updateUsernameQuery = async (id, username) => {
     try {
@@ -65,6 +102,35 @@ export const uploadAvatarFileQuery = async (id, avatar) => {
             {avatar},
             {where:
                 {id: id}}
+        )
+    } catch (err){
+        throw err;
+    }
+}
+
+export const updateUserQuery = async (id, username, email, password, roleId) => {
+    try {
+        await User.update(
+            {username,
+            email,
+            password,
+            roleId},
+            {where:
+                {id: id}
+            }
+        )
+    } catch (err){
+        throw err;
+    }
+}
+
+//DESTROY
+export const deleteUserQuery = async (id) => {
+    try{
+        await User.destroy(
+            {where: {
+                id: id
+            }}
         )
     } catch (err){
         throw err;
