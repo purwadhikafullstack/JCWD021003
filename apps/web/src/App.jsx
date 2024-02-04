@@ -18,13 +18,6 @@ import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
 function App() {
-  // const LoggedInRoute = ({ children }) => {
-  //   const isAuthenticated = useSelector((state) => state.auth.isLogin);
-  //   const userRoleId = useSelector((state) => state.auth.roleId);
-
-  //   return isAuthenticated ? children : <Navigate to="/login" />;
-  // };
-
   const AdminRoute = ({ children }) => {
     const userRoleId = useSelector((state) => state.AuthReducer.user.roleId);
 

@@ -49,7 +49,7 @@ export const registerGoogleLoginQuery = async (username, email, avatar) => {
 };
 
 // FIND USER
-export const findUserQuery = async ({ email = null, username=null}) => {
+export const findUserbyEmailQuery = async ({ email = null, username=null}) => {
     try {
         console.log(email, username)
         const res = await User.findOne({

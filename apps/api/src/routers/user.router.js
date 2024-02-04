@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { updateUsernameController, updateEmailController, updatePasswordController, uploadAvatarFileController,findAdminController,findUserController,updateUserController,deleteUserController } from '../controllers/user.controller';
+import { updateUsernameController, updateEmailController, updatePasswordController, uploadAvatarFileController,findAdminController,findUserController,updateUserController,deleteUserController,createAccountController } from '../controllers/user.controller';
 import { uploadAvatarFile } from '../middleware/multer.middleware';
 import { verifyToken, checkRoleSuperadmin } from '../middleware/auth.middleware';
 const userRouter = Router();
@@ -7,6 +7,9 @@ const userRouter = Router();
 //GET
 userRouter.get('/admin', findAdminController)
 userRouter.get('/user', verifyToken, checkRoleSuperadmin,findUserController)
+
+//POST
+userRouter.post("/create-account", createAccountController);
 
 //PATCH
 userRouter.patch('/:id',verifyToken, checkRoleSuperadmin, updateUserController)

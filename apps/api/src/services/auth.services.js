@@ -1,4 +1,4 @@
-import { registerQuery, findUserQuery, emailVerificationQuery, verifiedUserQuery, keepLoginQuery, forgotPasswordQuery, resetPasswordQuery, checkTokenUsageQuery, registerGoogleLoginQuery } from "../queries/auth.queries";
+import { registerQuery, findUserbyEmailQuery, emailVerificationQuery, verifiedUserQuery, keepLoginQuery, forgotPasswordQuery, resetPasswordQuery, checkTokenUsageQuery, registerGoogleLoginQuery } from "../queries/auth.queries";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken";
 import handlebars from "handlebars";
@@ -12,7 +12,7 @@ export const registerService = async (email, username) => {
     try {
 
  // CHECK WHETHER OR NOT EMAIL AND USERNAME EXIST
-        const check = await findUserQuery({ email, username });
+        const check = await findUserbyEmailQuery({ email, username });
         if (check) throw new Error("Email or username already exist");
 
         const res = await registerQuery(email, username);
@@ -83,7 +83,7 @@ export const emailVerificationService = async (token, password) => {
 
 export const loginService = async (email, password) => {
     try {
-        const check = await findUserQuery({ email });
+        const check = await findUserbyEmailQuery({ email });
         if (!check) throw new Error("Email doesn't exist");
 
         const isValid = await bcrypt.compare(password, check.password);
@@ -107,7 +107,7 @@ export const loginService = async (email, password) => {
 
 export const GoogleloginService = async (username, email, avatar) => {
     try {
-        let check = await findUserQuery({ email });
+        let check = await findUserbyEmailQuery({ email });
         if (!check) {
             check =await registerGoogleLoginQuery(username, email, avatar)
         }
@@ -144,7 +144,7 @@ export const keepLoginService = async (id) => {
 export const forgotPasswordService = async (email) => {
     try {
         //Check email
-        const check = await findUserQuery({email});
+        const check = await findUserbyEmailQuery({email});
         if (!check) throw new Error("Email doesn't exist");
 // GENERATE TOKEN TO SET PASSWORD BASED ON THE TOKEN
         const secretKey = process.env.JWT_SECRET_KEY;

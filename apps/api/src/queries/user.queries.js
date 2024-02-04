@@ -136,3 +136,25 @@ export const deleteUserQuery = async (id) => {
         throw err;
     }
 }
+
+export const createAccountQuery = async (username, email, password, roleId) => {
+    const t = await User.sequelize.transaction();
+    try {
+
+        const res = await User.create(
+            {
+                email,
+                username,
+                password,
+                roleId,
+                isVerified: true
+            },
+            { transaction: t }
+        );
+        await t.commit();
+        return res;
+    } catch (err) {
+        await t.rollback();
+        throw err;
+    }
+};

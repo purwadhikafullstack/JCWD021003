@@ -1,5 +1,6 @@
 import { updateUsernameQuery, updateEmailQuery, updatePasswordQuery, findUsernameQuery, findEmailQuery, uploadAvatarFileQuery
-    , findAdminQuery, findUserQuery, updateUserQuery, deleteUserQuery } from "../queries/user.queries";
+    , findAdminQuery, findUserQuery, updateUserQuery, deleteUserQuery,createAccountQuery } from "../queries/user.queries";
+    import { findUserbyEmailQuery } from "../queries/auth.queries";
 import bcrypt from "bcrypt"
 export const updateUsernameService = async (id, username) => {
     try{
@@ -78,3 +79,21 @@ export const deleteUserService = async (id) => {
         throw err;
     }
 }
+
+export const createAccountService = async (username, email, password, roleId) => {
+    try {
+
+ // CHECK WHETHER OR NOT EMAIL AND USERNAME EXIST
+        const check = await findUserbyEmailQuery({ email, username });
+        if (check) throw new Error("Email or username already exist");
+
+        const salt = await bcrypt.genSalt(10);
+        const hashPassword = await bcrypt.hash(password, salt);
+
+        const res = await createAccountQuery(username, email, hashPassword, roleId);
+
+        return res;
+    } catch (err) {
+        throw err;
+    }
+};

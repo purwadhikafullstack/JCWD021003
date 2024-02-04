@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { HomeIcon } from '@heroicons/react/24/outline';
 import { ChevronRightIcon } from '@chakra-ui/icons'
 import { Footer } from '../../../components/Footer';
+import CreateUser from './components/create account';
 
 function AccountManagement() {
   const [admin, setAdmin] = useState([]);
@@ -74,6 +75,20 @@ function AccountManagement() {
               </BreadcrumbItem>
             </Breadcrumb>
           </Flex>
+        </Box>
+        <Box>
+        <Flex justifyContent={'space-between'}>
+                        <Flex>
+                            <Text fontSize={'24px'}
+                            fontWeight={'700'}>
+                                Account List
+                            </Text>
+                        </Flex>
+                        <Flex justifyContent={'flex-end'}
+                        gap={'12px'}>
+                            <CreateUser/>
+                        </Flex>
+                    </Flex>
         </Box>
         <Box className="table" h={'fit-content'} mb={'20px'}>
         <Text p={'10px'} fontWeight={700}> Admin Account List</Text>

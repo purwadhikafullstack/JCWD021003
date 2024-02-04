@@ -1,5 +1,5 @@
 import { updateUsernameService, updateEmailService, updatePasswordService, uploadAvatarFileService,findAdminService, findUserService,
-    updateUserService, deleteUserService } from "../services/user.services";
+    updateUserService, deleteUserService, createAccountService } from "../services/user.services";
 
 export const updateUsernameController = async (req, res) => {
     try{
@@ -115,3 +115,21 @@ export const findUserController = async (req, res) => {
           })
       }
   }
+
+  export const createAccountController = async (req, res) => {
+    try {
+      const { username, email, password, roleId } = req.body;
+  
+      const result = await createAccountService(username, email, password, roleId);
+  
+      return res.status(200).json({
+        message: "Create Account Success",
+        data: result,
+      });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({
+        message: err.message,
+      });
+    }
+  };
