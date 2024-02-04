@@ -1,6 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/home/Home';
-import ScrollToTop from './components/ScrollToTop';
 import { Auth } from './components/Auth';
 import Signup from './pages/Register';
 import Signin from './pages/Login';
@@ -14,62 +13,88 @@ import CartPage from './pages/cartPage';
 import CheckoutPage from './pages/Checkout';
 import ManageAddress from './pages/user-address';
 import CreateAddress from './pages/create Address';
+import AccountManagement from './pages/Admin dashboard/account management';
+import { useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 
 function App() {
+  // const LoggedInRoute = ({ children }) => {
+  //   const isAuthenticated = useSelector((state) => state.auth.isLogin);
+  //   const userRoleId = useSelector((state) => state.auth.roleId);
+
+  //   return isAuthenticated ? children : <Navigate to="/login" />;
+  // };
+
+  const AdminRoute = ({ children }) => {
+    const userRoleId = useSelector((state) => state.AuthReducer.user.roleId);
+
+    return userRoleId === 1 ? children : <Navigate to="/" />;
+  };
+  const user = useSelector((state) => state.AuthReducer.user.roleId);
+  console.log('roleID',user);
   return (
     <Auth>
-      <ScrollToTop>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/register" element={<Signup />} />
-          <Route path="/login" element={<Signin />} />
-          <Route path="/auth/email-verification" element={<Verification />} />
-          <Route path="/password-reset-request" element={<RequestPasswordReset />} />
-          <Route path="/auth/reset-password" element={<ResetPassword />} />
-          <Route
-            path="/profile"
-            element={
-              <LoggedInRoute>
-                <Profile />
-              </LoggedInRoute>
-            }
-          />
-          <Route
-            path="/manage-address"
-            element={
-              <LoggedInRoute>
-                <ManageAddress />
-              </LoggedInRoute>
-            }
-          />
-          <Route
-            path="/create-address"
-            element={
-              <LoggedInRoute>
-                <CreateAddress />
-              </LoggedInRoute>
-            }
-          />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/register" element={<Signup />} />
+        <Route path="/login" element={<Signin />} />
+        <Route path="/auth/email-verification" element={<Verification />} />
+        <Route
+          path="/password-reset-request"
+          element={<RequestPasswordReset />}
+        />
+        <Route path="/auth/reset-password" element={<ResetPassword />} />
+        <Route
+          path="/profile"
+          element={
+            <LoggedInRoute>
+              <Profile />
+            </LoggedInRoute>
+          }
+        />
+        <Route
+          path="/manage-address"
+          element={
+            <LoggedInRoute>
+              <ManageAddress />
+            </LoggedInRoute>
+          }
+        />
+        <Route
+          path="/create-address"
+          element={
+            <LoggedInRoute>
+              <CreateAddress />
+            </LoggedInRoute>
+          }
+        />
 
-          <Route path="/product/:id" element={<ProductDetailPage />} />
-          <Route
-            path="/cart"
-            element={
-              <LoggedInRoute>
-                <CartPage />
-              </LoggedInRoute>
-            }
-          />
-          <Route
-            path="/cart/shipment"
-            element={
-              <LoggedInRoute>
-                <CheckoutPage />
-              </LoggedInRoute>
-            }
-          />
-        </Routes>
-      </ScrollToTop>
+        <Route path="/product/:id" element={<ProductDetailPage />} />
+        <Route
+          path="/cart"
+          element={
+            <LoggedInRoute>
+              <CartPage />
+            </LoggedInRoute>
+          }
+        />
+        <Route
+          path="/cart/shipment"
+          element={
+            <LoggedInRoute>
+              <CheckoutPage />
+            </LoggedInRoute>
+          }
+        />
+        <Route
+          path="/admin-dashboard/account-management"
+          element={
+            <AdminRoute>
+              <AccountManagement />
+            </AdminRoute>
+          }
+        />
+      </Routes>
     </Auth>
   );
 }
