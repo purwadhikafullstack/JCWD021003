@@ -26,11 +26,21 @@ function AdminList({ admin, onAdminUpdated }) {
             <Table size="sm" bgcolor="white" borderRadius={'20px'}>
               <Thead>
                 <Tr>
-                  <Th p={'20px 10px 5px 10px'} textAlign={'center'}>Username</Th>
-                  <Th  p={'20px 20px 5px 20px'}textAlign={'center'}>Email</Th>
-                  <Th  p={'20px 20px 5px 20px'}textAlign={'center'}>Role</Th>
-                  <Th  p={'20px 20px 5px 20px'}textAlign={'center'}>Warehouse</Th>
-                  <Th p={'20px 20px 5px 20px'} textAlign={'center'}>Action</Th>
+                  <Th p={'20px 10px 5px 10px'} textAlign={'center'}>
+                    Username
+                  </Th>
+                  <Th p={'20px 20px 5px 20px'} textAlign={'center'}>
+                    Email
+                  </Th>
+                  <Th p={'20px 20px 5px 20px'} textAlign={'center'}>
+                    Role
+                  </Th>
+                  <Th p={'20px 20px 5px 20px'} textAlign={'center'}>
+                    Warehouse
+                  </Th>
+                  <Th p={'20px 20px 5px 20px'} textAlign={'center'}>
+                    Action
+                  </Th>
                 </Tr>
               </Thead>
               <Tbody>
@@ -46,13 +56,26 @@ function AdminList({ admin, onAdminUpdated }) {
                           ? 'Warehouse Admin'
                           : 'Unknown Role'}{' '}
                     </Td>
-                    <Td>{user.Warehouses[0].name}</Td>
                     <Td>
-                  <Box display={'flex'} gap={'8px'}>
-                    <EditAccount id={user.id} username={user.username} email={user.email} roleId={user.roleId} onAdminUpdated={onAdminUpdated}/>
-                    <DeleteAccount id={user.id} onDeletedAdmin={onAdminUpdated}/>
-                  </Box>
-                </Td>
+                      {user.Warehouses.length > 0
+                        ? user.Warehouses[0].name
+                        : ''}
+                    </Td>{' '}
+                    <Td>
+                      <Box display={'flex'} gap={'8px'}>
+                        <EditAccount
+                          id={user.id}
+                          username={user.username}
+                          email={user.email}
+                          roleId={user.roleId}
+                          onAdminUpdated={onAdminUpdated}
+                        />
+                        <DeleteAccount
+                          id={user.id}
+                          onDeletedAdmin={onAdminUpdated}
+                        />
+                      </Box>
+                    </Td>
                   </Tr>
                 ))}
               </Tbody>

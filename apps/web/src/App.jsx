@@ -14,6 +14,7 @@ import CheckoutPage from './pages/Checkout';
 import ManageAddress from './pages/user-address';
 import CreateAddress from './pages/create Address';
 import AccountManagement from './pages/Admin dashboard/account management';
+import CreateAccount from './pages/create account';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
@@ -84,6 +85,14 @@ function App() {
           element={
             <AdminRoute>
               <AccountManagement />
+            </AdminRoute>
+          }
+        />
+         <Route
+          path="/admin-dashboard/account-management/create-account"
+          element={
+            <AdminRoute>
+              <CreateAccount />
             </AdminRoute>
           }
         />

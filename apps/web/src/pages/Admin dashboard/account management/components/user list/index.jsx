@@ -21,7 +21,6 @@ import {
     return (
       <>
         <div>
-          {user.length > 0 ? (
             <TableContainer>
               <Table size="sm" bgcolor="white" borderRadius={'20px'}>
                 <Thead>
@@ -32,13 +31,13 @@ import {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {user.map((user, index) => (
+                  {user.map((userData, index) => (
                     <Tr key={index}>
-                      <Td textAlign={'center'}>{user.username}</Td>
-                      <Td textAlign={'center'}>{user.email}</Td>
+                      <Td textAlign={'center'}>{userData.username}</Td>
+                      <Td textAlign={'center'}>{userData.email}</Td>
                       <Td >
                     <Box display={'flex'} gap={'8px'} justifyContent={'center'}>
-                      <DeleteAccount id={user.id} onDeletedAdmin={onUserUpdated}/>
+                      <DeleteAccount id={userData.id} onDeletedAdmin={onUserUpdated}/>
                     </Box>
                   </Td>
                     </Tr>
@@ -46,9 +45,6 @@ import {
                 </Tbody>
               </Table>
             </TableContainer>
-          ) : (
-            <p>No admin data available.</p>
-          )}
         </div>
       </>
     );

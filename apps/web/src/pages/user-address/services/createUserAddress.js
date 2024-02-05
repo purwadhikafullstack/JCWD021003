@@ -23,7 +23,7 @@ export const getCoordinates = async (cityName) => {
   }
 };
 
-export const createUserAddress = async (id, specificAddress, cityId, fullName, phoneNumber, postalCode,openSuccessModal, openErrorModal) => {
+export const CreateUserAddress = async (id, specificAddress, cityId, fullName, phoneNumber, postalCode,openSuccessModal, openErrorModal) => {
   try {
     const cityName = await getCityName(cityId);
     console.log('cityName',cityName);

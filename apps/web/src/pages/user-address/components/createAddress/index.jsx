@@ -2,11 +2,10 @@ import { Box, Button, Flex, Input, Select, Text, useDisclosure } from "@chakra-u
 import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { useSelector } from "react-redux";
-import { createUserAddress} from "../../services/createUserAddress";
+import { CreateUserAddress } from "../../services/createUserAddress";
 import { getCity, getProvince } from "../../services/getUserAddress";
 import { useNavigate } from "react-router-dom";
 import { SuccessModal,ErrorModal } from "./services/popModal";
-import axios from "axios";
 
 function FormCreateAddress () {
     const [provinceList, setProvinceList] = useState([]);
@@ -41,7 +40,7 @@ function FormCreateAddress () {
         },
         onSubmit: async (values) => {
             try{
-               await createUserAddress(user.id, values.specificAddress, values.cityId, values.fullName, values.phoneNumber,values.postalCode, openSuccessModal, openErrorModal); 
+               await CreateUserAddress(user.id, values.specificAddress, values.cityId, values.fullName, values.phoneNumber,values.postalCode, openSuccessModal, openErrorModal); 
                 formik.resetForm();   
             } catch (err){
                 console.log(err.message);
