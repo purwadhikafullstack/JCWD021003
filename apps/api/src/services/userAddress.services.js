@@ -1,5 +1,5 @@
 import { findUserAddressQuery, createUserAddressQuery, findProvinceQuery, findCityQuery, opencageQuery, findCityOpenCageBasedQuery, CityOpencageQuery,
-    updateUserAddressQuery,updateMainAddressQuery,deleteUserAddressQuery,LongLatQuery,findCitybyIdQuery,findOneUserAddress, removeMainAddressQuery } from "../queries/userAddress.queries";
+    updateUserAddressQuery,updateMainAddressQuery,deleteUserAddressQuery,LongLatQuery,findCitybyIdQuery,findOneUserAddress, removeMainAddressQuery, findSearchableProvinceQuery } from "../queries/userAddress.queries";
 
 export const findUserAddressService = async (id) => {
     try{
@@ -41,6 +41,15 @@ export const findLongLatService = async (postalCode) => {
     try{
         const API_KEY = process.env.OPENCAGE_API_KEY;
         const res = await LongLatQuery(postalCode, API_KEY)
+        return res
+    } catch (err){
+        throw err
+    }
+}
+
+export const findSearchableProvinceService = async (name) => {
+    try {
+        const res = await findSearchableProvinceQuery(name)
         return res
     } catch (err){
         throw err

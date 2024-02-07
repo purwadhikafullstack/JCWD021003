@@ -11,6 +11,7 @@ const initialState = {
 		roleId: null,
 		isVerified: null,
 		avatar: "",
+		warehouseId: null,
 	},
 	isLogin: false,
 };
@@ -20,7 +21,7 @@ export const AuthReducer = createSlice({
 	initialState,
 	reducers: {
 		setUser: (state, action) => {
-			const { id, username, email , roleId, isVerified, avatar } =
+			const { id, username, email , roleId, isVerified, avatar,warehouseId } =
 				action.payload;
 
 			state.user = {
@@ -29,7 +30,8 @@ export const AuthReducer = createSlice({
 				email,
 				roleId,
 				isVerified,
-				avatar
+				avatar,
+				warehouseId,
 			};
 			
 		},

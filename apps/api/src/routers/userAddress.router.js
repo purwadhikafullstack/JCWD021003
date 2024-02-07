@@ -1,5 +1,6 @@
 import { Router } from 'express';
-import { findUserAddressController, createUserAddressController, findProvinceController, findCityController, opencageController,findOpencageAndCityController,findCityOpenCageBasedController,updateUserAddressController,updateMainAddressController,deleteUserAddressController,findLongLatController,findCitybyCityIdController } from '../controllers/userAddress.controller';
+import { findUserAddressController, createUserAddressController, findProvinceController, findCityController, opencageController,findOpencageAndCityController,findCityOpenCageBasedController,updateUserAddressController,
+    updateMainAddressController,deleteUserAddressController,findLongLatController,findCitybyCityIdController,findSearchableProvinceController } from '../controllers/userAddress.controller';
 const userAddressRouter = Router();
 
 // GET
@@ -11,6 +12,7 @@ userAddressRouter.get("/address", opencageController)
 userAddressRouter.get("/address-city", findOpencageAndCityController);
 userAddressRouter.get("/city", findCityOpenCageBasedController);
 userAddressRouter.get("/coordinates", findLongLatController);
+userAddressRouter.get('/province-list', findSearchableProvinceController)
 
 
 //POST 

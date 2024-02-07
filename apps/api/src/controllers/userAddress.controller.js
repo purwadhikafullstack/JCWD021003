@@ -1,5 +1,5 @@
 import { findUserAddressService, createUserAddressService, findProvinceService, findCityService, opencageService,findCityOpenCageBasedService,findCityOpenCageBasedService2,
-    updateUserAddressService, updateMainAddressService, deleteUserAddressService, findLongLatService,findCitybyIdService} from "../services/userAddress.services";
+    updateUserAddressService, updateMainAddressService, deleteUserAddressService, findLongLatService,findCitybyIdService, findSearchableProvinceService} from "../services/userAddress.services";
 
 export const findUserAddressController = async (req, res) => {
     try{
@@ -75,6 +75,21 @@ export const createUserAddressController = async (req, res) => {
     }
 }
 
+export const findSearchableProvinceController = async (req, res) => {
+    try {
+      const { name } = req.query
+      const result = await findSearchableProvinceService(name)
+      return res.status(200).json({
+        message: 'success',
+        data: result,
+      })
+    } catch (err) {
+      return res.status(500).json({
+        message: err.message,
+      })
+    }
+  }
+  
 export const opencageController = async (req, res) => {
     try{
         const {latitude, longitude} = req.query

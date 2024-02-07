@@ -81,6 +81,22 @@ export const findCityOpenCageBasedQuery = async (cityName) => {
     }
 }
 
+export const findSearchableProvinceQuery = async (name) => {
+    try {
+        const search = {
+            where: {
+                name : {
+                    [Op.like] : `%${name}%`
+                }
+            }
+        }
+        const res = await Province.findAll(search)
+        return res
+    } catch (err){
+        throw err
+    }
+}
+
 // POST 
 export const createUserAddressQuery = async (id, specificAddress, cityId, fullName, phoneNumber,isMainAddress, postalCode,latitude,longitude) => {
     try{
