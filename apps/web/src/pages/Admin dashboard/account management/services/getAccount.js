@@ -15,10 +15,11 @@ export const getAdminList = async () => {
     }
 }
 
-export const getUserList = async () => {
+export const getUserList = async ( page = 1, 
+  pageSize = 1) => {
     const token = localStorage.getItem("token")
     try {
-        const response = await axios.get('http://localhost:8000/api/user/user', 
+        const response = await axios.get(`http://localhost:8000/api/user/user?page=${page}&pageSize=${pageSize}`, 
         {
             headers: {
               Authorization: `Bearer ${token}`

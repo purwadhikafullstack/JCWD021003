@@ -22,10 +22,13 @@ export const findEmailQuery = async (email) => {
     }
 }
 
-export const findUserQuery = async () => {
+export const findUserQuery = async ( page = null, pageSize = null) => {
     try{
+        const offset = (page - 1) * pageSize
         const res = await User.findAll({
-            where:{roleId: 3}
+            where:{roleId: 3},
+            limit: +pageSize,
+            offset: offset,
         })
         return res
     } catch (err){
@@ -108,13 +111,14 @@ export const uploadAvatarFileQuery = async (id, avatar) => {
     }
 }
 
-export const updateUserQuery = async (id, username, email, password, roleId) => {
+export const updateUserQuery = async (id, username, email, password, roleId, warehouse) => {
     try {
         await User.update(
             {username,
             email,
             password,
-            roleId},
+            roleId,
+            warehouseId:warehouse},
             {where:
                 {id: id}
             }

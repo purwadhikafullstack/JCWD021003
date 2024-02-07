@@ -61,7 +61,8 @@ export const uploadAvatarFileController = async (req, res) => {
 
 export const findUserController = async (req, res) => {
     try {
-      const response = await findUserService()
+      const {page, pageSize } = req.query
+      const response = await findUserService(page, pageSize)
       return res.status(200).json({
         message: 'success',
         data: response,
@@ -90,8 +91,8 @@ export const findUserController = async (req, res) => {
   export const updateUserController = async (req, res) => {
     try {
       const { id } = req.params
-      const { username, email, password, roleId } = req.body
-      await updateUserService(id, username, email, password, roleId)
+      const { username, email, password, roleId, warehouse } = req.body
+      await updateUserService(id, username, email, password, roleId, warehouse)
       return res.status(200).json({
         message: 'success',
       })

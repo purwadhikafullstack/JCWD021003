@@ -5,23 +5,34 @@ import {
     Select,  } from '@chakra-ui/react'
   import { editAccount } from '../../services/editAccount'
   import { useFormik } from 'formik'
-  import { useState } from 'react'
+  import { useState,useEffect } from 'react'
   import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/solid'
+  import { getWarehouseList } from './services/getWarehouse'
   
-  function EditAccount ({ id, username, email, roleId, onAdminUpdated }) {
+  function EditAccount ({ id, username, email, roleId,warehouse, onAdminUpdated }) {
+    const [WarehouseList, setWarehouseList] = useState([])
+    const [selectedWarehouse, setSelectedWarehouse] = useState(warehouse || '')
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [showPassword, setShowPassword] = useState(false)
+
+    useEffect(() => {
+      getWarehouseList().then((data) => {
+        setWarehouseList(data)
+      })
+    }, [])
+
     const formik = useFormik({
       initialValues: {
         username: username || '',
         email: email || '',
         password: '',
         roleId: roleId || '',
+        warehouse: warehouse || '',
       },
       onSubmit: async (values) => {
         try {
           console.log('Formik Submission Values:', values)
-          await editAccount(id, values.username, values.email, values.password, values.roleId)
+          await editAccount(id, values.username, values.email, values.password, values.roleId, values.warehouse)
           onAdminUpdated()
         } catch (err) {
           console.log(err.message)
@@ -105,8 +116,25 @@ import {
                 value={formik.values.roleId}
                 onChange={formik.handleChange}>
                   <option value='2'>Warehouse Admin</option>
-                  <option value='3'>User</option>
               </Select>
+              <Text fontSize={'16px'} fontWeight={'700'} color={'brand.grey350'} mb={'8px'}>
+                      Warehouse
+                    </Text>
+                    <Select
+                      name='warehouse'
+                      placeholder="Warehouse"
+                      bg={'brand.grey100'}
+                      variant={'filled'}
+                      mb={'24px'}
+                      onChange={formik.handleChange}
+                      value={formik.values.warehouse}
+                    >
+                      {WarehouseList?.map((warehouse) => (
+                        <option key={warehouse.id} value={warehouse.id}>
+                          {warehouse.name}
+                        </option>
+                      ))}
+                    </Select>
               
             </ModalBody>
             <ModalFooter>

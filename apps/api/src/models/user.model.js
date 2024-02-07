@@ -7,7 +7,7 @@ export default class User extends Model {
         this.hasMany(models.UserAddress, {foreignkey: 'userId'});
         this.hasMany(models.Carts, {foreignKey: 'userId'});
         this.hasMany(models.Orders, {foreignKey: 'userId'})
-        this.hasMany(models.Warehouse, { foreignKey: 'userId' });
+        this.belongsTo(models.Warehouse, { foreignKey: 'warehouseId' });
     }
 }
 
@@ -20,6 +20,7 @@ export const init = (sequelize) => {
             roleId: DataTypes.INTEGER,
             isVerified: DataTypes.BOOLEAN,
             avatar: DataTypes.STRING,
+            warehouseId: DataTypes.INTEGER,
         },
         {
             sequelize,

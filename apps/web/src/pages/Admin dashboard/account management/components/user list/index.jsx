@@ -16,7 +16,7 @@ import {
   import DeleteAccount from '../remove Account';
 //   import EditAccount from '../edit Account';
   
-  function UserList({ user, onUserUpdated }) {
+  function UserList({ user, onUserUpdated,currentPage }) {
     console.log('user', user);
     return (
       <>

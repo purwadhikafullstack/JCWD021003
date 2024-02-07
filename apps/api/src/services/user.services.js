@@ -39,9 +39,9 @@ export const uploadAvatarFileService = async (id, avatar) => {
     }
 }
 
-export const findUserService = async () => {
+export const findUserService = async (page,pageSize) => {
     try{
-        const res = await findUserQuery()
+        const res = await findUserQuery(page,pageSize)
         return res
     } catch (err){
         throw err;
@@ -57,7 +57,7 @@ export const findAdminService = async () => {
     }
 }
 
-export const updateUserService = async (id, username, email, password, roleId) => {
+export const updateUserService = async (id, username, email, password, roleId,warehouse) => {
     try{
         let hashPassword;
         
@@ -66,7 +66,7 @@ export const updateUserService = async (id, username, email, password, roleId) =
             hashPassword = await bcrypt.hash(password, salt);
         }
 
-        await updateUserQuery(id, username, email, hashPassword, roleId);
+        await updateUserQuery(id, username, email, hashPassword, roleId,warehouse);
     } catch (err){
         throw err;
     }
