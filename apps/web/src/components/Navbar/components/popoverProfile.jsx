@@ -1,5 +1,4 @@
-import {
-  Popover,  PopoverTrigger,  PopoverContent,  PopoverBody,
+import {  Popover,  PopoverTrigger,  PopoverContent,  PopoverBody,
   Button,  PopoverFooter,  Text,  Flex,  Image,  AspectRatio,
   Box,  IconButton,  Avatar,  Badge,} from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
@@ -74,11 +73,18 @@ export const PopoverProfile = () => {
       </Button>
       <PopoverContent color="black" w={'fit-content'} right={-6}>
         {userRoleId === 1 && (
-          <PopoverBody>
-            <Link to={'/admin-dashboard/account-management'}>
-              Admin Dashboard
-            </Link>
-          </PopoverBody>
+          <>
+            <PopoverBody>
+              <Link to={'/admin-dashboard/account-management'}>
+                Account Management
+              </Link>
+            </PopoverBody>
+            <PopoverBody>
+              <Link to={'/admin-dashboard/warehouse-management'}>
+                Warehouse Management
+              </Link>
+            </PopoverBody>
+          </>
         )}
         <PopoverBody>
           <Link to={'/profile'}> Profile Setting</Link>

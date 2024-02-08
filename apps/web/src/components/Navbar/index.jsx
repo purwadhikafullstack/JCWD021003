@@ -60,12 +60,6 @@ export const Navbar = () => {
           gap={{ base: 3, xl: '50' }}
           alignItems={'center'}
         >
-          {/* <Link to="/event">
-						<Text fontSize={{base: "12px",lg: "16px"}}>Create Event</Text>
-					</Link>
-					<Link to="/Discovery">
-						<Text fontSize={{base: "12px",lg: "16px"}}>Discovery</Text>
-					</Link> */}
           {user ? (
             <PopoverProfile />
           ) : (

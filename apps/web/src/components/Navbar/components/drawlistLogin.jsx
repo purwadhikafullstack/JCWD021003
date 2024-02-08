@@ -1,11 +1,12 @@
 import { Box, Text, Flex, Image, AspectRatio, Center } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import { RiShoppingBag3Line } from "react-icons/ri";
+import { RiShoppingBag3Line } from 'react-icons/ri';
 import { RiLogoutBoxLine } from 'react-icons/ri';
 import { useSelector } from 'react-redux';
 
 export const DrawlistLogin = () => {
   const user = useSelector((state) => state.AuthReducer.user);
+  const userRoleId = useSelector((state) => state.AuthReducer.user.roleId);
 
   const logOut = () => {
     localStorage.removeItem('token');
@@ -56,11 +57,21 @@ export const DrawlistLogin = () => {
           <Link to="/profile">
             <Text fontWeight={800}>Dashboard</Text>
           </Link>
+          {userRoleId === 1 && (
+            <>
+              <Link to={'/admin-dashboard/account-management'}>
+              <Text fontWeight={800}>Account Management</Text>
+              </Link>
+              <Link to={'/admin-dashboard/warehouse-management'}>
+              <Text fontWeight={800}>Warehouse Management</Text>
+              </Link>
+            </>
+          )}
           <Link to="/cart">
-			<Flex justifyContent={'space-between'}>
-            <Text fontWeight={800}>Cart</Text>
-			<RiShoppingBag3Line  size={25} style={{ marginRight: '80px' }} />
-			</Flex>
+            <Flex justifyContent={'space-between'}>
+              <Text fontWeight={800}>Cart</Text>
+              <RiShoppingBag3Line size={25} style={{ marginRight: '80px' }} />
+            </Flex>
           </Link>
           <Link to="/discovery">
             <Text fontWeight={800}>Discovery</Text>
