@@ -39,10 +39,10 @@ export const Navbar = () => {
 						{/* <Text fontWeight={400}>
 							ada<span style={{ fontWeight: "200" }}>Store.</span>
 						</Text> */}
-						<Image src={logo} w={{base:'65%',sm:'50%', md:'70%',lg:'70%'}}/>
+						<Image src={logo} w={{base:'65%',sm:'50%', md:'50%',lg:'50%'}}/>
 					</Box>
 				</Link>
-				<Box ml={{base: "10px",lg: "44px"}} display={{ base: "none", md: "block" }}>
+				<Box  display={{ base: "none", md: "block" }} w={'80%'}>
 						<SearchProduct />
 				</Box>
 			</Box>

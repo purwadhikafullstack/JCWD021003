@@ -64,3 +64,12 @@ export const Products =  [
       description: "Inspired by MJ's championship legacy, the Jordan 6 Rings combines elements from six iconic Jordan shoes. Its stylish design makes it a standout choice for casual occasions.",
     },
   ];
+
+  export const searchProducts = (query) => {
+    return products.filter((product) => {
+      return (
+        product.name.toLowerCase().includes(query.toLowerCase()) ||
+        product.category.toLowerCase().includes(query.toLowerCase())
+      );
+    });
+  };

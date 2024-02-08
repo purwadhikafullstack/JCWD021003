@@ -13,126 +13,87 @@ import {
 	Text,
 	Tooltip,
 	Image,
-	InputRightElement
+	InputRightElement,
+	ModalCloseButton,
+	List, ListItem,Link
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import { Products } from "../../../../dummy/product";
+import { Link as RouterLink } from "react-router-dom";
 
 export const SearchProduct = () => {
-	const { isOpen, onOpen, onClose } = useDisclosure();
-	const [title, setTitle] = useState("");
-	const [product, setProduct] = useState();
-	const navigate = useNavigate()
+	const [searchTerm, setSearchTerm] = useState('');
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-	// const findProduct = async () => {
-	// 	try {
-	// 		const response = await axios.get(
-	// 			`http://localhost:8080/product?title=${title}`
-	// 		);
-	// 		setProduct(response?.data?.data);
-	// 	} catch (err) {
-	// 		console.log(err);
-	// 	}
-	// };
+  const handleSearchInput = (event) => {
+    const term = event.target.value;
+    setSearchTerm(term);
+    if (term.trim() === '') {
+      closeModal();
+      setFilteredProducts([]);
+    } else {
+      searchProducts(term);
+    }
+  };
 
-	// useEffect(() => {
-	// 	findProduct();
-	// }, [title]);
+  const searchProducts = (term) => {
+    const searchTermLower = term.toLowerCase();
+    const filtered = Products.filter(
+      (product) => product.name.toLowerCase().includes(searchTermLower)
+    );
+    setFilteredProducts(filtered);
+  };
 
-	const handeSearchlinput = (event) => {
-		setTitle(event.target.value);
-	};
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
 
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 	return (
-		<Box>
-			<InputGroup>
-				<InputRightElement pointerEvents="none">
-					<SearchIcon color="black" h={"16"} />
-				</InputRightElement>
-				<Input
-					type="text"
-					bgColor={"white"}
-					color={"black"}
-					w={{base: "250px",lg: "350px"}}
-					borderRadius={"40px"}
-					placeholder="Search Product..."
-					onClick={onOpen}
-				/>
-			</InputGroup>
-
-			<Modal isOpen={isOpen} onClose={onClose}>
-				<ModalOverlay />
-				<ModalContent borderTopRadius={"8px"} h={"550px"}>
-					<ModalHeader borderTopRadius={"8px"} position={"sticky"}>
-						<InputGroup>
-							<InputLeftElement pointerEvents="none">
-								<SearchIcon color="gray.300" h={"16"} />
-							</InputLeftElement>
-							<Input
-								type="text"
-								bgColor={"white"}
-								color={"black"}
-								borderRadius={"40px"}
-								placeholder="search Product..."
-								name="title"
-								onChange={handeSearchlinput}
-								value={title}
-							/>
-						</InputGroup>
-					</ModalHeader>
-					<ModalBody
-						display={"flex"}
-						flexDirection={"column"}
-						gap={3}
-						overflow={"auto"}
-						mb={"20px"}
-					>
-						{product?.slice(0, 5).map((data, index) => {
-							return (
-								<Flex
-									key={index}
-									h={"100px"}
-									// bgColor={"grey"}
-									border={"1px solid black"}
-									borderRadius={"5px"}
-									w={"full"}
-									cursor={"pointer"}
-									onClick={() => navigate(`/product/${data.id}`)}
-								>
-									<Box
-										bgColor={"grey"}
-										w={"35%"}
-										borderLeftRadius={"5px"}
-										h={"full"}
-									>
-										{/* <Image src={`http://localhost:8080/uploads/banner/${data?.banner}`} w={"full"} h={"full"}/> */}
-									</Box>
-									<Box w={"65%"} p={"5px 8px"}>
-										<Box
-											fontSize={"14px"}
-											h={"20px"}
-											overflow={"hidden"}
-										>
-											<Tooltip
-												hasArrow
-												placement="top-end"
-												label={data.title}
-											>
-												{data.title}
-											</Tooltip>
-										</Box>
-										<Text fontSize={"12px"}>
-											{data.start_date} - {data.end_date}
-										</Text>
-									</Box>
-								</Flex>
-							);
-						})}
-					</ModalBody>
-				</ModalContent>
-			</Modal>
-		</Box>
+		<Box w={'100%'}>
+      <Input
+        type="text"
+        placeholder="Search Product..."
+        value={searchTerm}
+        onChange={handleSearchInput}
+        onClick={openModal} 
+      />
+      <Modal isOpen={isModalOpen} onClose={closeModal}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Search Results</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+		  <Input
+              type="text"
+              placeholder="Search Product..."
+			  mb={'20px'}
+              value={searchTerm}
+              onChange={handleSearchInput}
+			  border={'1px solid green'}
+            />
+		  {searchTerm.trim() !== '' && (
+              <List>
+			  {filteredProducts.map((product) => (
+				<ListItem key={product.id}>
+				  <Link as={RouterLink} to={`/product/${product.id}`} textDecoration="none">
+					<Box display="flex" alignItems="center">
+					  <Image src={product.image} alt={product.name} objectFit={'scale-down'} w="50px" h="50px" mr="4" />
+					  <h3>{product.name}</h3>
+					</Box>
+				  </Link>
+				</ListItem>
+			  ))}
+			</List>
+            )}
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+	  </Box>
 	);
 };
