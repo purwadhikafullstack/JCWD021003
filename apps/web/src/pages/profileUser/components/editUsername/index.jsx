@@ -40,10 +40,16 @@ function UpdateUsername() {
     dispatch(setUser({...user, username}))
     toast({
       title: "Username successfully changed",
+      position:'top-right',
       status: "success",
     });
     onClose();
     } catch (err){
+      toast({
+        title: "Failed to update username",
+        position:'top-right',
+        status: "Failed",
+      });
       console.log(err)
     }
   };

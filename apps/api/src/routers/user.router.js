@@ -13,10 +13,10 @@ userRouter.post("/create-account", createAccountController);
 
 //PATCH
 userRouter.patch('/:id',verifyToken, checkRoleSuperadmin, updateUserController)
-userRouter.patch("/update-username/:id", verifyToken, updateUsernameController);
-userRouter.patch("/update-email/:id", verifyToken, updateEmailController);
-userRouter.patch("/update-password/:id", verifyToken, updatePasswordController);
-userRouter.patch("/upload-avatar/:id", verifyToken,  uploadAvatarFile, uploadAvatarFileController)
+userRouter.patch("/update-username/:id", updateUsernameController);
+userRouter.patch("/update-email/:id", updateEmailController);
+userRouter.patch("/update-password/:id", updatePasswordController);
+userRouter.patch("/upload-avatar/:id",  uploadAvatarFile, uploadAvatarFileController)
 
 //DELETE
 userRouter.delete('/:id', verifyToken, checkRoleSuperadmin, deleteUserController)

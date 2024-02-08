@@ -1,8 +1,9 @@
-import { AbsoluteCenter, Box, Button, Flex, Icon, Input, InputGroup, Image } from "@chakra-ui/react";
+import { AbsoluteCenter, Box, Button, Flex, Icon, Input, InputGroup, Image, useToast } from "@chakra-ui/react";
 import axios from "axios";
 import { useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import { PhotoIcon} from '@heroicons/react/24/solid'
+import { setUser } from "../../../../redux/reducer/authReducer";
 
 function UploadAvatar () {
 
@@ -10,6 +11,8 @@ function UploadAvatar () {
     const [fieldImage, setFieldImage] = useState(null);
     const [imagePreview, setImagePreview] = useState(null);
     const inputRef = useRef(null);
+    const toast = useToast()
+    const dispatch = useDispatch();
 
     const handleImageClick = (event) => {
         event.stopPropagation();
@@ -28,14 +31,24 @@ function UploadAvatar () {
         try{
             let formData = new FormData();
             formData.append("avatar", fieldImage);
-            
+            console.log('cek',`avatar_${user.id}-${fieldImage.name}`)
             const { data } = await axios.patch(
                 `${
                 import.meta.env.VITE_API_URL
                 }user/upload-avatar/${user.id}`,
                 formData)
-                alert(data?.message);
+                dispatch(setUser({...user, avatar:`avatar_${user.id}-${fieldImage.name}`}))
+                toast({
+                    title: "Profile Picture successfully changed",
+                    position:'top-right',
+                    status: "success",
+                  });
         } catch (err){
+            toast({
+                title: "Failed to update Profile Picture",
+                position:'top-right',
+                status: "Failed",
+              });
             console.log(err);
         }
     }

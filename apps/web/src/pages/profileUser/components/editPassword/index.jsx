@@ -1,6 +1,6 @@
 import {
   Button,  Input,  useDisclosure,  Modal,  ModalBody,  ModalContent,  ModalOverlay,  ModalHeader,  ModalCloseButton,  ModalFooter,  FormControl,
-  FormLabel,  Text,  Select,  Link,  FormErrorMessage,  Icon,  InputRightElement,  InputGroup,
+  FormLabel,  Text,  Select,  Link,  FormErrorMessage,  Icon,  InputRightElement,  InputGroup, useToast
 } from '@chakra-ui/react';
 import { useFormik } from 'formik';
 import axios from 'axios';
@@ -13,6 +13,7 @@ function UpdatePassword() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const toast = useToast()
   const user = useSelector((state) => state.AuthReducer.user);
   const editCashier = async (password) => {
     try {
@@ -22,9 +23,18 @@ function UpdatePassword() {
           password,
         },
       );
-
+      toast({
+        title: "Password successfully changed",
+        position:'top-right',
+        status: "success",
+      });
       onClose();
     } catch (err) {
+      toast({
+        title: "Failed to update Password",
+        position:'top-right',
+        status: "Failed",
+      });
       console.log(err);
     }
   };
