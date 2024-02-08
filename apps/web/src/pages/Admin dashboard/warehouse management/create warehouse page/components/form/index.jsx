@@ -88,16 +88,32 @@ function FormCreateWarehouse({ address, lat, lng }) {
     }
   }
 
-  useEffect(() => {
-    if (address) {
-      formik.setFieldValue(
-        'location',locationValue,
-      )
-      formik.setFieldValue('postalCode', `${address.address.postcode}`)
-      formik.setFieldValue('cityId', `${address.city.id}`)
-    }
-  }, [address, formik.setFieldValue])
+  const postalCode = address.address.postcode || address.city.postal_code;
 
+useEffect(() => {
+    const fetchData = async () => {
+        try {
+            if (address) {
+                if (locationValue) {
+                    formik.setFieldValue('location', locationValue);
+                }
+                if (postalCode) {
+                    formik.setFieldValue('postalCode', postalCode);
+                }
+                if (address.city && address.city.id) {
+                    formik.setFieldValue('cityId', `${address.city.id}`);
+                }
+            }
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            alert('Error fetching data. Please try again later.');
+        }
+    };
+
+    fetchData();
+}, [address, locationValue, postalCode, formik.setFieldValue]);
+
+  console.log('data alamat',address)
   return (
     <>
       <form onSubmit={formik.handleSubmit}>

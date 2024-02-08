@@ -71,11 +71,20 @@ export const findCitybyIdQuery = async (cityId) => {
 
 export const findCityOpenCageBasedQuery = async (cityName) => {
     try{
-        return await City.findOne(
-            {where : {
-                name: {[Op.substring]: cityName}
-            }})
-
+        if (typeof cityName !== 'undefined') {
+            const words = cityName.split(/\s+/);
+            const conditions = words.map(word => ({
+                name: { [Op.substring]: word }
+            }));
+            
+            return await City.findOne({
+                where: {
+                    [Op.or]: conditions
+                }
+            });
+        } else {
+            throw new Error('City name is undefined');
+        }
     } catch (err){
         throw err
     }
