@@ -18,6 +18,7 @@ import CreateAccount from './pages/create account';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import WarehouseList from './pages/Admin dashboard/warehouse management';
+import CreateWarehouse from './pages/Admin dashboard/warehouse management/create warehouse page';
 
 function App() {
   const AdminRoute = ({ children }) => {
@@ -98,6 +99,8 @@ function App() {
           }
         />
           <Route path="/admin-dashboard/warehouse-management" element={<WarehouseList />} />
+          <Route path="/warehouse-management/create-warehouse" element={<CreateWarehouse />} />
+
 
       </Routes>
     </Auth>

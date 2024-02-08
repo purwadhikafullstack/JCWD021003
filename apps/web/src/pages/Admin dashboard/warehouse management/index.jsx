@@ -12,12 +12,8 @@ import { Navbar } from '../../../components/Navbar'
 function WarehouseList() {
   const location = useLocation()
   const [warehouse, setWarehouse] = useState([])
-
-  const [provinceId, setProvinceId] = useState('')
   const [name, setName] = useState('')
   const [pageSize, setPageSize] = useState(10)
-  const [sortField, setSortField] = useState('name')
-  const [sortOrder, setSortOrder] = useState('ASC')
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(0)
   const [totalRecords, setTotalRecords] = useState(0)
@@ -45,7 +41,7 @@ function WarehouseList() {
   const navigate = useNavigate()
 
   return (
-    <Box bg={'#F1F1F1'} height={'100vh'}>
+    <Box bg={'#F1F1F1'} height={'100vh'} w={'100vw'}>
      <Navbar/>
       <Box padding={{base: '0px 10px', md:'0px 30px'}} marginBottom={'150px'}>
         <Box className="top-dashboard" mt={'36px'} mb={'24px'}>
@@ -62,7 +58,7 @@ function WarehouseList() {
                 w={{ base: '150px', md: '220px' }}
                 h={{ base: '34px', md: '48px' }}
                 display={'flex'}
-                onClick={() => navigate('/warehouse-list/create-warehouse')}
+                onClick={() => navigate('/admin-dashboard/warehouse-management/create-warehouse')}
               >
                 <Flex
                   justifyContent={'center'}
@@ -100,7 +96,7 @@ function WarehouseList() {
                   minW={'185px'}
                   h={'48px'}
                   display={'flex'}
-                  onClick={() => navigate('/warehouse-list/create-warehouse')}
+                  onClick={() => navigate('/warehouse-management/create-warehouse')}
                 >
                   <Flex
                     justifyContent={'center'}

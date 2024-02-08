@@ -11,7 +11,7 @@ import {    Table,    TableContainer,    Td,    Thead,    Tr,
     
     return (
       <>
-        <TableContainer maxWidth={'1163px'} borderRadius={'8px'}>
+        <TableContainer borderRadius={'12px'} mx={'7%'}>
           <Table size={{base: 'sm', md:'md'}}>
             <Thead bgColor={'green'}>
               <Tr>

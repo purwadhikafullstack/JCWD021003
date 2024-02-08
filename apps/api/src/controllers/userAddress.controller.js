@@ -126,7 +126,7 @@ export const findOpencageAndCityController = async (req, res) => {
         const { latitude, longitude } = req.query;
         const addressResult = await opencageService(latitude, longitude);
         // console.log('data alamat',addressResult)
-        const cityName = addressResult.components.municipality|| addressResult.components.county;
+        const cityName = addressResult.components.city|| addressResult.components.county;
 
         const cityResult = await findCityOpenCageBasedService(cityName);
 
