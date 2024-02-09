@@ -100,8 +100,8 @@ export const findWarehouseListController = async (req, res) => {
   export const editWarehouseController = async (req, res) => {
     try {
       const { id } = req.params
-      const { name, location, cityId, postalCode, latitude, longitude } = req.body
-      await editWarehouseService(id, name, location, cityId, postalCode, latitude, longitude )
+      const { name, location, cityId, postalCode, lat, lng } = req.body
+      await editWarehouseService(id, name, location, cityId, postalCode, lat, lng )
       return res.status(200).json({
         message: 'success',
       })
