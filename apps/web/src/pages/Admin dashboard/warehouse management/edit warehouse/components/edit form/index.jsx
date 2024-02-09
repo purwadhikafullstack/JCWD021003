@@ -6,12 +6,14 @@ import { useNavigate } from 'react-router-dom'
 import {createWarehouse} from '../../../services/createWarehouse.js'
 import { getCity, getProvinceWarehouse } from '../../../services/getWarehouse'
 
-function FormCreateWarehouse({ address, lat, lng }) {
+function FormEditWarehouse({ address, lat, lng }) {
   const [selectedCity, setSelectedCity] = useState('')
   const [citylist, setCityList] = useState([])
   const [provinceList, setProvinceList] = useState([])
   const [selectedProvince, setSelectedProvince] = useState('')
   const navigate = useNavigate()
+
+//   console.log('cek passing address',address)
 
   useEffect(() => {
     if (address && address.city) {
@@ -88,7 +90,7 @@ function FormCreateWarehouse({ address, lat, lng }) {
     }
   }
 
-  const postalCode = address.address.postcode || address.city.postal_code;
+  const postalCode = address.address?.postcode || address?.city?.postal_code;
 
 useEffect(() => {
     const fetchData = async () => {
@@ -139,7 +141,7 @@ useEffect(() => {
             </Text>
             <Select
               placeholder="Select a Province"              bg={'brand.grey100'}              variant={'filled'}              color={'brand.grey350'}              mb={'24px'}              value={selectedProvince}
-              onChange={(e) => setSelectedProvince(e.target.value)}            >
+              onChange={(e) => setSelectedProvince(e.target.value)}   disabled         >
               {provinceList?.map((province) => (
                 <option key={province.id} value={province.id}>
                   {province.name}
@@ -151,7 +153,7 @@ useEffect(() => {
             </Text>
             <Select
               value={selectedCity}              placeholder="Select a City"              bg={'brand.grey100'}              color={'brand.grey350'}              variant={'filled'}
-              mb={'24px'}              name="cityId"
+              mb={'24px'}              name="cityId" disabled
               onChange={(e) => {
                 setSelectedCity(e.target.value)
                 formik.handleChange(e)
@@ -187,7 +189,7 @@ useEffect(() => {
             _hover={{ bg: '#f50f5a' }}
             _active={{ opacity: '70%' }}
           >
-            Create
+            Update
           </Button>
         </Flex>
       </form>
@@ -195,4 +197,4 @@ useEffect(() => {
   )
 }
 
-export default FormCreateWarehouse
+export default FormEditWarehouse

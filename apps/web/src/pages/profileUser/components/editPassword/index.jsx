@@ -15,7 +15,7 @@ function UpdatePassword() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const toast = useToast()
   const user = useSelector((state) => state.AuthReducer.user);
-  const editCashier = async (password) => {
+  const UpdatePassword = async (password) => {
     try {
       await axios.patch(
         `http://localhost:8000/api/user/update-password/${user.id}`,
@@ -45,7 +45,7 @@ function UpdatePassword() {
     },
 
     onSubmit: (values) => {
-      editCashier(values.password);
+      UpdatePassword(values.password);
     },
   });
 

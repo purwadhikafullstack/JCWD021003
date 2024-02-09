@@ -12,9 +12,6 @@ function Home() {
     <Box bgColor="white" maxW={'100vw'} id="home">
       <Navbar />
       <Hero />
-      <Link to={'/admin-dashboard/warehouse-management'}>
-      <Button> warehouse management</Button>
-      </Link>
       <CarouselKategori />
       <CardContainer/>
       <Footer />

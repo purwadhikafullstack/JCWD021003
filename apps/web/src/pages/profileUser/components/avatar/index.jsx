@@ -31,7 +31,7 @@ function UploadAvatar () {
         try{
             let formData = new FormData();
             formData.append("avatar", fieldImage);
-            console.log('cek',`avatar_${user.id}-${fieldImage.name}`)
+            // console.log('cek',`avatar_${user.id}-${fieldImage.name}`)
             const { data } = await axios.patch(
                 `${
                 import.meta.env.VITE_API_URL

@@ -26,7 +26,7 @@ import {CheckBadgeIcon} from '@heroicons/react/24/solid'
 function UpdateEmail() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const user = useSelector((state) => state.AuthReducer.user);
-  const editCashier = async (email) => {
+  const editEmail = async (email) => {
     try{ 
       await axios.patch(`http://localhost:8000/api/user/update-email/${user.id}`, {
       email,
@@ -44,7 +44,7 @@ function UpdateEmail() {
     },
 
     onSubmit: (values) => {
-        editCashier(
+      editEmail(
           values.email,
           )
         }

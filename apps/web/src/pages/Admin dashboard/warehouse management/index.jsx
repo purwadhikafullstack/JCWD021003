@@ -31,7 +31,7 @@ function WarehouseList() {
   useEffect(() => {
     fetchWarehouseList()
   }, [])
-
+//to trigger fetchWarehouseList again.
   useEffect(() => {
     if (location.state?.warehouseCreated) {
       fetchWarehouseList()

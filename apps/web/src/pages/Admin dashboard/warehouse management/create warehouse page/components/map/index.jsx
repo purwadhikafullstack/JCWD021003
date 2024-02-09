@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMapEvent } from 'react-leafl
 
 import 'leaflet/dist/leaflet.css';
 import { findOpenCageAndCity } from '../../../services/getWarehouse';
+
 function ClickableMap({ initialPosition, setSelectedAddress, setFormCurrentLocation, marker, setMarker, mapRef, setLat, setLng }) {
   const [markerPosition, setMarkerPosition] = useState(initialPosition);
 
@@ -41,7 +42,7 @@ useEffect(() => {
 
   return (
       <Marker position={markerPosition}>
-          <Popup>Kamu sedang. <br /> di sini nih!</Popup>
+          <Popup>You are here right now!</Popup>
       </Marker>
   );
 }

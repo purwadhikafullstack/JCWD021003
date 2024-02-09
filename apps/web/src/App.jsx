@@ -19,6 +19,7 @@ import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import WarehouseList from './pages/Admin dashboard/warehouse management';
 import CreateWarehouse from './pages/Admin dashboard/warehouse management/create warehouse page';
+import EditWarehouse from './pages/Admin dashboard/warehouse management/edit warehouse';
 
 function App() {
   const AdminRoute = ({ children }) => {
@@ -35,10 +36,8 @@ function App() {
         <Route path="/register" element={<Signup />} />
         <Route path="/login" element={<Signin />} />
         <Route path="/auth/email-verification" element={<Verification />} />
-        <Route
-          path="/password-reset-request"
-          element={<RequestPasswordReset />}
-        />
+        <Route path="/product/:id" element={<ProductDetailPage />} />
+        <Route path="/password-reset-request" element={<RequestPasswordReset />}/>
         <Route path="/auth/reset-password" element={<ResetPassword />} />
         <Route
           path="/profile"
@@ -65,7 +64,6 @@ function App() {
           }
         />
 
-        <Route path="/product/:id" element={<ProductDetailPage />} />
         <Route
           path="/cart"
           element={
@@ -98,10 +96,30 @@ function App() {
             </AdminRoute>
           }
         />
-          <Route path="/admin-dashboard/warehouse-management" element={<WarehouseList />} />
-          <Route path="/warehouse-management/create-warehouse" element={<CreateWarehouse />} />
-
-
+        <Route
+          path="/admin-dashboard/warehouse-management"
+          element={
+            <AdminRoute>
+              <WarehouseList />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/warehouse-management/create-warehouse"
+          element={
+            <AdminRoute>
+          <CreateWarehouse />
+          </AdminRoute>
+        }
+        />
+         <Route
+          path="/warehouse-management/edit-warehouse"
+          element={
+            <AdminRoute>
+          <EditWarehouse />
+          </AdminRoute>
+        }
+        />
       </Routes>
     </Auth>
   );

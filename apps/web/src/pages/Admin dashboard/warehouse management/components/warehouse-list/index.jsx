@@ -64,7 +64,7 @@ import {    Table,    TableContainer,    Td,    Thead,    Tr,
                     <Box display={'flex'} gap={'8px'} justifyContent={'center'}>
                     
                       <Button
-                        onClick={() => {navigate('/edit-warehouse', {state: {warehouse}})}}
+                        onClick={() => {navigate('/warehouse-management/edit-warehouse', {state: {warehouse}})}}
                         bg={'green'}
                         color={'white'}
                         fontSize={'12px'}

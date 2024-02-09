@@ -11,7 +11,7 @@ import {
   Center,
 } from '@chakra-ui/react';
 import { Navbar } from '../../../components/Navbar';
-import AdminList from './components/admin list';
+import AdminList from './components/admin list/index';
 import UserList from './components/user list';
 import { getAdminList, getUserList } from './services/getAccount';
 import { useEffect, useState } from 'react';
