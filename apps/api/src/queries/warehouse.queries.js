@@ -101,9 +101,27 @@ export const createWarehouseQuery = async (warehouseAddressId, name) => {
 
   //PATCH
 
-export const editWarehouseQuery = async (id, name) => {
+export const editWarehouseQuery = async (id, name, location, cityId, postalCode, latitude, longitude ) => {
     try {
-      await Warehouse.update({ name }, { where: { id: id } })
+      const warehouse = await Warehouse.findByPk(id)
+      if (warehouse) {
+        await warehouse.update({ name });
+
+        await WarehouseAddress.update(
+          { 
+            location, 
+            cityId, 
+            postalCode, 
+            latitude, 
+            longitude 
+          },
+          { 
+            where: { id: warehouse.warehouseAddressId } 
+          }
+        );
+      } else {
+        throw new Error('Warehouse not found');
+      }
     } catch (err) {
       throw err
     }

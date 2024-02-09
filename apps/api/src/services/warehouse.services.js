@@ -68,9 +68,9 @@ export const findWarehouseListService = async () => {
     }
   }
 
-  export const editWarehouseService = async (id, name) => {
+  export const editWarehouseService = async (id,  name,location, cityId, postalCode, latitude, longitude ) => {
     try {
-      await editWarehouseQuery(id, name)
+      await editWarehouseQuery(id,  name, location, cityId, postalCode, latitude, longitude )
     } catch (err) {
       throw err
     }

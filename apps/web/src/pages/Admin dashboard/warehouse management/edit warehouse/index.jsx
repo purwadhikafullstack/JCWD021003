@@ -9,7 +9,7 @@ import { Navbar } from "../../../../components/Navbar";
 import { Footer } from "../../../../components/Footer";
 import { findOpenCageAndCity } from "../services/getWarehouse";
 import FormEditWarehouse from "./components/edit form";
-import { useLocation } from 'react-router-dom';
+import { useLocation,useNavigate } from 'react-router-dom';
 
 function EditWarehouse(){
 
@@ -23,12 +23,13 @@ function EditWarehouse(){
     const [lng, setLng] = useState(null)
     const location = useLocation();
     const warehouse = location.state?.warehouse;
+    const navigate = useNavigate()
 
-    console.log('cek passing data',warehouse)
-    console.log(
-        'lat',warehouse.WarehouseAddress.latitude,
-        'long',warehouse.WarehouseAddress.longitude,
-        'address',address)
+    // console.log('cek data warehouse',warehouse)
+    // console.log(
+    //     'lat',warehouse.WarehouseAddress.latitude,
+    //     'long',warehouse.WarehouseAddress.longitude,
+    //     'id',warehouse.id)
     
     useEffect (() => {
             setLatitude(warehouse.WarehouseAddress.latitude);
@@ -63,6 +64,9 @@ function EditWarehouse(){
     //         console.error("Error fetching address:", error);
     //     }
     // };
+    const navigateTo = () => {
+        navigate('/admin-dashboard/warehouse-management');
+      };
 
     return (
         <Box bg={'#F1F1F1'}
@@ -88,7 +92,7 @@ function EditWarehouse(){
       <BreadcrumbItem>
           <BreadcrumbLink color={'brand.lightred'}
           fontWeight={'700'}
-          fontSize={'12px'} href="/admin-dashboard/warehouse-management">
+          fontSize={'12px'} onClick={navigateTo}>
               Manage Warehouse
           </BreadcrumbLink>
       </BreadcrumbItem>
@@ -107,23 +111,6 @@ function EditWarehouse(){
                 padding={'24px'}
                 mb={'40px'}
                 borderRadius={'16px'}>
-                    {/* <Button color='brand.lightred' 
-                    borderColor={'brand.lightred'} 
-                    variant={'outline'} 
-                    padding={'9px 11px'}
-                    mb={'40px'}
-                    _hover={{
-                        opacity: '80%'
-                    }}
-                    _active={{
-                        opacity: '50%'
-                    }}
-                    onClick={handleClick}
-                    >
-                        <Text fontSize={{base: '13px', md: '16px'}}>
-                        Use your current location
-                        </Text>
-                    </Button> */}
                     <Box 
                     className="map"
                     width={'100%'}
@@ -132,7 +119,7 @@ function EditWarehouse(){
                     marginBottom={'33px'}>
                         <MapWarehouse lat={latitude} lng={longitude} 
                         setSelectedAddress={setSelectedAddress} 
-                        // setFormCurrentLocation={setFormCurrentLocation} 
+                        setFormLocation={setFormLocation} 
                         marker={marker}
                         setMarker={setMarker}
                         setLat={setLat}
@@ -141,6 +128,9 @@ function EditWarehouse(){
                     </Box>
                         <FormEditWarehouse 
                         address={selectedAddress || address} 
+                        id={warehouse.id}
+                        warehouse={warehouse}
+                        prevData={warehouse}
                         lat={lat || latitude} 
                         lng={lng || longitude}/> 
                 </Box>

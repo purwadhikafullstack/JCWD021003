@@ -3,17 +3,18 @@ import { useEffect, useState } from 'react'
 import { useFormik } from 'formik'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import {createWarehouse} from '../../../services/createWarehouse.js'
+import { editWarehouse } from '../../../services/editWarehouse'
 import { getCity, getProvinceWarehouse } from '../../../services/getWarehouse'
 
-function FormEditWarehouse({ address, lat, lng }) {
+function FormEditWarehouse({ address,id, lat, lng, warehouse }) {
   const [selectedCity, setSelectedCity] = useState('')
   const [citylist, setCityList] = useState([])
   const [provinceList, setProvinceList] = useState([])
   const [selectedProvince, setSelectedProvince] = useState('')
   const navigate = useNavigate()
 
-//   console.log('cek passing address',address)
+  console.log('cek ware',warehouse)
+  console.log('lat long',lat,lng)
 
   useEffect(() => {
     if (address && address.city) {
@@ -46,21 +47,22 @@ function FormEditWarehouse({ address, lat, lng }) {
 
   const formik = useFormik({
     initialValues: {
-      location: '',
-      cityId: null,
-      postalCode: '',
-      name: '',
+      location: warehouse.WarehouseAddress.location,
+      cityId: warehouse.WarehouseAddress.cityId,
+      postalCode: warehouse.WarehouseAddress.postalCode,
+      name: warehouse.name,
     },
     onSubmit: async (values, { resetForm }) => {
       try {
         console.log('Formik Submission Values:', values)
-        await createWarehouse(
+        await editWarehouse(
+          id,  
+          values.name,
           values.location,
           values.cityId,
           values.postalCode,
           lat,
           lng,
-          values.name,
         )
         navigate('/admin-dashboard/warehouse-management', { state: { warehouseCreated: true } })
       } catch (err) {
@@ -115,7 +117,6 @@ useEffect(() => {
     fetchData();
 }, [address, locationValue, postalCode, formik.setFieldValue]);
 
-  console.log('data alamat',address)
   return (
     <>
       <form onSubmit={formik.handleSubmit}>
@@ -176,7 +177,7 @@ useEffect(() => {
         <Flex justifyContent={'flex-end'} mt={'40px'} gap={'16px'}>
           <Button            width={'168px'}            padding={'12px 16px'}            bgColor={'white'}            color={'green'}            variant={'outline'}
             borderColor={'green'}            _hover={{ borderColor: '#f50f5a', color: '#f50f5a' }}            _active={{ opacity: '70%' }}
-            onClick={() => navigate('/manage-address')}
+            onClick={() => navigate('/admin-dashboard/warehouse-management')}
           >
             Cancel
           </Button>
