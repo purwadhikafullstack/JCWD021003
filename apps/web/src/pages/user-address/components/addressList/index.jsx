@@ -61,7 +61,7 @@ function AddressList (){
                     </Text>
                 </Flex>
                 <Flex justifyContent={'flex-end'}
-                gap={'12px'} flexDirection={['column', null, null, null, 'row']}>
+                gap={'12px'} flexDirection={['column', null, null, null, 'column']}>
                       {address.isMainAddress ? 
                         <Box padding={'10px'}
                              bg={'green'}

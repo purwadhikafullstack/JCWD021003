@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from "react"
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCart, removeFromCart,updateQuantity } from '../../redux/reducer/cartReducer';
 import { Flex, Box, Heading, Text, HStack, Divider, Image,IconButton,Button } from '@chakra-ui/react';
@@ -13,6 +13,7 @@ const CartPage = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch();
   const cartData = useSelector((state) => state.cart.items);
+  const [checkoutButtonDisabled, setCheckoutButtonDisabled] = useState(false);
 
   const handleRemove = (productId) => {
     dispatch(removeFromCart(productId));
@@ -23,7 +24,6 @@ const CartPage = () => {
   };
 
   const handleProceedToCheckout = () => {
-    const { totalPrice } = useSelector(selectCart);
     if (totalPrice === 0) {
       setCheckoutButtonDisabled(true);
     } else {
@@ -93,7 +93,7 @@ const CartPage = () => {
           Total Price: {currencyFormatter.format(totalPrice, { code: 'IDR' })}{' '}
         </Text>
       </Box>
-      <Button color={'white'} bgColor={'green'} mt={4} onClick={handleProceedToCheckout}>
+      <Button color={'white'} bgColor={'green'} mt={4} onClick={handleProceedToCheckout} disabled={checkoutButtonDisabled}>
         Proceed to Checkout
       </Button>
     </Flex>

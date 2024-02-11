@@ -2,7 +2,6 @@ import { Routes, Route } from 'react-router-dom';
 import Home from './pages/home/Home';
 import { Auth } from './components/Auth';
 import Signup from './pages/Register';
-import Signin from './pages/Login';
 import Verification from './pages/user-verification';
 import Profile from './pages/profileUser';
 import { ProductDetailPage } from './pages/detailProduct';
@@ -21,6 +20,7 @@ import WarehouseList from './pages/Admin dashboard/warehouse management';
 import CreateWarehouse from './pages/Admin dashboard/warehouse management/create warehouse page';
 import EditWarehouse from './pages/Admin dashboard/warehouse management/edit warehouse';
 import EditAddress from './pages/user-address/components/edit address by map';
+import Signin from './pages/Login/index2';
 
 function App() {
   const AdminRoute = ({ children }) => {
@@ -38,10 +38,7 @@ function App() {
         <Route path="/login" element={<Signin />} />
         <Route path="/auth/email-verification" element={<Verification />} />
         <Route path="/product/:id" element={<ProductDetailPage />} />
-        <Route
-          path="/password-reset-request"
-          element={<RequestPasswordReset />}
-        />
+        <Route path="/password-reset-request"element={<RequestPasswordReset />}/>
         <Route path="/auth/reset-password" element={<ResetPassword />} />
         <Route
           path="/profile"
@@ -71,7 +68,9 @@ function App() {
         <Route
           path="/edit-address"
           element={
+            <LoggedInRoute>
               <EditAddress />
+              </LoggedInRoute>
           }
         />
 

@@ -38,66 +38,59 @@ function RequestPasswordReset() {
     }) 
   return (
     <>
-    <Navbar/>
-        <Flex height={'100vh'} width={'100%'} boxShadow={'base'}>
-            <Box width={'50%'} height={'100vh'} position={'relative'}>
-                <Image borderTopRightRadius={'20'} borderBottomRightRadius={'20'} src={back} width={'730px'} height={'100vh'} objectFit={'cover'} opacity={'75%'}/>
-                <AbsoluteCenter>
-                    <Image src={logo}/>
-                </AbsoluteCenter>
-            </Box>
-            <Flex justifyContent={'center'} alignItems={'center'} alignContent={'center'} width={'50%'} margin={'50'}>
-                <Box width={'450px'}>
-                <Text fontWeight={'800'} color={'green'} textAlign={'center'} fontSize={'42px'} marginBottom={'40px'}> Reset Password</Text>
-                <form onSubmit={formik.handleSubmit}>
-                
-                <FormControl isInvalid={(formik.touched.username && formik.errors.username)}
-                marginBottom={'32px'}>    
+   <Navbar/>
+<Flex height={'100vh'} width={'100vw'} boxShadow={'base'} justifyContent={'center'} alignItems={'center'} minW={'500px'} bgColor={'white'}>
+<Flex justifyContent={'center'} alignItems={'center'} width={'50%'} margin={'50'} p={'50px'} borderRadius={'20px'}
+    border={'2px solid green'} 
+    borderColor={'green'} 
+    boxShadow={'inset 0 0 0 2px #fff, inset 0 0 0 4px green'}
+>        <Box width={'450px'}>
+            <Text fontWeight={'800'} color={'green'} textAlign={'center'} fontSize={'42px'} marginBottom={'40px'}> Reset Password</Text>
+            <form onSubmit={formik.handleSubmit}>
+                <FormControl isInvalid={(formik.touched.username && formik.errors.username)} marginBottom={'32px'}>    
                     <InputGroup marginBottom={'8px'}>
-                    <Input
-                        name="email"
-                        placeholder="Email"
-                        type="email"
-                        value={formik.values.email}
-                        onChange={formik.handleChange}
-                        _placeholder={{color:"#707070"}}
-                        height={'64px'}
-                        bg={'#EEEDED'}
-                        color={'#707070'}
-                        paddingLeft={'72px'}
-                        fontSize={'20px'}
-                        borderRadius={'16px'}
-                    />
-                    <InputLeftElement top={'12px'} width={'72px'}>
-                        <Flex justifyContent={'center'} alignItems={'center'} height={'64px'}>
-                        <Icon as={EnvelopeIcon} boxSize={'24px'} margin={'auto'} position={'relative'} textColor={'brand.grey350'}/>
-                        </Flex>
-                    </InputLeftElement>
+                        <Input
+                            name="email"
+                            placeholder="Email"
+                            type="email"
+                            value={formik.values.email}
+                            onChange={formik.handleChange}
+                            _placeholder={{color:"#707070"}}
+                            height={'64px'}
+                            bg={'#EEEDED'}
+                            color={'#707070'}
+                            paddingLeft={'72px'}
+                            fontSize={'20px'}
+                            borderRadius={'16px'}
+                        />
+                        <InputLeftElement top={'12px'} width={'72px'}>
+                            <Flex justifyContent={'center'} alignItems={'center'} height={'64px'}>
+                                <Icon as={EnvelopeIcon} boxSize={'24px'} margin={'auto'} position={'relative'} textColor={'brand.grey350'}/>
+                            </Flex>
+                        </InputLeftElement>
                     </InputGroup>
                     {formik.touched.username &&
-					formik.errors.username && (
-						<FormErrorMessage>
-							{formik.errors.username}
-						</FormErrorMessage>
-					)}
+                    formik.errors.username && (
+                        <FormErrorMessage>
+                            {formik.errors.username}
+                        </FormErrorMessage>
+                    )}
                 </FormControl>
-                {loading ? (<Button width={'100%'} height={'68px'} borderRadius={'16px'} fontSize={'24px'} fontWeight={'700'} color={'white'} bg={'green'} _hover={{bg: '#f50f5a'}} _active={{opacity:'70%'}}>
-                    <div className="sweet-loading">
-                        <BeatLoader color={"#ffffff"}
-							loading={loading}
-							cssOverride={override}
-							size={10}
-							aria-label="spiner"
-							data-testid="loader"/>
-                    </div></Button>) : (
-                    <Button width={'100%'} height={'68px'} borderRadius={'16px'} fontSize={'24px'} fontWeight={'700'} color={'white'} bg={'green'} _hover={{bg: '#f50f5a'}} _active={{opacity:'70%'}} type="submit">RESET PASSWORD</Button>
+                {loading ? (
+                    <Button width={'100%'} height={'68px'} borderRadius={'16px'} fontSize={'24px'} fontWeight={'700'} color={'white'} bg={'green'} _hover={{bg: '#f50f5a'}} _active={{opacity:'70%'}}>
+                        <div className="sweet-loading">
+                            <BeatLoader color={"#ffffff"} loading={loading} cssOverride={override} size={10} aria-label="spinner" data-testid="loader"/>
+                        </div>
+                    </Button>
+                ) : (
+                    <Button width={'100%'} height={'48px'} borderRadius={'16px'} fontSize={'24px'} fontWeight={'700'} color={'white'} bg={'green'} _hover={{bg: '#f50f5a'}} _active={{opacity:'70%'}} type="submit">RESET PASSWORD</Button>
                 )}
-                </form>
-                <SuccessModal isOpen={isSuccessModalOpen} onClose={closeSuccessModal} />
-                <ErrorModal isOpen={isErrorModalOpen} onClose={closeErrorModal} />
-                </Box>
-            </Flex>
-        </Flex>
+            </form>
+            <SuccessModal isOpen={isSuccessModalOpen} onClose={closeSuccessModal} />
+            <ErrorModal isOpen={isErrorModalOpen} onClose={closeErrorModal} />
+        </Box>
+    </Flex>
+</Flex>
     </>
   )
 }

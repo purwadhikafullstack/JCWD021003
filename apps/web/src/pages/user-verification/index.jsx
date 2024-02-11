@@ -41,16 +41,22 @@ function Verification() {
     }) 
   return (
     <>
-        <Flex height={'100vh'} width={'100%'} boxShadow={'base'}>
-            <Box width={'50%'} height={'100vh'} position={'relative'}>
-                <Image borderTopRightRadius={'20'} borderBottomRightRadius={'20'} src={model} width={'730px'} height={'100vh'} objectFit={'cover'} opacity={'75%'}/>
-                {/* <AbsoluteCenter>
-                    <Image src={logo}/>
-                </AbsoluteCenter> */}
-            </Box>
-            <Flex justifyContent={'center'} alignItems={'center'} alignContent={'center'} width={'50%'} margin={'50'}>
-                <Box width={'450px'}>
-                <Text fontWeight={'800'} color={'green'} textAlign={'center'} fontSize={'42px'} marginBottom={'48px'} lineHeight={'1.0'}>SET PASSWORD</Text>
+   <Flex justifyContent="center" alignItems="center" height="100vh" width="100vw" minW={'850px'} bgColor={'white'} minHeight={'1000px'}>
+    <Flex
+        justifyContent="center"
+        alignItems="center"
+        width="50%"
+        margin="50"
+        p="50px"
+        borderRadius="20px"
+        border="2px solid green"
+        borderColor="green"
+        boxShadow="inset 0 0 0 2px #fff, inset 0 0 0 4px green"
+    >
+        <Box width="450px">
+            <Text fontWeight="800" color="green" textAlign="center" fontSize="42px" marginBottom="48px" lineHeight="1.0">
+                SET PASSWORD
+            </Text>
                 <form onSubmit={formik.handleSubmit}>
                 <FormControl 
                 isInvalid={ formik.touched.password && formik.errors.password}

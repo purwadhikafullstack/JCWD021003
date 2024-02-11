@@ -138,7 +138,7 @@ useEffect(() => {
               variant={'filled'}
               mb={'32px'}              value={formik.values.phoneNumber}              onChange={formik.handleChange}            />                  
           <Text fontSize={'16px'} fontWeight={'700'} color={'brand.grey350'} mb={'8px'}>
-              Warehouse Location
+              Address Location
             </Text>
             <Textarea
               placeholder="Type warehouse location"              name="location"              _placeholder={{ color: 'brand.grey350' }}              bg={'brand.grey100'}

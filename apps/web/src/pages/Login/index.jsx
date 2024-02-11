@@ -13,7 +13,7 @@ import { SuccessModal,ErrorModal } from "./services/PopModal"
 import { BeatLoader } from "react-spinners"
 import toast from 'react-hot-toast'
 
-function Signin() {
+function Signin3() {
     const isLogin = useSelector((state) => state.AuthReducer.isLogin);
     const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -194,4 +194,4 @@ function Signin() {
   )
 }
 
-export default Signin
+export default Signin3
