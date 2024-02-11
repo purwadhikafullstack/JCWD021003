@@ -11,6 +11,7 @@ import { IoHome } from "react-icons/io5";
 import { useState } from "react"
 import { SuccessModal,ErrorModal } from "./services/PopModal"
 import { BeatLoader } from "react-spinners"
+import toast from 'react-hot-toast'
 
 function Signin() {
     const isLogin = useSelector((state) => state.AuthReducer.isLogin);
@@ -32,8 +33,12 @@ function Signin() {
             password:"",
         },
         onSubmit: (values) => {
+            try{
             dispatch(login(values.email, values.password,setLoading, openSuccessModal, openErrorModal))
             formik.resetForm();
+            } catch (error){
+            toast.error("Login failed. Please try again.");
+            }
         }
     }) 
 
@@ -43,6 +48,7 @@ function Signin() {
 			if (result) {
 				dispatch(Googlelogin(result.username, result.email, result.avatar,setLoading, openSuccessModal, openErrorModal))
 			}
+            toast.success('Login Success!')
 		} catch (error) {
 			console.log(error);
 		}

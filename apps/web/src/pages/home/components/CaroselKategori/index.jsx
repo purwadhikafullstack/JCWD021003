@@ -155,10 +155,10 @@ export const CarouselKategori = () => {
 										backgroundPosition={"center"}
 										backgroundRepeat={"no-repeat"}
 										cursor={"pointer"}
-										onClick={() => {
-											navigate("/discovery");
-											sessionStorage.setItem('');
-										}}
+										// onClick={() => {
+										// 	navigate("/discovery");
+										// 	sessionStorage.setItem('');
+										// }}
 									>
 										{data.name}
 									</Box>

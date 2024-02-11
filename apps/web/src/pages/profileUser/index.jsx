@@ -13,13 +13,7 @@ import UpdateEmail from "./components/editEmail"
 import { Footer } from "../../components/Footer"
 
 function Profile() {
-    const user = useSelector((state) => state.AuthReducer.user);
     const [isEditable, setIsEditable] = useState(false);
-    const [fieldImage, setFieldImage] = useState(null);
-   
-  const toggleEdit = () => {
-    setIsEditable(!isEditable);
-  };
 
   return (
     <Box bg={'#F1F1F1'}

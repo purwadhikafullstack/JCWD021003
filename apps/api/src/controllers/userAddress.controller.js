@@ -163,8 +163,8 @@ export const findLongLatController =async(req,res) => {
 export const updateUserAddressController = async (req, res) => {
     try{
         const {id} = req.params
-        const {specificAddress, cityId, fullName, phoneNumber, postalCode} = req.body
-        await updateUserAddressService(id, specificAddress, cityId, fullName, phoneNumber, postalCode)
+        const {fullName,phoneNumber, location, cityId, postalCode, lat, lng} = req.body
+        await updateUserAddressService(id, fullName,phoneNumber, location, cityId, postalCode, lat, lng)
         return res.status(200).json({
             message: "update user data success",
         })

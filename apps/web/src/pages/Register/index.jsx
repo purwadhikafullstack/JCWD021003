@@ -9,8 +9,8 @@ import { BeatLoader } from "react-spinners";
 import { useState } from "react"
 import { registerScheme } from "./services/validation"
 import { IoHome,IoArrowBack  } from "react-icons/io5";
-import {Link, useNavigate} from 'react-router-dom'
-// import { signInWithGoogle } from '../../firebase';
+import {Link, useNavigate,Navigate} from 'react-router-dom'
+import { useSelector } from "react-redux"
 
 function Signup() {
     const { isOpen: isSuccessModalOpen, onOpen: openSuccessModal, onClose: closeSuccessModal } = useDisclosure();
@@ -36,10 +36,14 @@ function Signup() {
             } catch (err){
                 console.log("gagal error");
             }
-            // resetForm({values:{email: "", username:""}})
             formik.resetForm();
         }
     }) 
+
+    const isLogin = useSelector((state) => state.AuthReducer.isLogin);
+    if (isLogin){
+        return <Navigate to={'/'} replace={true}/>
+    }
 
      return (
     <>

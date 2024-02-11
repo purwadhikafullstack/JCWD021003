@@ -98,9 +98,9 @@ export const findCityOpenCageBasedService2 = async (city) => {
     }
 }
 
-export const updateUserAddressService = async (id, specificAddress, cityId, fullName, phoneNumber, postalCode) => {
+export const updateUserAddressService = async (id, fullName,phoneNumber, location, cityId, postalCode, lat, lng) => {
     try { 
-        await updateUserAddressQuery(id, specificAddress, cityId, fullName, phoneNumber, postalCode)
+        await updateUserAddressQuery(id, fullName,phoneNumber, location, cityId, postalCode, lat, lng)
     } catch (err){
         throw err
     }

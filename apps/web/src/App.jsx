@@ -20,6 +20,7 @@ import { Navigate } from 'react-router-dom';
 import WarehouseList from './pages/Admin dashboard/warehouse management';
 import CreateWarehouse from './pages/Admin dashboard/warehouse management/create warehouse page';
 import EditWarehouse from './pages/Admin dashboard/warehouse management/edit warehouse';
+import EditAddress from './pages/user-address/components/edit address by map';
 
 function App() {
   const AdminRoute = ({ children }) => {
@@ -28,7 +29,7 @@ function App() {
     return userRoleId === 1 ? children : <Navigate to="/" />;
   };
   const user = useSelector((state) => state.AuthReducer.user.roleId);
-  console.log('roleID',user);
+  console.log('roleID', user);
   return (
     <Auth>
       <Routes>
@@ -37,7 +38,10 @@ function App() {
         <Route path="/login" element={<Signin />} />
         <Route path="/auth/email-verification" element={<Verification />} />
         <Route path="/product/:id" element={<ProductDetailPage />} />
-        <Route path="/password-reset-request" element={<RequestPasswordReset />}/>
+        <Route
+          path="/password-reset-request"
+          element={<RequestPasswordReset />}
+        />
         <Route path="/auth/reset-password" element={<ResetPassword />} />
         <Route
           path="/profile"
@@ -65,6 +69,13 @@ function App() {
         />
 
         <Route
+          path="/edit-address"
+          element={
+              <EditAddress />
+          }
+        />
+
+        <Route
           path="/cart"
           element={
             <LoggedInRoute>
@@ -88,7 +99,7 @@ function App() {
             </AdminRoute>
           }
         />
-         <Route
+        <Route
           path="/admin-dashboard/account-management/create-account"
           element={
             <AdminRoute>
@@ -108,17 +119,17 @@ function App() {
           path="/warehouse-management/create-warehouse"
           element={
             <AdminRoute>
-          <CreateWarehouse />
-          </AdminRoute>
-        }
+              <CreateWarehouse />
+            </AdminRoute>
+          }
         />
-         <Route
+        <Route
           path="/warehouse-management/edit-warehouse"
           element={
             <AdminRoute>
-          <EditWarehouse />
-          </AdminRoute>
-        }
+              <EditWarehouse />
+            </AdminRoute>
+          }
         />
       </Routes>
     </Auth>

@@ -171,10 +171,16 @@ export const updateMainAddressQuery = async (id) => {
     }
 }
 
-export const updateUserAddressQuery  = async (id, specificAddress, cityId, fullName, phoneNumber, postalCode) => {
+export const updateUserAddressQuery  = async (id, fullName,phoneNumber, location, cityId, postalCode, lat, lng) => {
     try {
         await UserAddress.update(
-            {specificAddress, cityId, fullName, phoneNumber, postalCode},
+            {specificAddress: location, 
+            cityId, 
+            fullName, 
+            phoneNumber, 
+            postalCode,
+            latitude:lat,
+            longitude:lng},
             {where:
                 {id: id}
             }

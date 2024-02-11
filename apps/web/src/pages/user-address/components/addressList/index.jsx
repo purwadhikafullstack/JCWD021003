@@ -5,10 +5,12 @@ import { useSelector } from "react-redux";
 import FormEditAddress from "../edit-address";
 import UpdateMainAddress from "../update-MainAddress";
 import DeleteUserAddress from "../delete-address";
+import { useNavigate } from "react-router-dom";
 function AddressList (){
     
     const [address, setAddress] = useState([])
     const user = useSelector((state) => state.AuthReducer.user);
+    const navigate=useNavigate()
     
         const fetchData = async () => {
             try {
@@ -46,16 +48,6 @@ function AddressList (){
                               color={'black'}>
                             {address.fullName} 
                         </Text>
-                        {address.isMainAddress ? 
-                        <Box padding={'10px'}
-                             bg={'green'}
-                             borderRadius={'8px'}
-                             fontSize={'16px'}
-                             fontWeight={'700'}
-                             color={'white'}>
-                            Main
-                        </Box>
-                        : <></>}
                     </Flex>
                     <Text fontSize={'14px'}
                           fontWeight={'400'}
@@ -70,9 +62,22 @@ function AddressList (){
                 </Flex>
                 <Flex justifyContent={'flex-end'}
                 gap={'12px'} flexDirection={['column', null, null, null, 'row']}>
+                      {address.isMainAddress ? 
+                        <Box padding={'10px'}
+                             bg={'green'}
+                             borderRadius={'8px'}
+                             fontSize={'16px'}
+                             fontWeight={'700'}
+                             color={'white'}
+                             display={'flex'}
+                             justifyContent={'center'}
+                             alignItems={'center'}>
+                            Main
+                        </Box>
+                        : <></>}
                     <Flex justifyContent={'flex-end'}
                     flexDir={'column'}>
-                        <FormEditAddress 
+                        {/* <FormEditAddress 
                         id={address.id}
                         specificAddress={address.specificAddress}
                         cityId={address.cityId}
@@ -81,7 +86,22 @@ function AddressList (){
                         postalCode={address.postalCode}
                         provinceId={address.City.Province.id}
                         onAddressUpdated={fetchData}
-                        />
+                        /> */}
+                         <Button
+                        onClick={() => {navigate('/edit-address', {state: {address}})}}
+                        bg={'white'}
+                        variant={'outline'}
+                        color={'green'}
+                        border={'1px solid green'}
+                        fontSize={'12px'}
+                        fontWeight={'700'}
+                        padding={'4px 16px'}
+                        w={'72px'}
+                        _hover={'none'}
+                        _active={'none'}
+                      >
+                        Edit
+                      </Button>
                     </Flex>
                     <Flex justifyContent={'flex-end'}
                     flexDir={'column'}>
