@@ -82,7 +82,7 @@ function FormCreateAccount() {
               <option value="3">Buyer</option>
             </Select>
           </Box>
-          <Box w={'50%'}>
+          <Box w={'60%'}>
             <Text fontWeight={700}>Email</Text>
             <Input
               name="email"

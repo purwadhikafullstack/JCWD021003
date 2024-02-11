@@ -27,7 +27,7 @@ const CartPage = () => {
   };
 
   return (
-    <Box w={'100%'} minW={'600px'} bgColor={'#F0F3F7'}>
+    <Box w={'100vw'} minW={'600px'} bgColor={'#F0F3F7'}>
       <Navbar />
       <Box p={8} minH={'65vh'} h={'fit-content'}>
         <Heading mb={4}>Shopping Cart</Heading>

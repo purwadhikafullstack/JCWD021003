@@ -27,19 +27,19 @@ import {
                   <Tr>
                     <Th p={'20px 10px 5px 10px'} textAlign={'center'}>Username</Th>
                     <Th  p={'20px 20px 5px 20px'}textAlign={'center'}>Email</Th>
-                    <Th p={'20px 20px 5px 20px'} textAlign={'center'}>Action</Th>
+                    {/* <Th p={'20px 20px 5px 20px'} textAlign={'center'}>Action</Th> */}
                   </Tr>
                 </Thead>
                 <Tbody>
                   {user.map((userData, index) => (
                     <Tr key={index}>
-                      <Td textAlign={'center'}>{userData.username}</Td>
-                      <Td textAlign={'center'}>{userData.email}</Td>
-                      <Td >
+                      <Td textAlign={'center'} fontWeight={700} py={'15px'}>{userData.username}</Td>
+                      <Td textAlign={'center'} fontWeight={500}>{userData.email}</Td>
+                      {/* <Td >
                     <Box display={'flex'} gap={'8px'} justifyContent={'center'}>
                       <DeleteAccount id={userData.id} onDeletedAdmin={onUserUpdated}/>
                     </Box>
-                  </Td>
+                  </Td> */}
                     </Tr>
                   ))}
                 </Tbody>

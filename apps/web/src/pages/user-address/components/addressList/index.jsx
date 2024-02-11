@@ -69,7 +69,7 @@ function AddressList (){
                     </Text>
                 </Flex>
                 <Flex justifyContent={'flex-end'}
-                gap={'12px'}>
+                gap={'12px'} flexDirection={['column', null, null, null, 'row']}>
                     <Flex justifyContent={'flex-end'}
                     flexDir={'column'}>
                         <FormEditAddress 

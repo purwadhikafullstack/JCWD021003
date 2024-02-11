@@ -10,9 +10,9 @@ import { useNavigate } from 'react-router-dom';
 function ManageAddress() {
     const navigate = useNavigate();
   return (
-    <Box bg={'green.400'} height={'100%'}>
+    <Box bg={'green.400'} height={'100%'} w={'100vw'}>
             <Navbar />
-      <Box padding={'0px 100px'} marginBottom={'150px'}>
+      <Box padding={{lg:'0px 100px',base:'5px'}} marginBottom={'150px'}>
         <Flex
           className="create-address-top"
           flexDir={'column'}

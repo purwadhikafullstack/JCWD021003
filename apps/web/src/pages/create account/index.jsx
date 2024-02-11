@@ -9,10 +9,14 @@ import FormCreateAccount from './components/form Create Account';
 
 function CreateAccount() {
     const navigate = useNavigate();
+    const navigateTo = () => {
+      navigate('/admin-dashboard/account-management');
+    };
+
   return (
-    <Box bg={'green.400'} height={'100%'}>
+    <Box bg={'green.400'} height={'100%'} w={'100vw'} minW={'800px'}>
       <Navbar />
-      <Box padding={'0px 100px'} marginBottom={'150px'}>
+      <Box padding={{lg:'0px 100px',base:'0px 30px'}} marginBottom={'150px'}>
         <Flex
           className="create-address-top"
           flexDir={'column'}
@@ -38,7 +42,7 @@ function CreateAccount() {
                   color={'black'}
                   fontWeight={'700'}
                   fontSize={'12px'}
-                  href='/admin-dashboard/account-management'
+                  onClick={navigateTo}
                 >
                   Account Management
                 </BreadcrumbLink>

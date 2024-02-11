@@ -46,9 +46,9 @@ function AdminList({ admin, onAdminUpdated }) {
             <Tbody>
               {admin.map((user, index) => (
                 <Tr key={index}>
-                  <Td textAlign={'center'}>{user.username}</Td>
-                  <Td textAlign={'center'}>{user.email}</Td>
-                  <Td textAlign={'center'}>
+                  <Td textAlign={'center'} fontWeight={700}>{user.username}</Td>
+                  <Td textAlign={'center'} fontWeight={600}>{user.email}</Td>
+                  <Td textAlign={'center'} fontWeight={600}>
                     {' '}
                     {user.roleId === 1
                       ? 'Super Admin'
@@ -56,7 +56,7 @@ function AdminList({ admin, onAdminUpdated }) {
                         ? 'Warehouse Admin'
                         : 'Unknown Role'}{' '}
                   </Td>
-                  <Td textAlign={'center'}>
+                  <Td textAlign={'center'} fontWeight={600}>
                     {user.Warehouse && user.Warehouse.name
                       ? user.Warehouse.name
                       : ''}

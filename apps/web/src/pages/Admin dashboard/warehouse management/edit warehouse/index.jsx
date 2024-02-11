@@ -70,7 +70,7 @@ function EditWarehouse(){
 
     return (
         <Box bg={'#F1F1F1'}
-        height={'100%'}>
+        height={'100%'} w={'100vw'}>
             <Navbar/>
             <Box padding={{base: '0px 10px', md:'0px 100px'}}
              marginBottom={'150px'}>

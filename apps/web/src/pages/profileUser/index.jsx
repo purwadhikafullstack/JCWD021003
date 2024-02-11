@@ -23,9 +23,9 @@ function Profile() {
 
   return (
     <Box bg={'#F1F1F1'}
-    w={'100vw'}>
+    w={'100vw'} minW={'800px'}>
         <Navbar/>
-        <Box bg={"green.400"} padding={'0px 100px'}
+        <Box bg={"green.400"} padding={{lg:'0px 100px',sm:'0px'}}
         >
 
         <Flex className="top-container"
@@ -68,7 +68,7 @@ function Profile() {
             padding={'24px'}
             bg={'white'}
             mb={'10px'}
-            w={'100vw'}
+            // w={'100vw'}
             borderRadius={'20px'}
             >
                 <Text marginBottom={'24px'}

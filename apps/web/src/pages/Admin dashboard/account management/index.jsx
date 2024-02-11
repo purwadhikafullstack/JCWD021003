@@ -67,7 +67,7 @@ function AccountManagement() {
   };
 
   return (
-    <Box bg={'#F0F3F7'} height={'100%'}>
+    <Box bg={'#F0F3F7'} height={'100%'} w={'100vw'}>
       <Navbar />
       <Box padding={'0px 20px'} marginBottom={'150px'} h={'auto'}>
         <Box className="top-dashboard" mt={'36px'} mb={'24px'}>

@@ -10,6 +10,7 @@ import { Navbar } from "../../../../components/Navbar";
 import { Footer } from "../../../../components/Footer";
 import { findOpenCageAndCity } from "../services/getWarehouse";
 import FormCreateWarehouse from "./components/form";
+import { useNavigate } from "react-router-dom";
 
 function CreateWarehouse(){
 
@@ -21,6 +22,7 @@ function CreateWarehouse(){
     const [marker, setMarker] = useState(false)
     const [lat, setLat] = useState(null)
     const [lng, setLng] = useState(null)
+    const navigate = useNavigate()
     
     useEffect (() => {
         navigator.geolocation.getCurrentPosition((position) => {
@@ -28,6 +30,9 @@ function CreateWarehouse(){
             setLongitude(position.coords.longitude)
         })
     }, [])
+    const navigateTo = () => {
+        navigate('/admin-dashboard/warehouse-management');
+      };
 
     console.log("ini latitude", latitude, "ini longitude", longitude, "ini address", address, "ini lat", lat, "ini lng", lng)
 
@@ -58,7 +63,7 @@ function CreateWarehouse(){
 
     return (
         <Box bg={'#F1F1F1'}
-        height={'100%'}>
+        height={'100%'} w={'100vw'}>
             <Navbar/>
             <Box padding={{base: '0px 10px', md:'0px 100px'}}
              marginBottom={'150px'}>
@@ -80,7 +85,7 @@ function CreateWarehouse(){
       <BreadcrumbItem>
           <BreadcrumbLink color={'brand.lightred'}
           fontWeight={'700'}
-          fontSize={'12px'} href="/admin-dashboard/warehouse-management">
+          fontSize={'12px'} onClick={navigateTo}>
               Manage Warehouse
           </BreadcrumbLink>
       </BreadcrumbItem>

@@ -58,7 +58,7 @@ function WarehouseList() {
                 w={{ base: '150px', md: '220px' }}
                 h={{ base: '34px', md: '48px' }}
                 display={'flex'}
-                onClick={() => navigate('/admin-dashboard/warehouse-management/create-warehouse')}
+                onClick={() => navigate('/warehouse-management/create-warehouse')}
               >
                 <Flex
                   justifyContent={'center'}
