@@ -23,7 +23,12 @@ const CartPage = () => {
   };
 
   const handleProceedToCheckout = () => {
+    const { totalPrice } = useSelector(selectCart);
+    if (totalPrice === 0) {
+      setCheckoutButtonDisabled(true);
+    } else {
     navigate('/cart/shipment', { state: { cartData } });
+    }
   };
 
   return (
