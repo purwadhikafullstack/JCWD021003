@@ -28,12 +28,21 @@ function UpdateEmail() {
   const user = useSelector((state) => state.AuthReducer.user);
   const editEmail = async (email) => {
     try{ 
-      await axios.patch(`http://localhost:8000/api/user/update-email/${user.id}`, {
+      await axios.patch(`${import.meta.env.VITE_API_URL}user/update-email/${user.id}`, {
       email,
     });
-
+    toast({
+      title: "Email successfully changed",
+      position:'top-right',
+      status: "success",
+    });
     onClose();
     } catch (err){
+      toast({
+        title: "Failed to chnage Email",
+        position:'top-right',
+        status: "Failed",
+      });
       console.log(err)
     }
   };

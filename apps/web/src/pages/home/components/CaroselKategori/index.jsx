@@ -22,9 +22,8 @@ export const CarouselKategori = () => {
 	const dataCategory = async () => {
 		try {
 			const response = await axios.get(
-				"http://localhost:8000/api/product/category"
+				`${import.meta.env.VITE_API_URL}product/category`
 			);
-			// console.log('category', response.data.data)
 			setCategory(response.data.data);
 		} catch (err) {
 			console.log(err.message);

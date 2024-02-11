@@ -11,6 +11,7 @@ export const Footer = () => {
     <Box
       display={'flex'}
       h={{ base: 'fit-content', md: '300px' }}
+      maxH={{base:'400px'}}
       bgColor={'#EBEBEB'}
       color="black"
       px={{ base: '20px', lg: '80px' }}

@@ -72,7 +72,7 @@ const CheckoutPage = () => {
     setShippingCost(cost);
   };
   return (
-    <Box bgColor={'#F0F3F7'} h={'fit-content'} minH={'100vh'}>
+    <Box bgColor={'#F0F3F7'} h={'fit-content'} minH={'100vh'} w={'100vw'} minW={'780px'}>
       <Navbar />
       <Text p={'10px 20px'} fontSize={'30px'} fontWeight={900}>
         Delivery

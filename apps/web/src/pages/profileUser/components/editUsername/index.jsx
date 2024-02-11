@@ -34,7 +34,7 @@ function UpdateUsername() {
     username
   ) => {
     try{ 
-      await axios.patch(`http://localhost:8000/api/user/update-username/${user.id}`, {
+      await axios.patch(`${import.meta.env.VITE_API_URL}user/update-username/${user.id}`, {
       username,
     });
     dispatch(setUser({...user, username}))

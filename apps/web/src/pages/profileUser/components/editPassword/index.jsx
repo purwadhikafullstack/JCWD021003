@@ -18,7 +18,7 @@ function UpdatePassword() {
   const UpdatePassword = async (password) => {
     try {
       await axios.patch(
-        `http://localhost:8000/api/user/update-password/${user.id}`,
+        `${import.meta.env.VITE_API_URL}user/update-password/${user.id}`,
         {
           password,
         },

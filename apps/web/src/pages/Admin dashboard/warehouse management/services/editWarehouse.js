@@ -3,9 +3,8 @@ import axios from "axios";
 const token = localStorage.getItem("token")
 
 export const editWarehouse = async (id, name,location, cityId, postalCode, lat, lng) => {    
-    console.log("ini token", token);
     try{
-        await axios.patch(`http://localhost:8000/api/warehouse/${id}`, {
+        await axios.patch(`${import.meta.env.VITE_API_URL}warehouse/${id}`, {
             id, 
             name,
             location, 
@@ -24,18 +23,3 @@ export const editWarehouse = async (id, name,location, cityId, postalCode, lat, 
         console.log(err);
     }
 }
-
-export const assignAdminWarehouse = async (adminIds, warehouseId) => {
-    try {
-        await axios.patch(`http://localhost:8000/api/warehouse/assign/${warehouseId}`, 
-            { adminIds }, 
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            }
-        );
-    } catch (err) {
-        console.log(err);
-    }
-};

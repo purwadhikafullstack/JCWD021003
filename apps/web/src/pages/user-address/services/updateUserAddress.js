@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const updateUserAddress = async (id, specificAddress, cityId, fullName, phoneNumber, postalCode) => {
     try{
-        await axios.patch(`http://localhost:8000/api/user-address/update-user-address/${id}`, {
+        await axios.patch(`${import.meta.env.VITE_API_URL}user-address/update-user-address/${id}`, {
             specificAddress, 
             cityId, 
             fullName, 
@@ -16,7 +16,7 @@ export const updateUserAddress = async (id, specificAddress, cityId, fullName, p
 
 export const updateMainAddress = async (id, userId) => {
     try{
-        await axios.patch (`http://localhost:8000/api/user-address/update-main-address?id=${id}&userId=${userId}`)
+        await axios.patch (`${import.meta.env.VITE_API_URL}user-address/update-main-address?id=${id}&userId=${userId}`)
     } catch (err){
         console.log(err);
     }

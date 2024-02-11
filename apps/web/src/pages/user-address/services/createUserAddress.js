@@ -3,7 +3,7 @@ import axios from "axios";
 // Function to get city name from cityId
 export const getCityName = async (cityId) => {
   try {
-    const response = await axios.get(`http://localhost:8000/api/user-address/specific-city/${cityId}`);
+    const response = await axios.get(`${import.meta.env.VITE_API_URL}user-address/specific-city/${cityId}`);
     return response.data.data;
   } catch (error) {
     console.error(error);
@@ -14,7 +14,7 @@ export const getCityName = async (cityId) => {
 // Function to get coordinates from city name
 export const getCoordinates = async (cityName) => {
   try {
-    const response = await axios.get(`http://localhost:8000/api/user-address/city?city=${cityName}`);
+    const response = await axios.get(`${import.meta.env.VITE_API_URL}user-address/city?city=${cityName}`);
     const { lat, lng } = response.data.data; 
     return { latitude: lat, longitude: lng };  } 
     catch (error) {
@@ -31,7 +31,7 @@ export const CreateUserAddress = async (id, specificAddress, cityId, fullName, p
     const { latitude, longitude } = await getCoordinates(cityName);
     console.log(latitude, longitude);
 
-    await axios.post(`http://localhost:8000/api/user-address/create-user-address?id=${id}`, {
+    await axios.post(`${import.meta.env.VITE_API_URL}user-address/create-user-address?id=${id}`, {
       specificAddress,
       cityId,
       fullName,

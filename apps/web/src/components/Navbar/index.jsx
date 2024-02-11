@@ -13,7 +13,7 @@ export const Navbar = () => {
   const user = useSelector((state) => state.AuthReducer.isLogin);
 	return (
 		<Box
-			w={"100vw"}
+			// w={"100vw"}
 			h={"74px"}
 			py={"25px"}
 			bgColor={"black"}
@@ -39,7 +39,7 @@ export const Navbar = () => {
 						{/* <Text fontWeight={400}>
 							ada<span style={{ fontWeight: "200" }}>Store.</span>
 						</Text> */}
-						<Image src={logo} w={{base:'65%',sm:'50%', md:'50%',lg:'50%'}}/>
+						<Image src={logo} w={{base:'50%',sm:'50%', md:'50%',lg:'50%'}}/>
 					</Box>
 				</Link>
 				<Box  display={{ base: "none", md: "block" }} w={'80%'}>

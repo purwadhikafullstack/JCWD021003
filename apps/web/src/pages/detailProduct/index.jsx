@@ -18,20 +18,6 @@ export const ProductDetailPage = () => {
   const dispatch = useDispatch();
   const isLogin = useSelector((state) => state.AuthReducer.isLogin);
 
-  //   const fetchProductDetail = async (id) => {
-  //     try {
-  //       const response = await axios.get(
-  //         `http://localhost:8000/api/product/details/${id}`,
-  //       );
-  //       setProduct(response.data?.data);
-  //       console.log('detail', response.data.data);
-  //     } catch (error) {
-  //       console.log(error.message);
-  //     }
-  //   };
-  //   useEffect(() => {
-  //     fetchProductDetail(id);
-  //   }, [id]);
   useEffect(() => {
     const fetchProductDetail = () => {
       const productIdInt = parseInt(id, 10);
@@ -93,11 +79,13 @@ export const ProductDetailPage = () => {
       <Navbar />
       <Box
         m={{ base: '20px', sm: '30px', md: '40px' }}
-        minH={'400px'}
-        h={'60vh'}
+        minH={'450px'}
+        h={'fit-content'}
         display="grid"
         gridTemplateColumns={{ base: '1fr', sm: '1fr', md: 'repeat(2, 1fr)' }}
         gap="8"
+        w={'100vw'}
+        minW={'400px'}
       >
         {/* Left column for product image */}
         <Image

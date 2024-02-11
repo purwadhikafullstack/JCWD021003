@@ -60,7 +60,7 @@ export const AuthReducer = createSlice({
 });
 
 export const updateUser = createAsyncThunk('AuthReducer/updateUser', async (updatedUserData) => {
-	const response = await axios.patch(`http://localhost:8000/api/user/update-user`, updatedUserData);
+	const response = await axios.patch(`${import.meta.env.VITE_API_URL}user/update-user`, updatedUserData);
 	return response.data;
   });
 
@@ -68,7 +68,7 @@ export const login = (email, password, setLoading, openSuccessModal, openErrorMo
 	return async (dispatch) => {
 		try {
 			const res = await axios.post(
-				"http://localhost:8000/api/auth/login",
+				`${import.meta.env.VITE_API_URL}auth/login`,
 				{
 					email,
 					password,
@@ -92,7 +92,7 @@ export const Googlelogin = (username, email, avatar,setLoading, openSuccessModal
 	return async (dispatch) => {
 		try {
 			const res = await axios.post(
-				"http://localhost:8000/api/auth/google",
+				`${import.meta.env.VITE_API_URL}auth/google`,
 				{
 					username,
 					email,
@@ -118,7 +118,7 @@ export const keepLogin = () => {
 
 			if (token) {
 				const res = await axios.get(
-					"http://localhost:8000/api/auth/keep-login",
+					`${import.meta.env.VITE_API_URL}auth/keep-login`,
 					{
 						headers: {
 							Authorization: `Bearer ${token}`,

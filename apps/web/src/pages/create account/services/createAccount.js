@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const CreateAccount = async (username,email,password,roleId,openSuccessModal, openErrorModal) => {
     try {
-      await axios.post(`http://localhost:8000/api/user/create-account`, {
+      await axios.post(`${import.meta.env.VITE_API_URL}user/create-account`, {
         username,
         email,
         password,

@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const getNearestWarehouse = async (userLat, userLong) => {
     try {
-        const response = await axios.get(`http://localhost:8000/api/warehouse-address/nearest-warehouse?userLat=${userLat}&userLong=${userLong}`,);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}warehouse-address/nearest-warehouse?userLat=${userLat}&userLong=${userLong}`,);
         const warehouse = response?.data?.data
         console.log("ini warehouse", warehouse);
         return warehouse
@@ -14,7 +14,7 @@ export const getNearestWarehouse = async (userLat, userLong) => {
 
 export const getShippingCost = async (origin, destination, weight, courier) => {
     try {
-        const response = await axios.post(`http://localhost:8000/api/warehouse-address/shipping-cost`, {
+        const response = await axios.post(`${import.meta.env.VITE_API_URL}warehouse-address/shipping-cost`, {
             origin,
             destination,
             weight,
