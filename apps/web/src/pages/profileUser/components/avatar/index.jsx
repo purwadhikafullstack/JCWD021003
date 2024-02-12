@@ -28,6 +28,14 @@ function UploadAvatar () {
       };
 
     const uploadAvatar = async () => {
+        if (!fieldImage) {
+            toast({
+                title: "No image selected.",
+                position: 'top-right',
+                status: "error",
+            });
+            return; 
+        }
         try{
             let formData = new FormData();
             formData.append("avatar", fieldImage);
@@ -46,6 +54,7 @@ function UploadAvatar () {
         } catch (err){
             toast({
                 title: "Failed to update Profile Picture",
+                description: err.message,
                 position:'top-right',
                 status: "Failed",
               });
@@ -107,15 +116,17 @@ function UploadAvatar () {
         gap={'24px'}
         maxWidth={'202px'}
         justifyContent={'flex-end'}>
-            <Button bg={'green'}
+           <Button 
+            bg={'green'}
             color={'white'}
-            _hover={{bg:'#f62252'}}
-            _active={{bg:'#f95278'}}
+            _hover={{ bg:'#f62252' }}
+            _active={{ bg:'#f95278' }}
+            disabled={!fieldImage}
             onClick={() => {
-            uploadAvatar(fieldImage),
-            setFieldImage("");
-            }}>
-                Upload Image
+                uploadAvatar(fieldImage);
+                setFieldImage("");
+            }} >
+             Upload Image
             </Button>
             
             <Button

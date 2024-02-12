@@ -8,6 +8,11 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function ManageAddress() {
+  // const [address, setAddress] = useState([])
+  // const [pageSize, setPageSize] = useState(3)
+  // const [currentPage, setCurrentPage] = useState(1)
+  // const [totalRecords, setTotalRecords] = useState(0)
+
     const navigate = useNavigate();
   return (
     <Box bg={'green.400'} height={'100%'} w={'100vw'}>
@@ -86,7 +91,9 @@ function ManageAddress() {
                     fontWeight={'700'}>
                         Address
                     </Text>
-                   <AddressList/>
+                   <AddressList 
+                  //  address={address}
+                   />
                 </Box>
       </Box>
       <Footer />

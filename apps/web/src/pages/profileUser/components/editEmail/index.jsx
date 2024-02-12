@@ -22,6 +22,7 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { ChevronRightIcon } from '@chakra-ui/icons'
 import {CheckBadgeIcon} from '@heroicons/react/24/solid'
+import toast from 'react-hot-toast';
 
 function UpdateEmail() {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -31,18 +32,10 @@ function UpdateEmail() {
       await axios.patch(`${import.meta.env.VITE_API_URL}user/update-email/${user.id}`, {
       email,
     });
-    toast({
-      title: "Email successfully changed",
-      position:'top-right',
-      status: "success",
-    });
+    toast.success('Update email is successful.')
     onClose();
     } catch (err){
-      toast({
-        title: "Failed to chnage Email",
-        position:'top-right',
-        status: "Failed",
-      });
+      toast.error("Failed to update email. The email is already being used by another user.");
       console.log(err)
     }
   };

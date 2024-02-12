@@ -1,5 +1,6 @@
 import { Box, Button, Flex, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from "@chakra-ui/react"
 import { deleteUserAddress } from "../../services/deleteUserAddress"
+import toast from "react-hot-toast"
 
 function DeleteUserAddress ({id, onDeletedAddress}){
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -8,7 +9,9 @@ function DeleteUserAddress ({id, onDeletedAddress}){
             await deleteUserAddress(id)
             onDeletedAddress()
             onClose()
+            toast.success('Address deleted successfully')
         }catch (err){
+          toast.error('Error deleting')
             console.log(err.message);
         }
     }
