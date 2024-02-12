@@ -1,7 +1,14 @@
 import { updateUsernameQuery, updateEmailQuery, updatePasswordQuery, findUsernameQuery, findEmailQuery, uploadAvatarFileQuery
     , findAdminQuery, findUserQuery, updateUserQuery, deleteUserQuery,createAccountQuery } from "../queries/user.queries";
+import { emailUpdateQuery } from "../queries/auth.queries";
     import { findUserbyEmailQuery } from "../queries/auth.queries";
 import bcrypt from "bcrypt"
+import jwt from "jsonwebtoken";
+import handlebars from "handlebars";
+import fs from "fs";
+import path from "path";
+import transporter from "../utils/transporter";
+
 export const updateUsernameService = async (id, username) => {
     try{
         const check = await findUsernameQuery(username);
@@ -15,7 +22,41 @@ export const updateEmailService = async (id, email) => {
     try{
         const check = await findEmailQuery(email);
         if (check) throw new Error("Email already exist");
-        await updateEmailQuery(id, email)
+
+        const res =await emailUpdateQuery(id, email)
+        const secretKey = process.env.JWT_SECRET_KEY;
+        if (!secretKey) {
+            throw new Error("JWT_SECRET_KEY is not set in the environment");
+        }
+
+        const tokenVerification = jwt.sign({ email }, secretKey, {
+            expiresIn: "1hr"
+        });
+        const temp = await fs.readFileSync(
+            path.join(__dirname, "../template_email", "email-verif.html"),
+            "utf-8"
+        );
+        const emailVerificationLink = `${process.env.VITE_API_URL}auth/verify-email?token=${tokenVerification}`
+        const tempCompile = await handlebars.compile(temp);
+        const tempResult = tempCompile({ email: email, link: emailVerificationLink });
+        const gmailUser = process.env.GMAIL_USER;
+        if (typeof gmailUser !== 'string') {
+            throw new Error("GMAIL_USER is not set in the environment");
+        }
+
+        if (typeof email !== 'string') {
+            throw new Error("Recipient email is invalid");
+        }
+
+        await transporter.sendMail({
+            from: gmailUser,
+            to: email,
+            subject: "Email Confirmation",
+            html: tempResult,
+        });
+
+        return res;
+        // await updateEmailQuery(id, email)
     } catch (err){
         throw err
     }

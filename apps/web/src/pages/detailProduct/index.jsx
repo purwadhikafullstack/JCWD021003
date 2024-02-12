@@ -75,7 +75,7 @@ export const ProductDetailPage = () => {
   };
   console.log(product);
   return (
-    <Box>
+    <Box w={'100vw'}>
       <Navbar />
       <Box
         m={{ base: '20px', sm: '30px', md: '40px' }}
@@ -84,8 +84,8 @@ export const ProductDetailPage = () => {
         display="grid"
         gridTemplateColumns={{ base: '1fr', sm: '1fr', md: 'repeat(2, 1fr)' }}
         gap="8"
-        w={'100vw'}
-        minW={'400px'}
+        // w={'100vw'}
+        // minW={'400px'}
       >
         {/* Left column for product image */}
         <Image
@@ -121,7 +121,7 @@ export const ProductDetailPage = () => {
           </HStack>
 
           {/* Quantity input with buttons */}
-          <Box>
+          <Box >
             <Text fontSize="md" mb="2">
               Quantity:
             </Text>
@@ -149,13 +149,14 @@ export const ProductDetailPage = () => {
           <Button
             colorScheme="green"
             onClick={isLogin ? handleAddToBag : undefined} 
-            w="100%"
+            w="50%"
             mt={'20px'}
             isDisabled={!isLogin} 
+            mb={'20px'}
           >
             Add to Bag
           </Button>
-          <Box mt={'20px'} p={'20px'} bgColor={'#F8F8FF'} borderRadius={'20px'}>
+          <Box display={'contents'} mt={'20px'} p={'20px'} bgColor={'#F8F8FF'} borderRadius={'20px'} w={'70%'}>
             <Text fontSize="md">{product.description}</Text>
           </Box>
         </Box>

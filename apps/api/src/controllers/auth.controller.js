@@ -1,4 +1,4 @@
-import { registerService, emailVerificationService, loginService, keepLoginService, forgotPasswordService, resetPasswordService, GoogleloginService } from "../services/auth.services";
+import { registerService, emailVerificationService, loginService, keepLoginService, forgotPasswordService, resetPasswordService, GoogleloginService,verificationEmailService } from "../services/auth.services";
 
 export const registerController = async (req, res) => {
     try {
@@ -32,6 +32,24 @@ export const emailVerificationController = async (req, res) => {
             message: "Email Verif Success",
             data: result,
           });
+  } catch(err){
+    console.log(err);
+      return res.status(500).json({
+        message: err.message,
+      });
+  }
+}
+
+export const verificationEmailController = async (req, res) => {
+  try{
+        const token = req.query.token;
+        if (typeof token !== "string") {
+          return res.status(400).json({
+            message: "Invalid token format",
+          });
+        }
+        const result = await verificationEmailService(token);
+        return res.redirect(`${process.env.FE_BASE_URL}/`)
   } catch(err){
     console.log(err);
       return res.status(500).json({

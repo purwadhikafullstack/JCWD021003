@@ -25,6 +25,29 @@ export const registerQuery = async (email, username) => {
     }
 };
 
+export const emailUpdateQuery = async (id, email) => {
+    const t = await User.sequelize.transaction();
+    try {
+
+        const res = await User.update(
+            {
+                email,
+                isVerified: false
+            },
+            {
+                where:
+                    { id: id }
+            },
+            { transaction: t }
+        );
+        await t.commit();
+        return res;
+    } catch (err) {
+        await t.rollback();
+        throw err;
+    }
+};
+
 export const registerGoogleLoginQuery = async (username, email, avatar) => {
     const t = await User.sequelize.transaction();
     try {
@@ -73,6 +96,22 @@ export const emailVerificationQuery = async (email, password) => {
             {
                 isVerified: true,
                 password
+            },
+            {
+                where:
+                    { email: email }
+            }
+        )
+    } catch (err) {
+        throw err;
+    }
+};
+
+export const verificationEmailQuery = async (email) => {
+    try {
+        await User.update(
+            {
+                isVerified: true,
             },
             {
                 where:

@@ -19,21 +19,25 @@ import {
     Flex} from '@chakra-ui/react'
 import { useFormik } from "formik";
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { ChevronRightIcon } from '@chakra-ui/icons'
 import {CheckBadgeIcon} from '@heroicons/react/24/solid'
 import toast from 'react-hot-toast';
+import { setUser } from '../../../../redux/reducer/authReducer';
 
 function UpdateEmail() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const user = useSelector((state) => state.AuthReducer.user);
+  const dispatch = useDispatch()
+
   const editEmail = async (email) => {
     try{ 
       await axios.patch(`${import.meta.env.VITE_API_URL}user/update-email/${user.id}`, {
       email,
     });
-    toast.success('Update email is successful.')
+    toast.success('Update email is successful. Check your Email to verify your email')
     onClose();
+    dispatch(setUser({ ...user, email, isVerified: false }));
     } catch (err){
       toast.error("Failed to update email. The email is already being used by another user.");
       console.log(err)

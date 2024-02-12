@@ -1,11 +1,10 @@
-import { registerQuery, findUserbyEmailQuery, emailVerificationQuery, verifiedUserQuery, keepLoginQuery, forgotPasswordQuery, resetPasswordQuery, checkTokenUsageQuery, registerGoogleLoginQuery } from "../queries/auth.queries";
+import { registerQuery, findUserbyEmailQuery, emailVerificationQuery, verifiedUserQuery, keepLoginQuery, forgotPasswordQuery, resetPasswordQuery, checkTokenUsageQuery, registerGoogleLoginQuery,verificationEmailQuery } from "../queries/auth.queries";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken";
 import handlebars from "handlebars";
 import fs from "fs";
 import path from "path";
 import transporter from "../utils/transporter";
-import {oauth2 } from "googleapis/build/src/apis/oauth2";
 
 //POST USER REGISTRATION
 export const registerService = async (email, username) => {
@@ -76,6 +75,25 @@ export const emailVerificationService = async (token, password) => {
         await emailVerificationQuery(decoded.email, hashPassword);
 
         return { message: "Email is now verified and password is set succesfully." };
+    } catch (err) {
+        throw err;
+    }
+};
+
+export const verificationEmailService = async (token) => {
+    try {
+        const secretKey = process.env.JWT_SECRET_KEY;
+        if (!secretKey) throw new Error("JWT_SECRET_KEY is not set");
+
+        const decoded = jwt.verify(token, secretKey);
+        if (!decoded?.email) throw new Error("Invalid token");
+
+        const isAlreadyVerified = await verifiedUserQuery(decoded.email);
+        if (isAlreadyVerified) throw new Error("User has already been verified");
+
+        await verificationEmailQuery(decoded.email);
+
+        return { message: "Email is now verified." };
     } catch (err) {
         throw err;
     }
