@@ -76,16 +76,6 @@ function AddressList (){
                         : <></>}
                     <Flex justifyContent={'flex-end'}
                     flexDir={'column'}>
-                        {/* <FormEditAddress 
-                        id={address.id}
-                        specificAddress={address.specificAddress}
-                        cityId={address.cityId}
-                        fullName={address.fullName}
-                        phoneNumber={address.phoneNumber}
-                        postalCode={address.postalCode}
-                        provinceId={address.City.Province.id}
-                        onAddressUpdated={fetchData}
-                        /> */}
                          <Button
                         onClick={() => {navigate('/edit-address', {state: {address}})}}
                         bg={'white'}

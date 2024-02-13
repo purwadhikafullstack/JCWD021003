@@ -1,9 +1,17 @@
 import { findUserAddressQuery, createUserAddressQuery, findProvinceQuery, findCityQuery, opencageQuery, findCityOpenCageBasedQuery, CityOpencageQuery,
-    updateUserAddressQuery,updateMainAddressQuery,deleteUserAddressQuery,LongLatQuery,findCitybyIdQuery,findOneUserAddress, removeMainAddressQuery, findSearchableProvinceQuery } from "../queries/userAddress.queries";
+    updateUserAddressQuery,updateMainAddressQuery,deleteUserAddressQuery,LongLatQuery,findCitybyIdQuery,findOneUserAddress, removeMainAddressQuery, findSearchableProvinceQuery,findUserAddressPagQuery } from "../queries/userAddress.queries";
 
 export const findUserAddressService = async (id) => {
     try{
         const res = await findUserAddressQuery(id)
+        return res
+    } catch (err){
+        throw err
+    }
+}
+export const findUserAddressPagService = async (id,page,pageSize) => {
+    try{
+        const res = await findUserAddressPagQuery(id,page,pageSize)
         return res
     } catch (err){
         throw err

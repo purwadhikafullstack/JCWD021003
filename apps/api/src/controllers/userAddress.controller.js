@@ -1,10 +1,26 @@
 import { findUserAddressService, createUserAddressService, findProvinceService, findCityService, opencageService,findCityOpenCageBasedService,findCityOpenCageBasedService2,
-    updateUserAddressService, updateMainAddressService, deleteUserAddressService, findLongLatService,findCitybyIdService, findSearchableProvinceService} from "../services/userAddress.services";
+    updateUserAddressService, updateMainAddressService, deleteUserAddressService, findLongLatService,findCitybyIdService, findSearchableProvinceService,findUserAddressPagService} from "../services/userAddress.services";
 
 export const findUserAddressController = async (req, res) => {
     try{
         const {id} = req.params
         const result = await findUserAddressService(id)
+        return res.status(200).json({
+            message: "find user address success",
+            data: result
+        });
+    } catch (err){
+        return res.status(500).json({
+            message: err.message
+        });        
+    }
+}
+
+export const findUserAddressPagController = async (req, res) => {
+    try{
+        const {id} = req.params
+        const {page,pageSize} =req.query;
+        const result = await findUserAddressPagService(id,page,pageSize)
         return res.status(200).json({
             message: "find user address success",
             data: result

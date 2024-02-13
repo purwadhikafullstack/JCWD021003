@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { findUserAddress } from '../user-address/services/getUserAddress';
 import { getNearestWarehouse } from './services/ShippingCostApi';
 import {  Box, Text,  Button,  Grid,  GridItem,  Image,  Flex,  Icon,Center} from '@chakra-ui/react';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import currencyFormatter from 'currency-formatter';
 import { Navbar } from '../../components/Navbar';
 import ChangeAddressModal from './components/Modal ChangeAddress';
 import ShippingCost from './components/shippingCost';
 import { Footer } from '../../components/Footer';
+import { clearCart } from '../../redux/reducer/cartReducer';
+import toast from 'react-hot-toast'
 
 const CheckoutPage = () => {
   const location = useLocation();
@@ -17,10 +19,10 @@ const CheckoutPage = () => {
   const [nearestWarehouse, setNearestWarehouse] = useState(null);
   const [shippingCost, setShippingCost] = useState(0);
   const user = useSelector((state) => state.AuthReducer.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
 
-  const formatCurrency = (amount) => {
-    return currencyFormatter.format(amount, { code: 'IDR' });
-  };
+  const formatCurrency = (amount) => {return currencyFormatter.format(amount, { code: 'IDR' }); };
 
   const fetchData = async () => {
     try {
@@ -70,6 +72,16 @@ const CheckoutPage = () => {
   const updateShippingCost = (cost) => {
     setShippingCost(cost);
   };
+
+    const handleProceedToPayment = () => {
+      if (!hasShippingFee) {
+        toast.error('Shipping cost is not available');
+        return;
+      }
+      dispatch(clearCart());
+      toast.success('Transaction Success')
+      navigate('/')
+    }; 
   return (
     <Box bgColor={'#F0F3F7'} h={'fit-content'} minH={'100vh'} w={'100vw'} minW={'780px'}>
       <Navbar />
@@ -77,7 +89,6 @@ const CheckoutPage = () => {
         Delivery
       </Text>
       <Grid templateColumns="2fr 1fr" gap={8} h={'100%'} px={'20px'}>
-        {/* Left Column */}
         <GridItem>
           <Box bgColor={'#F0F3F7'}>
             <Box bgColor={'white'} mb={'20px'} p={'20px'} borderRadius={'20px'}>
@@ -86,33 +97,17 @@ const CheckoutPage = () => {
               </Text>
               {selectedAddress && (
                 <Flex
-                  key={selectedAddress?.id}
-                  borderRadius={'12px'}
-                  border={'1px solid #818181'}
-                  bg={'white'}
-                  padding={'24px'}
-                  mt={'24px'}
-                  mb={'24px'}
-                >
+                  key={selectedAddress?.id}                  borderRadius={'12px'}                  border={'1px solid #818181'}
+                  bg={'white'}                  padding={'24px'}                  mt={'24px'}                  mb={'24px'}  >
                   <Flex width={'100%'} flexWrap={'wrap'} flexDir={'column'}>
                     <Flex gap={'24px'} alignItems={'center'} mb={'24px'}>
-                      <Text
-                        fontSize={'16px'}
-                        fontWeight={'700'}
-                        color={'black'}
-                      >
+                      <Text                        fontSize={'16px'}                        fontWeight={'700'}                        color={'black'}                      >
                         {selectedAddress?.fullName}
                       </Text>
                       {/* badge main/ */}
                       {selectedAddress?.isMainAddress ? (
-                        <Box
-                          padding={'10px'}
-                          bg={'green'}
-                          borderRadius={'8px'}
-                          fontSize={'16px'}
-                          fontWeight={'700'}
-                          color={'white'}
-                        >
+                        <Box                          padding={'10px'}                          bg={'green'}                          borderRadius={'8px'}
+                          fontSize={'16px'}                          fontWeight={'700'}                          color={'white'} >
                           Main
                         </Box>
                       ) : (
@@ -144,34 +139,16 @@ const CheckoutPage = () => {
                 </Flex>
               )}
             </Box>
-
-            {/* Cart Items */}
-            <Box
-              bgColor={'white'}
-              padding={'20px'}
-              borderRadius={'20px'}
-              mb={'20px'}
-            >
+            <Box bgColor={'white'}    padding={'20px'}    borderRadius={'20px'}    mb={'20px'}  >
               <Text fontSize="xl" fontWeight="bold">
                 Cart Items:
               </Text>
               {cartData.map((item) => (
                 <Flex key={item.id} mb={4}>
-                  {/* Left part image */}
                   <Box mr={10}>
-                    <Image
-                      src={item.image}
-                      alt={item.name}
-                      boxSize="50px"
-                      objectFit="scale-down"
-                      border={'1px solid black'}
-                      borderRadius={'10px'}
-                      p={'5px'}
-                      m={'10px'}
-                    />
+                    <Image                      src={item.image}                      alt={item.name}                      boxSize="50px"                      objectFit="scale-down"
+                      border={'1px solid black'}                      borderRadius={'10px'}                      p={'5px'}                      m={'10px'}  />
                   </Box>
-
-                  {/* Right part product details */}
                   <Box>
                     <Text>{item.name}</Text>
                     <Text>Quantity: {item.quantity}</Text>
@@ -183,14 +160,11 @@ const CheckoutPage = () => {
                 <ShippingCost
                   nearestWarehouse={nearestWarehouse}
                   selectedAddress={selectedAddress}
-                  updateShippingCost={updateShippingCost}
-                />
+                  updateShippingCost={updateShippingCost} />
               </Box>
             </Box>
           </Box>
         </GridItem>
-
-        {/* Right Column */}
         <GridItem>
           <Box bgColor={'white'} padding={'20px'} borderRadius={'20px'}>
             <Text fontSize="xl" fontWeight="bold" mb={4}>
@@ -200,22 +174,18 @@ const CheckoutPage = () => {
               <Text>Total Price:</Text>
               <Text>{formatCurrency(totalCost)}</Text>
             </Flex>
-
             {hasShippingFee && (
               <Flex justifyContent="space-between" alignItems="center" mb={2}>
                 <Text>Total Delivery Fee:</Text>
                 <Text>{formatCurrency(shippingCost)}</Text>
               </Flex>
             )}
-
             <Flex justifyContent="space-between" alignItems="center" mb={2}>
               <Text>Shopping Total:</Text>
               <Text>{formatCurrency(totalCostWithShipping)}</Text>
             </Flex>
-
-            {/* Payment Button */}
             <Center>
-            <Button bgColor="green" color={'white'} mt={4} >
+            <Button bgColor="green" color={'white'} mt={4} onClick={handleProceedToPayment} disabled={!shippingCost}>
               Proceed to Payment
             </Button>
             </Center>

@@ -27,6 +27,35 @@ export const findUserAddressQuery = async (userId) => {
     }
 };
 
+export const findUserAddressPagQuery = async (id, page,pageSize) => {
+    try {
+        const filter = {
+            where: { userId: id },
+            include: [
+                {
+                    model: City,
+                    attributes: ['name'], 
+                    include: [
+                        {
+                            model: Province,
+                            attributes: ['name', 'id'] 
+                        }
+                    ]
+                }
+            ],
+            limit: parseInt(pageSize, 10) || 10,
+            offset: (page - 1) * pageSize,
+            order:[],
+        }
+        const res = await UserAddress.findAll(filter);
+        const totalData = await UserAddress.count({where:filter.where})
+        const totalPages = Math.ceil(totalData/parseInt(pageSize, 10))
+        return {data:res,totalPages,totalData}
+    } catch (err) {
+        throw err;
+    }
+};
+
 export const findOneUserAddress = async (id) => {
     try{
         return await UserAddress.findOne({

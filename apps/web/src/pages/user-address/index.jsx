@@ -4,14 +4,35 @@ import { Footer } from '../../components/Footer';
 import { ChevronRightIcon } from '@chakra-ui/icons'
 import { HomeIcon,PlusIcon } from '@heroicons/react/24/outline';
 import AddressList from './components/addressList';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Pagination from './components/pagination';
+import { findUserAddress } from './services/getUserAddress';
+import { useSelector } from 'react-redux';
 
 function ManageAddress() {
-  // const [address, setAddress] = useState([])
-  // const [pageSize, setPageSize] = useState(3)
-  // const [currentPage, setCurrentPage] = useState(1)
-  // const [totalRecords, setTotalRecords] = useState(0)
+  const [address, setAddress] = useState([])
+  const [pageSize, setPageSize] = useState(3)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [totalData, setTotalData] = useState(0)
+  const [totalPages, setTotalPages] = useState(0)
+  const user = useSelector((state) => state.AuthReducer.user);
+  
+  //     const fetchData = async (page=currentPage) => {
+  //         try {
+  //             const fetchAddresses = await findUserAddress(user.id,page,pageSize)
+  //             console.log('cek',fetchAddresses)
+  //             setAddress(fetchAddresses.data)
+  //             setTotalPages(fetchAddresses.totalPages)
+  //             setTotalData(fetchAddresses.totalData)
+  //         } catch (err){
+  //             console.log(err);
+  //         }
+  //     }
+  
+  // useEffect(() => {
+  //     fetchData()
+  // }, [user.id,currentPage,pageSize])
 
     const navigate = useNavigate();
   return (
@@ -92,8 +113,14 @@ function ManageAddress() {
                         Address
                     </Text>
                    <AddressList 
-                  //  address={address}
                    />
+                   {/* <Pagination
+                   currentPage={currentPage}
+                   totalData={totalData}
+                   onPageChange={(page)=>setCurrentPage(page)}
+                   pageSize={pageSize}
+                   totalPages={totalPages}
+                   /> */}
                 </Box>
       </Box>
       <Footer />

@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { findUserAddressController, createUserAddressController, findProvinceController, findCityController, opencageController,findOpencageAndCityController,findCityOpenCageBasedController,updateUserAddressController,
-    updateMainAddressController,deleteUserAddressController,findLongLatController,findCitybyCityIdController,findSearchableProvinceController } from '../controllers/userAddress.controller';
+    updateMainAddressController,deleteUserAddressController,findLongLatController,findCitybyCityIdController,findSearchableProvinceController,findUserAddressPagController } from '../controllers/userAddress.controller';
 const userAddressRouter = Router();
 
 // GET
