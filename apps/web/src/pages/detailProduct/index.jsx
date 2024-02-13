@@ -73,7 +73,6 @@ export const ProductDetailPage = () => {
       }),
     );
   };
-  console.log(product);
   return (
     <Box w={'100vw'}>
       <Navbar />

@@ -51,7 +51,6 @@ function FormCreateWarehouse({ address, lat, lng }) {
     },
     onSubmit: async (values, { resetForm }) => {
       try {
-        console.log('Formik Submission Values:', values)
         await createWarehouse(
           values.location,
           values.cityId,
@@ -113,7 +112,6 @@ useEffect(() => {
     fetchData();
 }, [address, locationValue, postalCode, formik.setFieldValue]);
 
-  console.log('data alamat',address)
   return (
     <>
       <form onSubmit={formik.handleSubmit}>

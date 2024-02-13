@@ -26,10 +26,8 @@ export const getCoordinates = async (cityName) => {
 export const CreateUserAddress = async (id, specificAddress, cityId, fullName, phoneNumber, postalCode,openSuccessModal, openErrorModal) => {
   try {
     const cityName = await getCityName(cityId);
-    console.log('cityName',cityName);
 
     const { latitude, longitude } = await getCoordinates(cityName);
-    console.log(latitude, longitude);
 
     await axios.post(`${import.meta.env.VITE_API_URL}user-address/create-user-address?id=${id}`, {
       specificAddress,

@@ -17,7 +17,6 @@ import DeleteAccount from '../remove Account';
 import EditAccount from '../edit Account';
 
 function AdminList({ admin, onAdminUpdated }) {
-  console.log('admin', admin);
 
   return (
     <>

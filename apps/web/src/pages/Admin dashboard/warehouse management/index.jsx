@@ -21,7 +21,6 @@ function WarehouseList() {
   const fetchWarehouseList = async () => {
     try {
       const fetchWarehouseData = await getWarehouseList()
-      console.log(fetchWarehouseData)
       setWarehouse(fetchWarehouseData)
     } catch (err) {
       console.log(err)

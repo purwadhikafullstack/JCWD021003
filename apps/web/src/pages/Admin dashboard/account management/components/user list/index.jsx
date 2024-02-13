@@ -17,7 +17,6 @@ import {
 //   import EditAccount from '../edit Account';
   
   function UserList({ user, onUserUpdated,currentPage }) {
-    console.log('user', user);
     return (
       <>
         <div>

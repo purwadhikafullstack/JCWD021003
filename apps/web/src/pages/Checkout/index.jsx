@@ -55,7 +55,6 @@ const CheckoutPage = () => {
       fetchWarehouse();
     }
   }, [selectedAddress]);
-  console.log('ini warehouse terdekat', nearestWarehouse);
 
   // Calculate total cost
   const totalCost = cartData.reduce(

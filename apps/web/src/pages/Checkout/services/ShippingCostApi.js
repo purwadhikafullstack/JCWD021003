@@ -4,7 +4,6 @@ export const getNearestWarehouse = async (userLat, userLong) => {
     try {
         const response = await axios.get(`${import.meta.env.VITE_API_URL}warehouse-address/nearest-warehouse?userLat=${userLat}&userLong=${userLong}`,);
         const warehouse = response?.data?.data
-        console.log("ini warehouse", warehouse);
         return warehouse
 
     } catch (err){

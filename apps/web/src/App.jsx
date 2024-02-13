@@ -29,7 +29,6 @@ function App() {
     return userRoleId === 1 ? children : <Navigate to="/" />;
   };
   const user = useSelector((state) => state.AuthReducer.user.roleId);
-  console.log('roleID', user);
   return (
     <Auth>
       <Routes>

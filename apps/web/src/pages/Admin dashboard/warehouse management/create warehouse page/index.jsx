@@ -15,8 +15,8 @@ import { useNavigate } from "react-router-dom";
 function CreateWarehouse(){
 
     const [formCurrentLocation, setFormCurrentLocation] = useState(false)
-    const [latitude, setLatitude] = useState(null)
-    const [longitude, setLongitude] = useState(null)
+    const [latitude, setLatitude] = useState(-7.7340171)
+    const [longitude, setLongitude] = useState(110.4542632)
     const [address, setAddress] = useState('');
     const [selectedAddress, setSelectedAddress] = useState('');
     const [marker, setMarker] = useState(false)
@@ -30,11 +30,11 @@ function CreateWarehouse(){
             setLongitude(position.coords.longitude)
         })
     }, [])
+
+    console.log(latitude, longitude)
     const navigateTo = () => {
         navigate('/admin-dashboard/warehouse-management');
       };
-
-    console.log("ini latitude", latitude, "ini longitude", longitude, "ini address", address, "ini lat", lat, "ini lng", lng)
 
     useEffect(() => {
         const fetchAddress = async () => {

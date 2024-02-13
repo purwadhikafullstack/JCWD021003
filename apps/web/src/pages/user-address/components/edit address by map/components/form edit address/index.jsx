@@ -13,10 +13,6 @@ function FormEditAddress2({ address,id, lat, lng, UserAddress }) {
   const [selectedProvince, setSelectedProvince] = useState('')
   const navigate = useNavigate()
 
-  console.log('cek add',UserAddress)
-//   console.log('lat long',lat,lng)
-//   console.log('cek',address, 'city',address.city)
-
   useEffect(() => {
     if (address && address.city) {
       setSelectedProvince(address.city.provinceId)
@@ -55,7 +51,6 @@ function FormEditAddress2({ address,id, lat, lng, UserAddress }) {
     },
     onSubmit: async (values, { resetForm }) => {
       try {
-        console.log('Formik Submission Values:', values)
         await editAddress(
           id,  
           values.fullName,

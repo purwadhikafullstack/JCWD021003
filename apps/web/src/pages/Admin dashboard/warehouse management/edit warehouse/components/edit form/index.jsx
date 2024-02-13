@@ -13,9 +13,6 @@ function FormEditWarehouse({ address,id, lat, lng, warehouse }) {
   const [selectedProvince, setSelectedProvince] = useState('')
   const navigate = useNavigate()
 
-  console.log('cek ware',warehouse)
-  console.log('lat long',lat,lng)
-
   useEffect(() => {
     if (address && address.city) {
       setSelectedProvince(address.city.provinceId)

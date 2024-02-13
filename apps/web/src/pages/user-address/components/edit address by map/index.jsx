@@ -23,11 +23,6 @@ function EditAddress(){
     const location = useLocation();
     const UserAddress = location.state?.address;
     const navigate = useNavigate()
-
-    console.log('cek data address',UserAddress)
-    console.log(
-        'lat',UserAddress.latitude,
-        'long',UserAddress.longitude,)
     
     useEffect (() => {
             setLatitude(UserAddress.latitude);

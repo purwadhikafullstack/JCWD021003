@@ -38,7 +38,6 @@ function FormCreateAccount() {
     },
     onSubmit: async (values) => {
       try {
-        console.log('Formik Submission Values:', values);
         await CreateAccount(
           values.username,
           values.email,

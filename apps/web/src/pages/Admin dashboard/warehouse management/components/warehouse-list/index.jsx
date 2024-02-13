@@ -7,7 +7,6 @@ import {    Table,    TableContainer,    Td,    Thead,    Tr,
   
   function TableWarehouse({ warehouse, onWarehouseUpdated }) {
     const navigate = useNavigate()
-    console.log('data warehouse',warehouse)
     
     return (
       <>

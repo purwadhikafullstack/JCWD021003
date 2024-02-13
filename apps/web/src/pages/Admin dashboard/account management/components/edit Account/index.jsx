@@ -31,7 +31,6 @@ import {
       },
       onSubmit: async (values) => {
         try {
-          console.log('Formik Submission Values:', values)
           await editAccount(id, values.username, values.email, values.password, values.roleId, values.warehouse)
           onAdminUpdated()
         } catch (err) {
