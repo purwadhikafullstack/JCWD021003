@@ -61,3 +61,13 @@ export const findUserAddress = async (id) => {
     }
 }
 
+export const getCityName = async (cityId) => {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}user-address/specific-city/${cityId}`);
+      return response.data.data;
+    } catch (error) {
+      console.error(error);
+      throw new Error('Failed to get city name');
+    }
+  };
+

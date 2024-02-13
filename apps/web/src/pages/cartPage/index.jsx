@@ -34,9 +34,13 @@ const CartPage = () => {
   return (
     <Box w={'100vw'} minW={'600px'} bgColor={'#F0F3F7'}>
       <Navbar />
-      <Box p={8} minH={'65vh'} h={'fit-content'}>
+      <Box p={8} minH={'65vh'} h={'fit-content'} display="flex" flexDirection="column" justifyContent="center" alignItems="center">
         <Heading mb={4}>Shopping Cart</Heading>
-        {items.map((item) => (
+        {items.length === 0 ? (
+        <Text  Text fontSize="3xl" fontWeight="bold" mt={8}>
+          No items in the cart.
+        </Text>        ) : (
+        items.map((item) => (
           <Box
             key={item.id}
             borderWidth="1px"
@@ -80,23 +84,28 @@ const CartPage = () => {
             />
           </HStack>
           </Box>
-        ))}
-        <Divider my={8} />
-        <Flex justifyContent="flex-end" flexDirection="column" alignItems="flex-end">
-      <Box>
-        <Text fontSize="lg" fontWeight="semibold">
-          Total Items: {totalCount}
-        </Text>
-      </Box>
-      <Box mt={2}>
-        <Text fontSize="lg" fontWeight="semibold">
-          Total Price: {currencyFormatter.format(totalPrice, { code: 'IDR' })}{' '}
-        </Text>
-      </Box>
-      <Button color={'white'} bgColor={'green'} mt={4} onClick={handleProceedToCheckout} disabled={checkoutButtonDisabled}>
-        Proceed to Checkout
-      </Button>
-    </Flex>
+        )))}
+
+        {items.length > 0 && (
+          <>
+            <Divider my={8} />
+            <Flex justifyContent="flex-end" flexDirection="column" alignItems="flex-end">
+              <Box>
+                <Text fontSize="lg" fontWeight="semibold">
+                  Total Items: {totalCount}
+                </Text>
+              </Box>
+              <Box mt={2}>
+                <Text fontSize="lg" fontWeight="semibold">
+                  Total Price: {currencyFormatter.format(totalPrice, { code: 'IDR' })}{' '}
+                </Text>
+              </Box>
+              <Button color={'white'} bgColor={'green'} mt={4} onClick={handleProceedToCheckout} disabled={checkoutButtonDisabled}>
+                Proceed to Checkout
+              </Button>
+            </Flex>
+          </>
+        )}
       </Box>
       <Footer/>
     </Box>

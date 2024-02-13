@@ -51,7 +51,6 @@ function FormEditWarehouse({ address,id, lat, lng, warehouse }) {
     },
     onSubmit: async (values, { resetForm }) => {
       try {
-        console.log('Formik Submission Values:', values)
         await editWarehouse(
           id,  
           values.name,

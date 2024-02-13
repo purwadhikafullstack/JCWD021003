@@ -4,6 +4,7 @@ import {    Table,    TableContainer,    Td,    Thead,    Tr,
 //   import DeleteWarehouse from '../delete-warehouse'
   import { ChevronDownIcon } from '@chakra-ui/icons'
   import { useNavigate } from 'react-router-dom'
+  import DeleteWarehouse from '../../delete warehouse'
   
   function TableWarehouse({ warehouse, onWarehouseUpdated }) {
     const navigate = useNavigate()
@@ -75,12 +76,7 @@ import {    Table,    TableContainer,    Td,    Thead,    Tr,
                       >
                         Edit
                       </Button>
-                      {/* <EditWarehouse
-                        id={warehouse.id}
-                        name={warehouse.name}
-                        onWarehouseUpdated={onWarehouseUpdated}
-                      /> */}
-                      {/* <DeleteWarehouse id={warehouse.id} onDeletedWarehouse={onWarehouseUpdated} /> */}
+                      <DeleteWarehouse id={warehouse.id} onDeletedWarehouse={onWarehouseUpdated} />
                     </Box>
                   </Td>
                 </Tr>

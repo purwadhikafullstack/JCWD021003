@@ -30,8 +30,7 @@ function CreateWarehouse(){
             setLongitude(position.coords.longitude)
         })
     }, [])
-
-    console.log(latitude, longitude)
+    // console.log(longitude,latitude)
     const navigateTo = () => {
         navigate('/admin-dashboard/warehouse-management');
       };

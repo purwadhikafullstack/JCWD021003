@@ -27,6 +27,7 @@ function UpdatePassword() {
         title: "Password successfully changed",
         position:'top-right',
         status: "success",
+        duration:1000
       });
       onClose();
     } catch (err) {
@@ -34,6 +35,7 @@ function UpdatePassword() {
         title: "Failed to update Password",
         position:'top-right',
         status: "Failed",
+        duration:1000
       });
       console.log(err);
     }
@@ -41,12 +43,18 @@ function UpdatePassword() {
 
   const formik = useFormik({
     initialValues: {
-      username: '',
+      password: '',
+      confirmationPassword: '',
     },
 
     onSubmit: (values) => {
-      UpdatePassword(values.password);
-    },
+      if (values.password !== values.confirmationPassword) {
+        formik.setFieldError('confirmationPassword', 'Password and confirmation password do not match');
+        return;
+      } else {
+        UpdatePassword(values.password);
+        onClose();
+      }    },
   });
 
   return (
@@ -69,7 +77,7 @@ function UpdatePassword() {
           <ModalOverlay />
           <form onSubmit={formik.handleSubmit}>
             <ModalContent>
-              <ModalHeader>Edit Username</ModalHeader>
+              <ModalHeader>Edit Password</ModalHeader>
               <ModalCloseButton />
               <ModalBody pb={6}>
                 <FormControl

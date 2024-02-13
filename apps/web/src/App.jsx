@@ -21,6 +21,7 @@ import CreateWarehouse from './pages/Admin dashboard/warehouse management/create
 import EditWarehouse from './pages/Admin dashboard/warehouse management/edit warehouse';
 import EditAddress from './pages/user-address/components/edit address by map';
 import Signin from './pages/Login/index2';
+import toast from 'react-hot-toast'
 
 function App() {
   const AdminRoute = ({ children }) => {
@@ -28,7 +29,6 @@ function App() {
 
     return userRoleId === 1 ? children : <Navigate to="/" />;
   };
-  const user = useSelector((state) => state.AuthReducer.user.roleId);
   return (
     <Auth>
       <Routes>

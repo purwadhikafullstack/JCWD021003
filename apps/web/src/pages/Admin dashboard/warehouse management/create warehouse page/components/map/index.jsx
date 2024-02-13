@@ -4,7 +4,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMapEvent } from 'react-leafl
 import 'leaflet/dist/leaflet.css';
 import { findOpenCageAndCity } from '../../../services/getWarehouse';
 
-function ClickableMap({ initialPosition, setSelectedAddress, setFormLocation, marker, setMarker, mapRef, setLat, setLng }) {
+function ClickableMap({ initialPosition, setSelectedAddress, setFormCurrentLocation, marker, setMarker, mapRef, setLat, setLng }) {
   const [markerPosition, setMarkerPosition] = useState(initialPosition);
 
 
@@ -29,7 +29,7 @@ useEffect(() => {
         setLat(markerPosition.lat);
         setLng(markerPosition.lng);
         if (markerPosition !== initialPosition){
-            setFormLocation(true);
+          setFormCurrentLocation(true);
         }
       } catch (error) {
         console.error("Error fetching address:", error);
@@ -37,7 +37,7 @@ useEffect(() => {
     };
     fetchData();
   }
-}, [markerPosition, setSelectedAddress, setFormLocation]);
+}, [markerPosition, setSelectedAddress, setFormCurrentLocation]);
 
 
   return (
@@ -47,7 +47,7 @@ useEffect(() => {
   );
 }
 
-function MapWarehouse({ lat, lng , setSelectedAddress, setFormLocation, marker, setMarker, setLat, setLng}) {
+function MapWarehouse({ lat, lng , setSelectedAddress, setFormCurrentLocation, marker, setMarker, setLat, setLng}) {
   const mapRef = useRef(null);
 
   if (lat == null || lng == null) {
@@ -65,7 +65,7 @@ function MapWarehouse({ lat, lng , setSelectedAddress, setFormLocation, marker, 
           <ClickableMap 
           initialPosition={initialPosition} 
           setSelectedAddress={setSelectedAddress} 
-          setFormLocation={setFormLocation} 
+          setFormCurrentLocation={setFormCurrentLocation} 
           marker={marker} 
           setMarker={setMarker} 
           mapRef={mapRef}

@@ -11,9 +11,13 @@ import transporter from "../utils/transporter";
 
 export const updateUsernameService = async (id, username) => {
     try{
-        const check = await findUsernameQuery(username);
+        const trimmedUsername = username.trim();
+        if (trimmedUsername === '') {
+            throw new Error("Username cannot be just whitespace");
+        }
+        const check = await findUsernameQuery(trimmedUsername);
         if (check) throw new Error("Username already exist");
-        await updateUsernameQuery(id, username)
+        await updateUsernameQuery(id, trimmedUsername)
     } catch (err){
         throw err
     }

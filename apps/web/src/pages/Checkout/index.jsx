@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { findUserAddress } from '../user-address/services/getUserAddress';
+import { findUserAddress, getCityName } from '../user-address/services/getUserAddress';
 import { getNearestWarehouse } from './services/ShippingCostApi';
 import {  Box, Text,  Button,  Grid,  GridItem,  Image,  Flex,  Icon,Center} from '@chakra-ui/react';
 import { useSelector,useDispatch } from 'react-redux';
@@ -17,6 +17,7 @@ const CheckoutPage = () => {
   const cartData = location.state?.cartData || [];
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [nearestWarehouse, setNearestWarehouse] = useState(null);
+  const [Warehouse, setWarehouse] = useState(null);
   const [shippingCost, setShippingCost] = useState(0);
   const user = useSelector((state) => state.AuthReducer.user);
   const dispatch = useDispatch();
@@ -46,7 +47,9 @@ const CheckoutPage = () => {
         selectedAddress?.latitude,
         selectedAddress?.longitude,
       );
+      const nearestWarehouse = await getCityName(fetchNearestWarehouse)
       setNearestWarehouse(fetchNearestWarehouse);
+      setWarehouse(nearestWarehouse)
     } catch (err) {
       console.log(err);
     }
@@ -82,6 +85,7 @@ const CheckoutPage = () => {
       toast.success('Transaction Success')
       navigate('/')
     }; 
+    console.log(nearestWarehouse)
   return (
     <Box bgColor={'#F0F3F7'} h={'fit-content'} minH={'100vh'} w={'100vw'} minW={'780px'}>
       <Navbar />
@@ -161,6 +165,9 @@ const CheckoutPage = () => {
                   nearestWarehouse={nearestWarehouse}
                   selectedAddress={selectedAddress}
                   updateShippingCost={updateShippingCost} />
+                   {hasShippingFee && (
+             <Box margin={'20px'} fontWeight={700}> Dikirim dari gudang {Warehouse}</Box>
+            )}
               </Box>
             </Box>
           </Box>

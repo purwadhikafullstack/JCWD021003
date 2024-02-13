@@ -22,13 +22,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { ChevronRightIcon } from '@chakra-ui/icons'
 import {useState, useEffect} from 'react'
 import { setUser, updateUser } from '../../../../redux/reducer/authReducer';
+import toast from 'react-hot-toast';
 
 
 function UpdateUsername() {
   const user = useSelector((state) => state.AuthReducer.user);
   const { isOpen, onOpen, onClose } = useDisclosure()
   const dispatch = useDispatch();
-  const toast = useToast()
 
   const editUsername = async (
     username
@@ -38,19 +38,11 @@ function UpdateUsername() {
       username,
     });
     dispatch(setUser({...user, username}))
-    toast({
-      title: "Username successfully changed",
-      position:'top-right',
-      status: "success",
-    });
+    toast.success('Username successfully changed');
     onClose();
     } catch (err){
-      toast({
-        title: "Failed to update username",
-        position:'top-right',
-        status: "Failed",
-      });
-      console.log(err)
+      console.error(err);
+      toast.error('An error occurred while updating the username');
     }
   };
 
@@ -58,7 +50,7 @@ function UpdateUsername() {
 
   const formik = useFormik({
     initialValues:{
-    username: user.username,
+    username: '',
     },
 
     onSubmit: (values) => {
