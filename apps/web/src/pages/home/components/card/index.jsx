@@ -14,7 +14,7 @@ export const ProductCard = ({ id, image, name, category, price, onAddToCart }) =
   const formattedPrice = currencyFormatter.format(price, { code: 'IDR' });
   return (
     <Box
-      maxW="sm"
+      maxW={{base:"sm"}}
       borderWidth="1px"
       borderRadius="lg"
       overflow="hidden"

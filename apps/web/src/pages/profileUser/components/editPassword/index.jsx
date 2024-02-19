@@ -8,35 +8,23 @@ import { useSelector } from 'react-redux';
 import { ChevronRightIcon } from '@chakra-ui/icons';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/solid';
 import { useState } from 'react';
+import toast from 'react-hot-toast'
 
 function UpdatePassword() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const toast = useToast()
   const user = useSelector((state) => state.AuthReducer.user);
   const UpdatePassword = async (password) => {
     try {
       await axios.patch(
         `${import.meta.env.VITE_API_URL}user/update-password/${user.id}`,
-        {
-          password,
-        },
+        {password,},
       );
-      toast({
-        title: "Password successfully changed",
-        position:'top-right',
-        status: "success",
-        duration:1000
-      });
+      toast.success('Edit password Success')
       onClose();
     } catch (err) {
-      toast({
-        title: "Failed to update Password",
-        position:'top-right',
-        status: "Failed",
-        duration:1000
-      });
+      toast.error('Failed to edit password.')
       console.log(err);
     }
   };

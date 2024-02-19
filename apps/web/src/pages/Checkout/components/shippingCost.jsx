@@ -16,6 +16,8 @@ function ShippingCost({
   const [selectedService, setSelectedService] = useState('');
   const [costResult, setCostResult] = useState('');
 
+  // console.log('cek',selectedAddress)
+
   useEffect(() => {
     const fetchData = async () => {
       if (nearestWarehouse && selectedAddress && selectedCourier) {
@@ -87,6 +89,7 @@ function ShippingCost({
           onChange={(e) => setSelectedCourier(e.target.value)}
           initialValue={''}
           size={'md'}
+          disabled={!selectedAddress}
         >
           <option value="" disabled> Select Courier </option>
           <option value="jne">JNE</option>

@@ -1,5 +1,6 @@
 import { Box, Button, Flex, Modal, ModalBody, ModalContent, ModalFooter, ModalOverlay, useDisclosure } from "@chakra-ui/react"
 import { deleteAccountFunction } from "../../services/deleteAccount"
+import toast from 'react-hot-toast'
 
 function DeleteAccount ({id, onDeletedAdmin}){
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -8,6 +9,7 @@ function DeleteAccount ({id, onDeletedAdmin}){
             await deleteAccountFunction(id)
             onDeletedAdmin()
             onClose()
+            toast.success('Success to delete account')
         }catch (err){
             console.log(err.message);
         }

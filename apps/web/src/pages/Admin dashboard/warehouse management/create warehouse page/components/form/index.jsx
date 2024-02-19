@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import {createWarehouse} from '../../../services/createWarehouse.js'
 import { getCity, getProvinceWarehouse } from '../../../services/getWarehouse'
+import toast from 'react-hot-toast'
 
 function FormCreateWarehouse({ address, lat, lng }) {
   const [selectedCity, setSelectedCity] = useState('')
@@ -59,8 +60,10 @@ function FormCreateWarehouse({ address, lat, lng }) {
           lng,
           values.name,
         )
+        toast.success('Warehouse Address successfully created')
         navigate('/admin-dashboard/warehouse-management', { state: { warehouseCreated: true } })
       } catch (err) {
+        toast.error('Failed! Please fill in all the fields.')
         console.log(err.message)
       }
       resetForm({

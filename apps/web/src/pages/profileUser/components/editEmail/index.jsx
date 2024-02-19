@@ -39,7 +39,7 @@ function UpdateEmail() {
     onClose();
     dispatch(setUser({ ...user, email, isVerified: false }));
     } catch (err){
-      toast.error("Failed to update email. The email is already being used by another user.");
+      toast.error("Failed to update email.");
       console.log(err)
     }
   };

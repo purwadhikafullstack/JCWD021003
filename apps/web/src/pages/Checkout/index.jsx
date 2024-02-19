@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate,Link } from 'react-router-dom';
 import { findUserAddress, getCityName } from '../user-address/services/getUserAddress';
 import { getNearestWarehouse } from './services/ShippingCostApi';
 import {  Box, Text,  Button,  Grid,  GridItem,  Image,  Flex,  Icon,Center} from '@chakra-ui/react';
@@ -85,9 +85,9 @@ const CheckoutPage = () => {
       toast.success('Transaction Success')
       navigate('/')
     }; 
-    console.log(nearestWarehouse)
+    // console.log(nearestWarehouse)
   return (
-    <Box bgColor={'#F0F3F7'} h={'fit-content'} minH={'100vh'} w={'100vw'} minW={'780px'}>
+    <Box bgColor={'#F0F3F7'} h={'fit-content'} minH={'100vh'} w={'100vw'} minW={'880px'}>
       <Navbar />
       <Text p={'10px 20px'} fontSize={'30px'} fontWeight={900}>
         Delivery
@@ -99,7 +99,7 @@ const CheckoutPage = () => {
               <Text fontSize="xl" fontWeight="bold" mb={4}>
                 Delivery Address:
               </Text>
-              {selectedAddress && (
+              {selectedAddress ? (
                 <Flex
                   key={selectedAddress?.id}                  borderRadius={'12px'}                  border={'1px solid #818181'}
                   bg={'white'}                  padding={'24px'}                  mt={'24px'}                  mb={'24px'}  >
@@ -141,6 +141,10 @@ const CheckoutPage = () => {
                     </Flex>
                   </Flex>
                 </Flex>
+              ): (
+                <Link to="/create-address">
+                  <Button bg={'green'} color={'white'}>Create Address</Button>
+                </Link>
               )}
             </Box>
             <Box bgColor={'white'}    padding={'20px'}    borderRadius={'20px'}    mb={'20px'}  >

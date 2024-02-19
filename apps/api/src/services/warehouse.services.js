@@ -54,6 +54,9 @@ export const findWarehouseListService = async () => {
     name,
   ) => {
     try {
+      if (!location.trim() || !postalCode.trim() || !latitude.trim() || !longitude.trim() || !name.trim()) {
+        throw new Error('Location, postal code, latitude, longitude, and name are required fields');
+      }
       const warehouseAddress = await createWarehouseAddressQuery(
         location,
         cityId,
@@ -70,6 +73,9 @@ export const findWarehouseListService = async () => {
 
   export const editWarehouseService = async (id,  name,location, cityId, postalCode, lat, lng ) => {
     try {
+      if (!location.trim() || !postalCode.trim()|| !name.trim()) {
+        throw new Error('Location, postal code, latitude, longitude, and name are required fields');
+      }
       await editWarehouseQuery(id,  name, location, cityId, postalCode, lat, lng )
     } catch (err) {
       throw err

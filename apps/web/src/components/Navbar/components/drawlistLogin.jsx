@@ -73,7 +73,7 @@ export const DrawlistLogin = () => {
               <RiShoppingBag3Line size={25} style={{ marginRight: '80px' }} />
             </Flex>
           </Link>
-          <Link to="/discovery">
+          <Link>
             <Text fontWeight={800}>Discovery</Text>
           </Link>
         </Box>

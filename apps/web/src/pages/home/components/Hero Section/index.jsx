@@ -42,7 +42,7 @@ export const Hero = () => {
           DISCOVERY YOUR OWN SHOES
         </Text>
        
-        <Link to="/discovery">
+        <Link>
           <Button
             bgColor={'green'}
             color={'white'}

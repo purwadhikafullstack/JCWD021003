@@ -40,7 +40,7 @@ function WarehouseList() {
   const navigate = useNavigate()
 
   return (
-    <Box bg={'#F1F1F1'} w={'100vw'}>
+    <Box bg={'#F1F1F1'} w={'100vw'} h={'100vh'}>
      <Navbar/>
       <Box padding={{base: '0px 10px', md:'0px 30px'}} marginBottom={'150px'}>
         <Box className="top-dashboard" mt={'36px'} mb={'24px'}>

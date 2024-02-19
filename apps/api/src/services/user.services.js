@@ -24,6 +24,9 @@ export const updateUsernameService = async (id, username) => {
 }
 export const updateEmailService = async (id, email) => {
     try{
+        if (!email.trim()) {
+            throw new Error('Email is required');
+        }
         const check = await findEmailQuery(email);
         if (check) throw new Error("Email already exist");
 
@@ -67,6 +70,9 @@ export const updateEmailService = async (id, email) => {
 }
 export const updatePasswordService = async (id, password) => {
     try{
+        if (!password.trim()) {
+            throw new Error('password is required');
+        }
         const salt = await bcrypt.genSalt(10);
         const hashPassword = await bcrypt.hash(password, salt);
         await updatePasswordQuery(id, hashPassword)
@@ -104,6 +110,9 @@ export const findAdminService = async () => {
 
 export const updateUserService = async (id, username, email, password, roleId,warehouse) => {
     try{
+        if (!username.trim() || !email.trim() || !password.trim() || !roleId.trim()) {
+            throw new Error('Username, email, password, and role are required fields');
+        }
         let hashPassword;
         
         if (password && password.trim() !== '') {
@@ -127,7 +136,9 @@ export const deleteUserService = async (id) => {
 
 export const createAccountService = async (username, email, password, roleId) => {
     try {
-
+        if (!username.trim() || !email.trim() || !password.trim() || !roleId.trim()) {
+            throw new Error('Username, email, password, and role are required fields');
+        }
  // CHECK WHETHER OR NOT EMAIL AND USERNAME EXIST
         const check = await findUserbyEmailQuery({ email, username });
         if (check) throw new Error("Email or username already exist");

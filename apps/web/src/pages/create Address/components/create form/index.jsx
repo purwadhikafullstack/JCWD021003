@@ -1,18 +1,19 @@
 import { Box, Button, Flex, Grid, Input, Select, Text, Textarea } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { useFormik } from 'formik'
-import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { editAddress } from '../../services/editAddress'
-import { getCity, getProvinceWarehouse } from '../../../../../Admin dashboard/warehouse management/services/getWarehouse'
+import { useSelector } from 'react-redux'
+import { CreateUserAddress } from '../../services/index.js'
+import { getCity, getProvinceWarehouse } from '../../../Admin dashboard/warehouse management/services/getWarehouse.js'
 import toast from 'react-hot-toast'
 
-function FormEditAddress2({ address,id, lat, lng, UserAddress }) {
+function FormCreateAddress({ address, lat, lng }) {
   const [selectedCity, setSelectedCity] = useState('')
   const [citylist, setCityList] = useState([])
   const [provinceList, setProvinceList] = useState([])
   const [selectedProvince, setSelectedProvince] = useState('')
   const navigate = useNavigate()
+  const user = useSelector((state) => state.AuthReducer.user);
 
   useEffect(() => {
     if (address && address.city) {
@@ -45,35 +46,37 @@ function FormEditAddress2({ address,id, lat, lng, UserAddress }) {
 
   const formik = useFormik({
     initialValues: {
-      location: UserAddress.location,
-      cityId: "",
-      postalCode: UserAddress.postalCode,
-      name: UserAddress.name,
+      location: '',
+      cityId: null,
+      postalCode: '',
+      name: '',
+      phoneNumber:'',
     },
     onSubmit: async (values, { resetForm }) => {
       try {
-        await editAddress(
-          id,  
-          values.fullName,
-          values.phoneNumber,
+        await CreateUserAddress(
+          user.id,
           values.location,
           values.cityId,
+          values.name,
+          values.phoneNumber,
           values.postalCode,
           lat,
           lng,
         )
         navigate('/manage-address', { state: { warehouseCreated: true } })
-        toast.success('Edit address Success')
+        toast.success('Address successfully created')
       } catch (err) {
         toast.error('Fill form correctly')
+        console.log(err.message)
       }
       resetForm({
         values: {
-          fullName:'',
-          phoneNumber:'',
           location: '',
           cityId: null,
           postalCode: '',
+          name: '',
+          phoneNumber: '',
         },
       })
     },
@@ -92,7 +95,7 @@ function FormEditAddress2({ address,id, lat, lng, UserAddress }) {
     }
   }
 
-  const postalCode = address.address?.postcode || address?.city?.postal_code;
+  const postalCode = address.address.postcode || address.city.postal_code;
 
 useEffect(() => {
     const fetchData = async () => {
@@ -123,22 +126,22 @@ useEffect(() => {
         <Grid width={'100%'} gap={{base: '24px', md: '68px'}} gridTemplateColumns={{base: '1fr', md: '1fr 1fr', }}>
           <Box>
             <Text fontSize={'16px'} fontWeight={'700'} color={'brand.grey350'} mb={'8px'}>
-              Fullname
+              FullName
             </Text>
-            <Input              name="fullName"              placeholder="Buyer name"              _placeholder={{ color: 'brand.grey350' }}              bg={'brand.grey100'}
+            <Input              name="name"              placeholder="Type Fullname here"              _placeholder={{ color: 'brand.grey350' }}              bg={'brand.grey100'}
               variant={'filled'}
-              mb={'32px'}              value={formik.values.FullName}              onChange={formik.handleChange}            />  
-              <Text fontSize={'16px'} fontWeight={'700'} color={'brand.grey350'} mb={'8px'}>
+              mb={'32px'}              value={formik.values.name}              onChange={formik.handleChange}            />
+               <Text fontSize={'16px'} fontWeight={'700'} color={'brand.grey350'} mb={'8px'}>
               Phone Number
             </Text>
-            <Input              name="phoneNumber"              placeholder="Phone number"              _placeholder={{ color: 'brand.grey350' }}              bg={'brand.grey100'}
+            <Input              name="phoneNumber"              placeholder="Phone number here"              _placeholder={{ color: 'brand.grey350' }}              bg={'brand.grey100'}
               variant={'filled'}
-              mb={'32px'}              value={formik.values.phoneNumber}              onChange={formik.handleChange}            />                  
+              mb={'32px'}              value={formik.values.phoneNumber}              onChange={formik.handleChange}            />            
           <Text fontSize={'16px'} fontWeight={'700'} color={'brand.grey350'} mb={'8px'}>
               Address Location
             </Text>
             <Textarea
-              placeholder="Type warehouse location"              name="location"              _placeholder={{ color: 'brand.grey350' }}              bg={'brand.grey100'}
+              placeholder="Type Address location"              name="location"              _placeholder={{ color: 'brand.grey350' }}              bg={'brand.grey100'}
               variant={'filled'}              h={'210px'}              value={formik.values.location}              onChange={formik.handleChange}            />
           </Box>
         
@@ -148,7 +151,7 @@ useEffect(() => {
             </Text>
             <Select
               placeholder="Select a Province"              bg={'brand.grey100'}              variant={'filled'}              color={'brand.grey350'}              mb={'24px'}              value={selectedProvince}
-              onChange={(e) => setSelectedProvince(e.target.value)}   disabled         >
+              onChange={(e) => setSelectedProvince(e.target.value)}            >
               {provinceList?.map((province) => (
                 <option key={province.id} value={province.id}>
                   {province.name}
@@ -160,7 +163,7 @@ useEffect(() => {
             </Text>
             <Select
               value={selectedCity}              placeholder="Select a City"              bg={'brand.grey100'}              color={'brand.grey350'}              variant={'filled'}
-              mb={'24px'}              name="cityId" disabled
+              mb={'24px'}              name="cityId"
               onChange={(e) => {
                 setSelectedCity(e.target.value)
                 formik.handleChange(e)
@@ -196,7 +199,7 @@ useEffect(() => {
             _hover={{ bg: '#f50f5a' }}
             _active={{ opacity: '70%' }}
           >
-            Update
+            Create
           </Button>
         </Flex>
       </form>
@@ -204,4 +207,4 @@ useEffect(() => {
   )
 }
 
-export default FormEditAddress2
+export default FormCreateAddress

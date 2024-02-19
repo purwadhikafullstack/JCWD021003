@@ -21,7 +21,6 @@ import CreateWarehouse from './pages/Admin dashboard/warehouse management/create
 import EditWarehouse from './pages/Admin dashboard/warehouse management/edit warehouse';
 import EditAddress from './pages/user-address/components/edit address by map';
 import Signin from './pages/Login/index2';
-import toast from 'react-hot-toast'
 
 function App() {
   const AdminRoute = ({ children }) => {

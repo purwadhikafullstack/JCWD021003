@@ -66,6 +66,9 @@ export const findSearchableProvinceService = async (name) => {
 
 export const createUserAddressService = async (id, specificAddress, cityId, fullName, phoneNumber, postalCode, latitude,longitude) => {
     try {
+        if (!specificAddress.trim() || !fullName.trim() || !phoneNumber.trim() || !postalCode.trim()) {
+            throw new Error('Specific address, full name, phone number, and postal code are required fields');
+        }
         const existingAddress = await findOneUserAddress(id)
 
         const isMainAddress = !existingAddress;
@@ -108,6 +111,9 @@ export const findCityOpenCageBasedService2 = async (city) => {
 
 export const updateUserAddressService = async (id, fullName,phoneNumber, location, cityId, postalCode, lat, lng) => {
     try { 
+        if (!fullName.trim() || !phoneNumber.trim() || !location.trim() || !postalCode.trim()) {
+            throw new Error('Full name, phone number, location, and postal code are required fields');
+        }
         await updateUserAddressQuery(id, fullName,phoneNumber, location, cityId, postalCode, lat, lng)
     } catch (err){
         throw err

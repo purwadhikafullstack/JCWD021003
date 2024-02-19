@@ -8,6 +8,7 @@ import {
   import { useState,useEffect } from 'react'
   import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/solid'
   import { getWarehouseList } from './services/getWarehouse'
+  import toast from 'react-hot-toast'
   
   function EditAccount ({ id, username, email, roleId,warehouse, onAdminUpdated }) {
     const [WarehouseList, setWarehouseList] = useState([])
@@ -32,9 +33,10 @@ import {
       onSubmit: async (values) => {
         try {
           await editAccount(id, values.username, values.email, values.password, values.roleId, values.warehouse)
+          toast.success('Updated account success')
           onAdminUpdated()
         } catch (err) {
-          console.log(err.message)
+          toast.error('Failed to update user account.');
         }
       },
     })

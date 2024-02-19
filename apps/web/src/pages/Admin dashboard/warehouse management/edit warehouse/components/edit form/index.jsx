@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { editWarehouse } from '../../../services/editWarehouse'
 import { getCity, getProvinceWarehouse } from '../../../services/getWarehouse'
+import toast from 'react-hot-toast'
 
 function FormEditWarehouse({ address,id, lat, lng, warehouse }) {
   const [selectedCity, setSelectedCity] = useState('')
@@ -60,8 +61,10 @@ function FormEditWarehouse({ address,id, lat, lng, warehouse }) {
           lat,
           lng,
         )
+        toast.success('Success edit warehouse address')
         navigate('/admin-dashboard/warehouse-management', { state: { warehouseCreated: true } })
       } catch (err) {
+        toast.error('Fail to edit warehouse address')
         console.log(err.message)
       }
       resetForm({
