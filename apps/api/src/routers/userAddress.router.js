@@ -4,7 +4,7 @@ import { findUserAddressController, createUserAddressController, findProvinceCon
 const userAddressRouter = Router();
 
 // GET
-userAddressRouter.get("/address/:id", findUserAddressController);
+userAddressRouter.get("/address/:id", findUserAddressPagController);
 userAddressRouter.get("/province", findProvinceController);
 userAddressRouter.get("/city/:id", findCityController);
 userAddressRouter.get("/specific-city/:cityId", findCitybyCityIdController);

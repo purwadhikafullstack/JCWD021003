@@ -8,7 +8,7 @@ import {    Table,    TableContainer,    Td,    Thead,    Tr,
   
   function TableWarehouse({ warehouse, onWarehouseUpdated }) {
     const navigate = useNavigate()
-    
+    // console.log('coba',onWarehouseUpdated)
     return (
       <>
         <TableContainer borderRadius={'12px'} mx={'7%'}>

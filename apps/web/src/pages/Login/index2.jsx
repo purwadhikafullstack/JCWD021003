@@ -10,11 +10,11 @@ import { useState } from "react"
 import { SuccessModal,ErrorModal } from "./services/PopModal"
 import toast from 'react-hot-toast'
 import { Navbar } from "../../components/Navbar"
+import { BeatLoader } from "react-spinners";
 
 function Signin() {
     const isLogin = useSelector((state) => state.AuthReducer.isLogin);
     const dispatch = useDispatch();
-	const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const { isOpen: isSuccessModalOpen, onOpen: openSuccessModal, onClose: closeSuccessModal } = useDisclosure();
     const { isOpen: isErrorModalOpen, onOpen: openErrorModal, onClose: closeErrorModal } = useDisclosure();
@@ -42,9 +42,14 @@ function Signin() {
 
 	const onLoginWithGoogle = async () => {
 		try {
+            setLoading(true)
+            const timer = setTimeout(() => {
+                setLoading(false);
+                clearTimeout(timer);
+            }, 11000);
 			const result = await signInWithGoogle();
 			if (result) {
-				dispatch(Googlelogin(result.username, result.email, result.avatar,setLoading, openSuccessModal, openErrorModal))
+				dispatch(Googlelogin(result.username, result.email,setLoading, openSuccessModal, openErrorModal))
 			}
             toast.success('Login Success!')
 		} catch (error) {
@@ -130,13 +135,27 @@ function Signin() {
                 <Box flex={['none', 'none', '1']} p={['6', '6', '6']}>
                     <Flex h={'100%'} justifyContent="center" alignItems="center" flexDirection="column">
                         <Text fontWeight="bold" fontSize="sm" mb="2">Or Sign in with</Text>
-                        <Button bgColor={'white'} color={'black'} size="lg" mb="2" onClick={onLoginWithGoogle}>
-                            <Image
-								src={googleImg}
-								w={"15px"}
-								mr={"7px"}
-								alt="Google Image"
-							/>Google</Button> 
+                {loading ? (
+                 <Button  borderRadius={'16px'} fontSize={'24px'} fontWeight={'700'} color={'white'} bg={'green'} _hover={{bg: 'red'}} _active={{opacity:'70%'}}>
+                        <div className="sweet-loading">
+                            <BeatLoader color={"#ffffff"}
+                                        loading={loading}
+                                        _hover={{color: 'green'}}
+                                        cssOverride={override}
+                                        size={10}
+                                        aria-label="spiner"
+                                        data-testid="loader"/>
+                        </div>
+                 </Button>
+                 ) : (
+                    <Button bgColor={'white'} color={'black'} size="lg" mb="2" onClick={onLoginWithGoogle}>
+                    <Image
+                        src={googleImg}
+                        w={"15px"}
+                        mr={"7px"}
+                        alt="Google Image"
+                    />Google</Button> 
+                )}
                    <Text fontWeight="bold" fontSize="sm" mb="2">Don't have an account?</Text>
                    <Link to="/register" style={{ marginLeft: "5px" }}>
                         <Button color={"white"} bg={"green"} borderRadius={20} _hover={{bgColor:'red'}}>Register</Button>

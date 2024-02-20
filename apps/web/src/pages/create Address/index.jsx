@@ -58,7 +58,6 @@ function CreateAddress(){
             console.error("Error fetching address:", error);
         }
     };
-
     return (
         <Box bg={'#F1F1F1'}
         height={'100%'} w={'100vw'}>

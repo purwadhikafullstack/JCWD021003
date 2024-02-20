@@ -33,6 +33,7 @@ function UploadAvatar () {
                 title: "No image selected.",
                 position: 'top-right',
                 status: "error",
+                duration:1000,
             });
             return; 
         }
@@ -50,6 +51,7 @@ function UploadAvatar () {
                     title: "Profile Picture successfully changed",
                     position:'top-right',
                     status: "success",
+                    duration:1000,
                   });
         } catch (err){
             toast({
@@ -57,6 +59,7 @@ function UploadAvatar () {
                 description: err.message,
                 position:'top-right',
                 status: "Failed",
+                duration:1000,
               });
             console.log(err);
         }

@@ -110,7 +110,7 @@ export const findAdminService = async () => {
 
 export const updateUserService = async (id, username, email, password, roleId,warehouse) => {
     try{
-        if (!username.trim() || !email.trim() || !password.trim() || !roleId.trim()) {
+        if (!username.trim() || !email.trim()) {
             throw new Error('Username, email, password, and role are required fields');
         }
         let hashPassword;

@@ -91,6 +91,7 @@ export const login = (email, password, setLoading, openSuccessModal, openErrorMo
 export const Googlelogin = (username, email, avatar,setLoading, openSuccessModal, openErrorModal) => {
 	return async (dispatch) => {
 		try {
+			setLoading(true);
 			const res = await axios.post(
 				`${import.meta.env.VITE_API_URL}auth/google`,
 				{

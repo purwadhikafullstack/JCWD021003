@@ -168,7 +168,7 @@ export const CarouselKategori = () => {
 					</Swiper>
 				</Box>
 				<Center>
-					<Link to="/discovery">
+					<Link>
 						<Text
 							fontSize={{ base: "14px", lg: "20px" }}
 							fontWeight={600}

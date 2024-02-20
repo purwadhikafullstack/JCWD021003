@@ -3,10 +3,10 @@ import axios from "axios";
 
 const token = localStorage.getItem("token")
 
-export const getWarehouseList = async () => {
+export const getWarehouseList = async (page=1,pageSize=2) => {
     
     try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}warehouse/list`, 
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}warehouse/list?page=${page}&pageSize=${pageSize}`, 
         {
             headers: {
               Authorization: `Bearer ${token}`

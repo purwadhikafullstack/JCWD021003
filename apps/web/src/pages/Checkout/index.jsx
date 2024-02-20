@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate,Link } from 'react-router-dom';
-import { findUserAddress, getCityName } from '../user-address/services/getUserAddress';
+import { findUserAddress, getCityName,findUserAddressChekout } from '../user-address/services/getUserAddress';
 import { getNearestWarehouse } from './services/ShippingCostApi';
 import {  Box, Text,  Button,  Grid,  GridItem,  Image,  Flex,  Icon,Center} from '@chakra-ui/react';
 import { useSelector,useDispatch } from 'react-redux';
@@ -27,8 +27,8 @@ const CheckoutPage = () => {
 
   const fetchData = async () => {
     try {
-      const fetchAddresses = await findUserAddress(user.id);
-      const mainAddress = fetchAddresses.find(
+      const fetchAddresses = await findUserAddressChekout(user.id);
+      const mainAddress = fetchAddresses.data.find(
         (address) => address.isMainAddress,
       );
       setSelectedAddress(mainAddress);

@@ -64,7 +64,7 @@ function FormCreateAddress({ address, lat, lng }) {
           lat,
           lng,
         )
-        navigate('/manage-address', { state: { warehouseCreated: true } })
+        navigate(-1, { state: { warehouseCreated: true } })
         toast.success('Address successfully created')
       } catch (err) {
         toast.error('Fill form correctly')

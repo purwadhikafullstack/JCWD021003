@@ -27,7 +27,7 @@ export const findUserAddressQuery = async (userId) => {
     }
 };
 
-export const findUserAddressPagQuery = async (id, page,pageSize) => {
+export const findUserAddressPagQuery = async (id, page=null,pageSize=null) => {
     try {
         const filter = {
             where: { userId: id },
@@ -48,9 +48,9 @@ export const findUserAddressPagQuery = async (id, page,pageSize) => {
             order:[],
         }
         const res = await UserAddress.findAll(filter);
-        const totalData = await UserAddress.count({where:filter.where})
-        const totalPages = Math.ceil(totalData/parseInt(pageSize, 10))
-        return {data:res,totalPages,totalData}
+        const totalRecords = await UserAddress.count({where:filter.where})
+        const totalPages = Math.ceil(totalRecords/parseInt(pageSize, 10))
+        return {data:res,totalPages,totalRecords}
     } catch (err) {
         throw err;
     }

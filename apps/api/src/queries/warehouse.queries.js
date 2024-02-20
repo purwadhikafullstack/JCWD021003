@@ -24,6 +24,38 @@ export const findWarehouseListQuery = async () => {
     }
   }
 
+  export const findWarehouseListPagiQuery = async (page=null,pageSize=null) => {
+    try {
+      const filter = {
+        include: [
+          {
+            model: WarehouseAddress,
+            include: [
+              {
+                model: City,
+                include: [{ model: Province }],
+              },
+            ],
+          },
+        ],
+        limit: parseInt(pageSize, 10) || 10,
+        offset: (page - 1) * pageSize,
+        order: [],
+        where: {},
+      }
+      const res = await Warehouse.findAll(filter)
+      const totalRecords = await Warehouse.count({
+        where: filter.where,
+      })
+      console.log('cek',totalRecords)
+  
+      const totalPages = Math.ceil(totalRecords / parseInt(pageSize, 10))
+      return { data: res, totalPages, totalRecords }
+    } catch (err) {
+      throw err
+    }
+  }
+
   export const findWarehouseQuery = async (name) => {
     try {
       const search = {

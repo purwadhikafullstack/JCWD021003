@@ -5,35 +5,39 @@ import { ChevronRightIcon } from '@chakra-ui/icons'
 import { HomeIcon,PlusIcon } from '@heroicons/react/24/outline';
 import AddressList from './components/addressList';
 import { useState,useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Pagination from './components/pagination';
 import { findUserAddress } from './services/getUserAddress';
 import { useSelector } from 'react-redux';
 
 function ManageAddress() {
+  const location = useLocation()
   const [address, setAddress] = useState([])
   const [pageSize, setPageSize] = useState(3)
   const [currentPage, setCurrentPage] = useState(1)
-  const [totalData, setTotalData] = useState(0)
+  const [totalRecords, setTotalRecords] = useState(0)
   const [totalPages, setTotalPages] = useState(0)
   const user = useSelector((state) => state.AuthReducer.user);
   
-  //     const fetchData = async (page=currentPage) => {
-  //         try {
-  //             const fetchAddresses = await findUserAddress(user.id,page,pageSize)
-  //             console.log('cek',fetchAddresses)
-  //             setAddress(fetchAddresses.data)
-  //             setTotalPages(fetchAddresses.totalPages)
-  //             setTotalData(fetchAddresses.totalData)
-  //         } catch (err){
-  //             console.log(err);
-  //         }
-  //     }
-  
-  // useEffect(() => {
-  //     fetchData()
-  // }, [user.id,currentPage,pageSize])
+      const fetchData = async (page=currentPage) => {
+          try {
+              const fetchAddresses = await findUserAddress(user.id,page,pageSize)
+              setAddress(fetchAddresses.data)
+              setTotalPages(fetchAddresses?.totalPages)
+              setTotalRecords(fetchAddresses?.totalRecords)
+          } catch (err){
+              console.log(err);
+          }
+      }
+  useEffect(() => {
+      fetchData()
+  }, [user.id,currentPage,pageSize])
 
+  useEffect(() => {
+    if (location.state?.warehouseCreated) {
+      fetchData()
+    }
+  }, [location.state])
     const navigate = useNavigate();
   return (
     <Box bg={'green.400'} height={'100%'} w={'100vw'}>
@@ -112,15 +116,16 @@ function ManageAddress() {
                     fontWeight={'700'}>
                         Address
                     </Text>
-                   <AddressList 
+                   <AddressList address={address}
+                   onAddressUpdated={fetchData}
                    />
-                   {/* <Pagination
+                   <Pagination
                    currentPage={currentPage}
-                   totalData={totalData}
+                   totalRecords={totalRecords}
                    onPageChange={(page)=>setCurrentPage(page)}
                    pageSize={pageSize}
                    totalPages={totalPages}
-                   /> */}
+                   />
                 </Box>
       </Box>
       <Footer />

@@ -5,28 +5,13 @@ import { useSelector } from "react-redux";
 import UpdateMainAddress from "../update-MainAddress";
 import DeleteUserAddress from "../delete-address";
 import { useNavigate } from "react-router-dom";
-function AddressList (){
-    
-    const [address, setAddress] = useState([])
-    const user = useSelector((state) => state.AuthReducer.user);
+function AddressList ({address,onAddressUpdated}){
+        const user = useSelector((state) => state.AuthReducer.user);
     const navigate=useNavigate()
-    
-        const fetchData = async () => {
-            try {
-                const fetchAddresses = await findUserAddress(user.id)
-                setAddress(fetchAddresses)
-            } catch (err){
-                console.log(err);
-            }
-        }
-    
-    useEffect(() => {
-        fetchData()
-    }, [user.id])
 
     return (
         <>
-        {address.map((address) => ( 
+        {address?.map((address) => ( 
             <Flex key={address.id}
             borderRadius={'12px'}
             border={'1px solid #818181'}
@@ -102,20 +87,20 @@ function AddressList (){
                             fontSize={'14px'}
                             fontWeight={'700'}
                             padding={'12px 16px'}
-                            _hover={'none'}
+                            _hover={'green'}
                             _active={'none'}>
                                 <Text>•••</Text>
                             </MenuButton>
                             <MenuList>
-                                <MenuItem>
+                                <MenuItem _hover={{ backgroundColor: 'green', color: 'white' }} borderBottom={'1px solid green'}>
                                     <UpdateMainAddress 
-                                    id={address.id} 
-                                    userId={user.id}
-                                    onUpdatedMainAddress={fetchData}/>
+                                    id={address?.id} 
+                                    userId={user?.id}
+                                    onUpdatedMainAddress={onAddressUpdated}/>
                                 </MenuItem>
-                                <MenuItem>
-                                    <DeleteUserAddress id={address.id}
-                                    onDeletedAddress={fetchData}/>
+                                <MenuItem _hover={{ backgroundColor: 'green', color: 'white' }} borderTop={'1px solid green'}>
+                                    <DeleteUserAddress id={address?.id}
+                                    onDeletedAddress={onAddressUpdated}/>
                                 </MenuItem>
                             </MenuList>
                         </Menu>

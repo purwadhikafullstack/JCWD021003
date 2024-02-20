@@ -47,7 +47,7 @@ function Signup() {
 
      return (
     <>
-       <Flex height={'100vh'} width={'100vw'} boxShadow={'base'} justifyContent={'center'} alignItems={'center'}>
+       <Flex height={'100vh'} width={'100vw'} boxShadow={'base'} justifyContent={'center'} alignItems={'center'} minH={'700px'}>
     <Flex justifyContent={'center'} alignItems={'center'} width={'50%'} margin={'50'} p={'40px'} borderRadius={'20px'}
     border={'2px solid green'} 
     borderColor={'green'} 

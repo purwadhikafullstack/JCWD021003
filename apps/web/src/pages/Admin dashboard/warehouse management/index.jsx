@@ -5,23 +5,25 @@ import { BreadCrumbs } from './components/breadCrumbs'
 import { getWarehouseList } from './services/getWarehouse'
 import TableWarehouse from './components/warehouse-list'
 import { PlusIcon } from '@heroicons/react/24/outline'
-import { useNavigate } from 'react-router-dom'
-import { useLocation } from 'react-router-dom'
+import { useNavigate,useLocation } from 'react-router-dom'
 import { Navbar } from '../../../components/Navbar'
+import Pagination from '../../user-address/components/pagination'
 
 function WarehouseList() {
   const location = useLocation()
   const [warehouse, setWarehouse] = useState([])
-  const [name, setName] = useState('')
-  const [pageSize, setPageSize] = useState(10)
+  const [pageSize, setPageSize] = useState(2)
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(0)
   const [totalRecords, setTotalRecords] = useState(0)
 
-  const fetchWarehouseList = async () => {
+  const fetchWarehouseList = async (page=currentPage) => {
     try {
-      const fetchWarehouseData = await getWarehouseList()
-      setWarehouse(fetchWarehouseData)
+      const fetchWarehouseData = await getWarehouseList(page,pageSize)
+      // setWarehouse(fetchWarehouseData)
+      setWarehouse(fetchWarehouseData.data)
+      setTotalPages(fetchWarehouseData.totalPages)
+      setTotalRecords(fetchWarehouseData?.totalRecords)
     } catch (err) {
       console.log(err)
     }
@@ -29,7 +31,7 @@ function WarehouseList() {
 
   useEffect(() => {
     fetchWarehouseList()
-  }, [])
+  }, [currentPage,pageSize])
 //to trigger fetchWarehouseList again.
   useEffect(() => {
     if (location.state?.warehouseCreated) {
@@ -40,7 +42,7 @@ function WarehouseList() {
   const navigate = useNavigate()
 
   return (
-    <Box bg={'#F1F1F1'} w={'100vw'} h={'100vh'}>
+    <Box bg={'#F1F1F1'} w={'100vw'} h={'100vh'} minH={'700px'}>
      <Navbar/>
       <Box padding={{base: '0px 10px', md:'0px 30px'}} marginBottom={'150px'}>
         <Box className="top-dashboard" mt={'36px'} mb={'24px'}>
@@ -122,13 +124,13 @@ function WarehouseList() {
             onWarehouseUpdated={fetchWarehouseList}
           />
         </Box>
-        {/* <Pagination
+        <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
           onPageChange={(page) => setCurrentPage(page)}
           pageSize={pageSize}
           totalRecords={totalRecords}
-        /> */}
+        />
       </Box>
     </Box>
   )

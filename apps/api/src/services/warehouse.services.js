@@ -1,9 +1,18 @@
 import { findWarehouseListQuery, findWarehouseQuery, findWarehouseAdminQuery,findUnassignedAdminQuery, assignAdminWarehouseQuery,
-    createWarehouseAddressQuery, createWarehouseQuery, editWarehouseQuery, deleteWarehouseQuery} from "../queries/warehouse.queries"
+    createWarehouseAddressQuery, createWarehouseQuery, editWarehouseQuery, deleteWarehouseQuery,findWarehouseListPagiQuery} from "../queries/warehouse.queries"
 
 export const findWarehouseListService = async () => {
     try {
       const res = await findWarehouseListQuery()
+      return res
+    } catch (err) {
+      throw err
+    }
+  }
+
+  export const findWarehouseListPagiService = async (page, pageSize) => {
+    try {
+      const res = await findWarehouseListPagiQuery(page, pageSize)
       return res
     } catch (err) {
       throw err

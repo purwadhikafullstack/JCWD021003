@@ -18,14 +18,14 @@ import {
 
     useEffect(() => {
       getWarehouseList().then((data) => {
-        setWarehouseList(data)
+        setWarehouseList(data.data)
       })
     }, [])
 
     const formik = useFormik({
       initialValues: {
-        username: username || '',
-        email: email || '',
+        username: username,
+        email: email,
         password: '',
         roleId: roleId || '',
         warehouse: warehouse || '',

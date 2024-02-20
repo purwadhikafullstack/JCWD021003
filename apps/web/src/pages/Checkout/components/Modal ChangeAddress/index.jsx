@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { findUserAddress } from "../../../user-address/services/getUserAddress";
+import { findUserAddress, findUserAddressChekout } from "../../../user-address/services/getUserAddress";
 import { useEffect, useState } from "react";
 import { Box, Button, Flex, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Radio, RadioGroup, Text, useDisclosure } from "@chakra-ui/react";
 
@@ -12,8 +12,8 @@ function ChangeAddressModal ({setSelectedAddress, selectedAddress}){
     
         const fetchData = async () => {
             try {
-                const fetchAddresses = await findUserAddress(user.id)
-                setAddress(fetchAddresses);
+                const fetchAddresses = await findUserAddressChekout(user.id)
+                setAddress(fetchAddresses.data);
             } catch (err){
                 console.log(err);
             }

@@ -51,7 +51,17 @@ export const getCityOpenCageBased = async (city) => {
     }
 }
 
-export const findUserAddress = async (id) => {
+export const findUserAddress = async (id, page,pageSize) => {
+    try{
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}user-address/address/${id}?page=${page}&pageSize=${pageSize}`)
+        const address = response.data?.data
+        return address
+    } catch (err){
+        console.log(err);
+    }
+}
+
+export const findUserAddressChekout = async (id) => {
     try{
         const response = await axios.get(`${import.meta.env.VITE_API_URL}user-address/address/${id}`)
         const address = response.data?.data
