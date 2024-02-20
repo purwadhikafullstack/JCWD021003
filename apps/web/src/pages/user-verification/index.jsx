@@ -5,8 +5,7 @@ import { useFormik } from "formik"
 import { verification } from "./services/editUser"
 import { PasswordSchema } from "./services/Validation"
 import { useState } from "react"
-import { SuccessModal } from "./services/PopModal"
-import { ErrorModal } from "./services/PopModal"
+import { SuccessModal,ErrorModal } from "./services/PopModal"
 import { BeatLoader } from "react-spinners"
 import {useNavigate, Link} from 'react-router-dom'
 import { IoHome } from "react-icons/io5";

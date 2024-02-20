@@ -1,6 +1,12 @@
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ModalOverlay } from "@chakra-ui/react"
+import { useNavigate } from "react-router-dom";
+
 export const SuccessModal = ({ isOpen, onClose }) => {
-    
+    const navigate = useNavigate()
+    const goTo = ()=>{
+      onClose();
+      navigate(-1)
+    }
     return (
       <>
           <Modal isOpen={isOpen} onClose={onClose} isCentered>
@@ -12,7 +18,7 @@ export const SuccessModal = ({ isOpen, onClose }) => {
             </ModalBody>
   
             <ModalFooter>
-              <Button bg='green' color='white' _hover={{bg: '#f50f5a'}} mr={3} onClick={onClose}>
+              <Button bg='green' color='white' _hover={{bg: '#f50f5a'}} mr={3} onClick={goTo}>
                 Close
               </Button>
             </ModalFooter>

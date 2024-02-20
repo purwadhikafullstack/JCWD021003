@@ -13,7 +13,7 @@ function FormCreateWarehouse({ address, lat, lng }) {
   const [provinceList, setProvinceList] = useState([])
   const [selectedProvince, setSelectedProvince] = useState('')
   const navigate = useNavigate()
-
+  const navigateTo = () => {navigate('/admin-dashboard/warehouse-management'); };
   useEffect(() => {
     if (address && address.city) {
       setSelectedProvince(address.city.provinceId)
@@ -175,7 +175,7 @@ useEffect(() => {
         <Flex justifyContent={'flex-end'} mt={'40px'} gap={'16px'}>
           <Button            width={'168px'}            padding={'12px 16px'}            bgColor={'white'}            color={'green'}            variant={'outline'}
             borderColor={'green'}            _hover={{ borderColor: '#f50f5a', color: '#f50f5a' }}            _active={{ opacity: '70%' }}
-            onClick={() => navigate('/manage-address')}
+            onClick={navigateTo}
           >
             Cancel
           </Button>

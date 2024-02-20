@@ -25,10 +25,10 @@ const Pagination = ({ currentPage, totalPages, onPageChange, pageSize, totalReco
             <Box key={number} mx="1">
             <Button
                 onClick={() => onPageChange(number)}
-                bg={currentPage === number ? '#FFF1F5' : 'white'}
+                bg={currentPage === number ? 'white' : 'white'}
                 color={currentPage === number ? 'green' : 'brand.grey350'}
                 border={currentPage === number ? '1px solid green' : 'none'}
-                _hover={{bg: '#FFF1F5'}}
+                _hover={{bg: 'green', color:'white'}}
                 variant="solid"
             >
                 {number}

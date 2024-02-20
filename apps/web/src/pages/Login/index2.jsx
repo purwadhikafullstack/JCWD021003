@@ -46,7 +46,7 @@ function Signin() {
             const timer = setTimeout(() => {
                 setLoading(false);
                 clearTimeout(timer);
-            }, 11000);
+            }, 13000);
 			const result = await signInWithGoogle();
 			if (result) {
 				dispatch(Googlelogin(result.username, result.email,setLoading, openSuccessModal, openErrorModal))
